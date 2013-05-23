@@ -1,0 +1,17 @@
+
+.container.green-full-width.Sign.In
+  %h1 Sign up for your New User Account
+  = form_for @user do |f|
+    = f.label :status
+    = f.select :status, [['Interested in Peace Corp','interested'],['PCV (Peace Corps Volunteer)','PCV'],['RPCV (Returned Peace Corps Volunteers','RPCV']], {:include_blank => true, :required => true}
+    = f.select :country, [["select one", ""],['Hot','hot'],['Medium','medium'],['Cold','cold']], {:include_blank => true, :required => true}
+    = f.label :sector
+    = f.label :sector
+    = f.text_field :sector, :required => true
+    = f.label :email 
+    = f.email_field :email, :required => true
+    = f.label :password
+    = f.password_field :password, :required => true
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, :required => true
+    = f.submit "Create my Account"
