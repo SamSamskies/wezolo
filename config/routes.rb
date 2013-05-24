@@ -4,10 +4,12 @@ resource :follows, :only => [:create, :destroy]
 resource :users, :only => [:new, :create, :edit, :destroy, :show]
 
   root :to => "home#index"
-# resource :sessions, :only => [:create, :destroy]
-post '/login' => 'sessions#create', :as => "login"
-delete '/logout' => 'sessions#destroy', :as => "logout"
-get '/signup' => 'users#new', :as => "signup"
+  # resource :sessions, :only => [:create, :destroy]
+  post '/login' => 'sessions#create', :as => "login"
+  delete '/logout' => 'sessions#destroy', :as => "logout"
+  get '/signup' => 'users#new', :as => "signup"
+  match '/auth/google_oauth2/callback' => "sessions#create", :google => true
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

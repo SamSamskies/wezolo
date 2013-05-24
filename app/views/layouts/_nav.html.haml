@@ -2,6 +2,8 @@
   .container
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
+        %a#google-login-button{:href => '/auth/google_oauth2'}
+          %img{:src => 'https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png'}
         %a.brand{:href => "#"} Project name
         %ul.nav
           %li.active
