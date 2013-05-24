@@ -1,6 +1,10 @@
 Wezolo::Application.routes.draw do
 resource :users, :only => [:new, :create, :edit, :destroy, :show]
 
+# resource :sessions, :only => [:create, :destroy]
+get 'login' => 'sessions#new', :as => "login"
+get 'logout' => 'sessions#destroy', :as => "logout"
+get 'signup' => 'users#new', :as => "signup"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
