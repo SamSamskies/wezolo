@@ -5,11 +5,11 @@ describe Follow do
   let!(:togo) { create(:country, name: "Africa") }
   let!(:usa) { create(:country, name: "usa") }
 
-  let!(:fanguy) { create(:user, name: "fanguy") }
-  let!(:justin_bieber) { create(:user, name: "justin bieber") }
-  let!(:african_singer) { create(:user, name: "african singer") }
+  let!(:fanguy) { create(:user, username: "fanguy") }
+  let!(:justin_bieber) { create(:user, username: "justin_bieber") }
+  let!(:african_singer) { create(:user, username: "african_singer") }
   
-  let!(:oprah) { create(:user, name: "oprah") }
+  let!(:oprah) { create(:user, username: "oprah") }
 
 
   it "a user can be followed" do
@@ -58,5 +58,7 @@ describe Follow do
     fanguy.following_countries.last.users.should eq [justin_bieber, oprah]
     fanguy.following_countries.first.users.first.should eq african_singer
   end
+
+  it "has no duplicate follows"
 
 end

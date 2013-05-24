@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524052414) do
+ActiveRecord::Schema.define(:version => 20130524191227) do
 
   create_table "blog_hosts", :force => true do |t|
     t.string   "name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20130524052414) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "follows", ["followable_id", "followable_type", "follower_id"], :name => "follow_unique_index"
   add_index "follows", ["follower_id"], :name => "index_follows_on_follower_id"
 
   create_table "posts", :force => true do |t|
