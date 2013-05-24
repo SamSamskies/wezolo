@@ -3,9 +3,9 @@ resource :users, :only => [:new, :create, :edit, :destroy, :show]
 
   root :to => "home#index"
 # resource :sessions, :only => [:create, :destroy]
-get 'login' => 'sessions#create', :as => "login"
-get 'logout' => 'sessions#destroy', :as => "logout"
-get 'signup' => 'users#new', :as => "signup"
+post '/login' => 'sessions#create', :as => "login"
+delete '/logout' => 'sessions#destroy', :as => "logout"
+get '/signup' => 'users#new', :as => "signup"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
