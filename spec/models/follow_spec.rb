@@ -49,4 +49,14 @@ describe Follow do
     fanguy.following_countries.first.users.first.should eq african_singer
   end
 
+    it "a follow should beable to get all the users from a country using eager loading" do
+    justin_bieber.countries << usa
+    oprah.countries << usa
+    african_singer.countries << togo
+
+    fanguy.following_countries << [usa, togo]
+    fanguy.following_countries.last.users.should eq [justin_bieber, oprah]
+    fanguy.following_countries.first.users.first.should eq african_singer
+  end
+
 end
