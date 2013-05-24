@@ -1,4 +1,8 @@
 Wezolo::Application.routes.draw do
+  get "follows/create"
+
+  get "follows/destroy"
+
 resource :users, :only => [:new, :create, :edit, :destroy, :show]
 
   root :to => "home#index"
