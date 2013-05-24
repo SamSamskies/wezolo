@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
 
 
   #find all the followers(user as named) a user is following
-  has_many :follows, :as => :followable
+  has_many :follows, :as => :followable, :dependent => :destroy
   has_many :followers, :through => :follows
 
   #find all the users(use .celebs) a user is following
-  has_many :followings, :class_name => "Follow", :foreign_key => "follower_id"
+  has_many :followings, :class_name => "Follow", :foreign_key => "follower_id", :dependent => :destroy
   has_many :celebs, :through => :followings, :source => :followable, :source_type => "User"
 
   #find all the countries(user .following_countries) a user is following

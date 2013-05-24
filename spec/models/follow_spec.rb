@@ -59,4 +59,6 @@ describe Follow do
     fanguy.following_countries.first.users.first.should eq african_singer
   end
 
+  it "has no duplicate follows"
+
 end
