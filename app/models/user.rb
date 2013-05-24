@@ -21,21 +21,3 @@ class User < ActiveRecord::Base
 
 
 end
-
-justin = User.find(29)
-fan = User.find(30)
-
-
- #  User Load (0.8ms)  SELECT "users".* FROM "users" INNER JOIN "follows" ON "users"."id" = "follows"."followable_id" WHERE "follows"."followable_id" = 30 AND "follows"."followable_type" = 'User' AND "follows"."followable_type" = 'User'
- # => []
-
-
-# SELECT "users".* FROM "users" 
-# INNER JOIN "follows" 
-# ON "users"."id" = "follows"."followable_id" 
-# WHERE "follows"."followable_id" = 30 AND "follows"."followable_type" = 'User' AND "follows"."followable_type" = 'User
-
-
-# SELECT "users".* FROM "users" INNER JOIN "follows" ON "users"."id" = "follows"."follower_id" 
-# WHERE "follows"."followable_id" = 30 AND "follows"."followable_type" = 'User'
-# SELECT "users".* FROM "users" INNER JOIN "follows" ON "users"."id" = "follows"."follower_id" WHERE "follows"."follower_id" = 30
