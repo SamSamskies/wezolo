@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524191227) do
+ActiveRecord::Schema.define(:version => 20130524234407) do
+
+  create_table "auth_providers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "authorizations", :force => true do |t|
+    t.string   "uid"
+    t.integer  "user_id"
+    t.integer  "auth_provider_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "authorizations", ["auth_provider_id"], :name => "index_authorizations_on_auth_provider_id"
+  add_index "authorizations", ["user_id"], :name => "index_authorizations_on_user_id"
 
   create_table "blog_hosts", :force => true do |t|
     t.string   "name"

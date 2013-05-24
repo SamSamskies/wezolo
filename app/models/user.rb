@@ -18,4 +18,7 @@ class User < ActiveRecord::Base
 
   #find all the countries(user .following_countries) a user is following
   has_many :following_countries, :through => :followings, :source => :followable, :source_type => "Country"
+
+  has_many :authorizations
+  has_many :auth_providers, :through => :authorizations
 end
