@@ -18,13 +18,13 @@ describe Follow do
     justin_bieber.followers.first.should eq fanguy
   end
 
-  it "a follower should beable to get all their celebs" do
-    fanguy.celebs << justin_bieber
-    fanguy.celebs << oprah
-    fanguy.celebs.count.should eq 2
-    fanguy.celebs.should eq [oprah,justin_bieber]
-    fanguy.celebs.first.should eq oprah
-    fanguy.celebs.last.should eq justin_bieber
+  it "a follower should beable to get all their heroes" do
+    fanguy.heroes << justin_bieber
+    fanguy.heroes << oprah
+    fanguy.heroes.count.should eq 2
+    fanguy.heroes.should eq [oprah,justin_bieber]
+    fanguy.heroes.first.should eq oprah
+    fanguy.heroes.last.should eq justin_bieber
   end
 
 
