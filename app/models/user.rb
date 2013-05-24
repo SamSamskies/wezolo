@@ -3,17 +3,14 @@ class User < ActiveRecord::Base
   attr_accessible :avatar_url, :name, :password_digest, :sector, :status, :username, :email, :country, :password, :password_confirmation, :countries_attributes, :follower
   has_and_belongs_to_many :countries
   accepts_nested_attributes_for :countries
-<<<<<<< HEAD
   has_many :follows, :as => :followable
   has_many :followers, :through => :follows
 
   has_many :followings, :class_name => "Follow", :foreign_key => "follower_id"
   has_many :celebs, :through => :followings, :source => :followable, :source_type => "User"
   has_many :following_countries, :through => :followings, :source => :followable, :source_type => "Country"
-=======
   validates :email, :uniqueness => true
   validates :username, :uniqueness => true
->>>>>>> master
 end
 
 # justin = User.find(29)
