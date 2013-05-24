@@ -6,12 +6,13 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(params[:user])
-    user.countries << Country.find(params[:country_id])
+    countries = params[:country_ids].delete_if(&:empty?).map{|id| Country.find(id)}
+    user.countries << countries
     if user.save
       session[:user_id] = user.id
       redirect_to root_path
     else
-      flash[:error] = "hello"
+      flash[:error] = user.errors
       render "new"
     end
   end

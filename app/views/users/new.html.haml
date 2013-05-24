@@ -5,7 +5,7 @@
     = f.label :status
     = f.select :status, [['Interested in Peace Corp','interested'],['PCV (Peace Corps Volunteer)','PCV'],['RPCV (Returned Peace Corps Volunteers','RPCV']], {:include_blank => true, :required => true}
     = label_tag :country_of_service
-    = collection_select :country_id, nil, Country.all, :id, :name
+    = collection_select :country_ids, nil, Country.all, :id, :name, {}, {:multiple=>true }
     = f.label :sector
     = f.text_field :sector, :required => true
     = f.label :email 
