@@ -18,24 +18,4 @@ class User < ActiveRecord::Base
 
   #find all the countries(user .following_countries) a user is following
   has_many :following_countries, :through => :followings, :source => :followable, :source_type => "Country"
-
-
 end
-
-justin = User.find(29)
-fan = User.find(30)
-
-
- #  User Load (0.8ms)  SELECT "users".* FROM "users" INNER JOIN "follows" ON "users"."id" = "follows"."followable_id" WHERE "follows"."followable_id" = 30 AND "follows"."followable_type" = 'User' AND "follows"."followable_type" = 'User'
- # => []
-
-
-# SELECT "users".* FROM "users" 
-# INNER JOIN "follows" 
-# ON "users"."id" = "follows"."followable_id" 
-# WHERE "follows"."followable_id" = 30 AND "follows"."followable_type" = 'User' AND "follows"."followable_type" = 'User
-
-
-# SELECT "users".* FROM "users" INNER JOIN "follows" ON "users"."id" = "follows"."follower_id" 
-# WHERE "follows"."followable_id" = 30 AND "follows"."followable_type" = 'User'
-# SELECT "users".* FROM "users" INNER JOIN "follows" ON "users"."id" = "follows"."follower_id" WHERE "follows"."follower_id" = 30
