@@ -3,7 +3,8 @@ Wezolo::Application.routes.draw do
 resource :follows, :only => [:create, :destroy]
 resource :users, :only => [:new, :create, :edit, :destroy, :show]
 
-  root :to => "home#index"
+root :to => "home#landing"
+get '/home' => "home#home"
 # resource :sessions, :only => [:create, :destroy]
 post '/login' => 'sessions#create', :as => "login"
 delete '/logout' => 'sessions#destroy', :as => "logout"
