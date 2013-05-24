@@ -6,6 +6,6 @@ class HomeController < ApplicationController
 
   def home
     #eager load this later
-    @celebs = current_user.celebs    
+    @all_post = current_user.followed_posts
   end
 end
