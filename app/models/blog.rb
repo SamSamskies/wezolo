@@ -1,3 +1,6 @@
 class Blog < ActiveRecord::Base
-  # attr_accessible :title, :body
+  has_many :posts
+  belongs_to :blog_host
+  belongs_to :user
+  attr_accessible :title, :url, :external_id
 end

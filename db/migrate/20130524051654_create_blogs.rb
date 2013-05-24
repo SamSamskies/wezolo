@@ -4,7 +4,7 @@ class CreateBlogs < ActiveRecord::Migration
       t.string :title
       t.string :url, :null => false
       t.string :external_id
-      t.references :blog_type
+      t.references :blog_host
       t.references :user
 
       t.timestamps

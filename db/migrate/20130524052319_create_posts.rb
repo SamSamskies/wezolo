@@ -1,6 +1,6 @@
-class CreateBlogPosts < ActiveRecord::Migration
+class CreatePosts < ActiveRecord::Migration
   def change
-    create_table :blog_posts do |t|
+    create_table :posts do |t|
       t.string :title
       t.text :body, :null => false
       t.datetime :published_at
@@ -8,6 +8,6 @@ class CreateBlogPosts < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :blog_posts, :blog_id
+    add_index :posts, :blog_id
   end
 end
