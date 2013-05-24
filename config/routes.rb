@@ -1,6 +1,7 @@
 Wezolo::Application.routes.draw do
 resource :users, :only => [:new, :create, :edit, :destroy, :show]
 
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

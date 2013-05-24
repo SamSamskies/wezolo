@@ -12,4 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+
+//= require_tree ../../../vendor/assets/javascripts/
 //= require_tree .
+
+
+// Some general UI pack related JS
+// Extend JS String with repeat method
+
+$(document).ready(function(){
+});
