@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
   validates :username, :uniqueness => true
 
+  has_many :blogs
+  has_many :posts, :through => :blogs
 
   #find all the followers(user as named) a user is following
   has_many :follows, :as => :followable, :dependent => :destroy

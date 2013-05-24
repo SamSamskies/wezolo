@@ -1,0 +1,4 @@
+%h1 Users Newsfeed
+-@celebs.each do |celeb|
+  -celeb.posts.each do |post|
+    %p=post.title
