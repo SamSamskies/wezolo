@@ -7,5 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'CSV'
 CSV.foreach("./db/countries.csv") do |row|
-  Country.create(name: row)
+  Country.create(name: row.first)
 end
