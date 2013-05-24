@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(params[:user])
+    #delete_if is used because there is a bug in collection select that adds a blank ""
     countries = params[:country_ids].delete_if(&:empty?).map{|id| Country.find(id)}
     user.countries << countries
     if user.save
