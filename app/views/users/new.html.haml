@@ -4,9 +4,8 @@
   = form_for @user do |f|
     = f.label :status
     = f.select :status, [['Interested in Peace Corp','interested'],['PCV (Peace Corps Volunteer)','PCV'],['RPCV (Returned Peace Corps Volunteers','RPCV']], {:include_blank => true, :required => true}
-    =f.fields_for :countries do |country_field|
-      =country_field.label :country_name 
-      =country_field.text_field :name
+    = label_tag :country_of_service
+    = collection_select :country_id, nil, Country.all, :id, :name
     = f.label :sector
     = f.text_field :sector, :required => true
     = f.label :email 

@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
+    @user.countries.build
   end
 
   def create
     user = User.new(params[:user])
+    user.countries << Country.find(params[:country_id])
     if user.save
       session[:user_id] = user.id
-      redirect_to "/"
+      redirect_to root_path
     else
       flash[:error] = "hello"
       render "new"
