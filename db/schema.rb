@@ -13,18 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20130524052414) do
 
-  create_table "blog_posts", :force => true do |t|
-    t.string   "title"
-    t.text     "body",         :null => false
-    t.datetime "published_at"
-    t.integer  "blog_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "blog_posts", ["blog_id"], :name => "index_blog_posts_on_blog_id"
-
-  create_table "blog_types", :force => true do |t|
+  create_table "blog_hosts", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -34,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20130524052414) do
     t.string   "title"
     t.string   "url",          :null => false
     t.string   "external_id"
-    t.integer  "blog_type_id"
+    t.integer  "blog_host_id"
     t.integer  "user_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
@@ -50,6 +39,17 @@ ActiveRecord::Schema.define(:version => 20130524052414) do
     t.integer "user_id"
     t.integer "country_id"
   end
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.text     "body",         :null => false
+    t.datetime "published_at"
+    t.integer  "blog_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "posts", ["blog_id"], :name => "index_posts_on_blog_id"
 
   create_table "users", :force => true do |t|
     t.string   "status"
