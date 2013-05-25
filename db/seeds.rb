@@ -10,7 +10,7 @@ User.create(status: 'PCV',
             name: 'test',
             password: 'password')
 
-100.times do 
+25.times do 
   User.create(status: ['PCV', 'RPCV', 'Interested'].sample, 
               email: Faker::Internet.email, 
               sector: ['Business', 'Health', 'Agriculture'].sample, 

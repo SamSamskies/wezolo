@@ -13,4 +13,5 @@
         %li= link_to "unfollow country", follows_path(:followable_id => country.id, :followable_type => country.class.to_s), :method => :delete
       - else
         %li=link_to "follow country", follows_path(:followable_id => country.id, :followable_type => country.class.to_s), :method => :post
+  
 
