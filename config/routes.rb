@@ -1,5 +1,6 @@
 Wezolo::Application.routes.draw do
   get "search/index"
+  get "search/results", :to => "search#search_results"
 resource :follows, :only => [:create, :destroy]
 resource :users, :only => [:new, :create, :edit, :destroy, :show]
 
