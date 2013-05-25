@@ -1,6 +1,8 @@
 class SearchController < ApplicationController
   def index
-    @users = User.all
+    # @follows = FollowDecorator.decorate_collection(current_user.followings)
+    
+    @users = User.includes(:heroes, :following_countries, {:countries => :followers}, :followers).all
   end
 
 #figure out how to search by all indices

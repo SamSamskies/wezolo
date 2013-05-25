@@ -44,6 +44,14 @@ class User < ActiveRecord::Base
     array.flatten.sort_by {|post| post.published_at}.reverse
   end
 
+  def user_followings_by_type
+    user_followings_by_type = {"User"=>[], "Country" => []}
+    self.followings.each do |following|
+      user_followings_by_type[following.followable_type] << following.followable_id
+    end
+    user_followings_by_type
+  end
+
   def self.create_with_omniauth(auth)
     create! do |user|
       provider = AuthProvider.find_by_name(auth["provider"]) #refactor since repeated
