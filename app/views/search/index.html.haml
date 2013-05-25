@@ -13,9 +13,5 @@
         %li= link_to "unfollow country", follows_path(:followable_id => country.id, :followable_type => country.class.to_s), :method => :delete
       - else
         %li=link_to "follow country", follows_path(:followable_id => country.id, :followable_type => country.class.to_s), :method => :post
-  =form_tag search_results_path, :method => :get, :class => "form-search" do
-    .input-append
-      =text_field_tag "search", nil,:class => "search-query-8 span2 small search-query search-query-rounded", :placeholder => "Search"
-      %button.btn.btn-small{:type => "submit"}
-        %span.fui-search
+  
 
