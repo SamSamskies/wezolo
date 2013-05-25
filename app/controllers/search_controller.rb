@@ -5,7 +5,7 @@ class SearchController < ApplicationController
 
 #figure out how to search by all indices
   def search_results
-    # results = Tire.index('countries,users').search do
+   # Tire.index('countries,users').search
     #   query do
     #     string (params[:search])
     #   end
