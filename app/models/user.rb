@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :countries
   
   validates :email, :uniqueness => true
-  validates :username, :uniqueness => true
+  # validates :username, :uniqueness => true
 
   has_many :blogs
   has_many :posts, :through => :blogs
@@ -48,7 +48,9 @@ class User < ActiveRecord::Base
   def user_followings_by_type
     user_followings_by_type = {"User"=>[], "Country" => []}
     self.followings.each do |following|
-      user_followings_by_type[following.followable_type] << following.followable_id
+      if user_followings_by_type[following.followable_type] 
+        user_followings_by_type[following.followable_type] << following.followable_id
+      end
     end
     user_followings_by_type
   end

@@ -23,7 +23,23 @@ describe User do
 
     it "#published_at should return array of posts ordered by published_at"
 
-    it "returns correct hash by calling #user_followings_by_type"
+    
+  end
+
+  context "#user_followings_by_type" do
+    let!(:justin_bieber) { create(:user, :name => "justin bieber") }
+    let!(:oprah) { create(:user, :name => "oprah")}
+    let!(:usa) { create(:country, :name => "USA")}
+    let!(:togo) { create(:country, :name => "togo")}
+    let!(:fan) { create(:user, :name => "fan")}
+
+    before(:each) do
+      fan.following_countries << [togo, usa]
+      fan.heroes << [justin_bieber, oprah]
+    end
+    it "returns correct hash by calling #user_followings_by_type" do
+      fan.user_followings_by_type.should eq({"User"=> [oprah.id, justin_bieber.id], "Country"=> [usa.id, togo.id]})
+    end
   end
 
   context "authorization" do
