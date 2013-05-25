@@ -9,6 +9,9 @@ describe Authorization do
   let!(:fb_login_auth) { create(:authorization, :user => fanguy) }
 
   it "has a user" do
+    fb_login_auth.user = fanguy
+    fb_login_auth.save
+    fb_login_auth.reload
     fb_login_auth.user.should eq fanguy
   end
 
@@ -18,8 +21,5 @@ describe Authorization do
     fb_login_auth.reload
     fb_login_auth.auth_provider.should eq facebook
   end
-
-  #user can have multiple auth providers
-  #validations in database level for needing to have auth_provider and UID
 
 end

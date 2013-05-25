@@ -1,7 +1,17 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  let!(:sammyboy) { create(:user, :name => 'sam') }
+
+  let!(:google) { create(:auth_provider) }
+  let!(:facebook) { create(:auth_provider, :name => 'Facebook') }
+  let!(:tumblr) { create(:auth_provider, :name => 'Tumblr') }
+
+  let!(:google_login_auth) { create(:authorization, :auth_provider => google) }
+  let!(:fb_login_auth) { create(:authorization, :auth_provider => facebook) }
+  let!(:tumblr_login_auth) { create(:authorization, :auth_provider => tumblr) }
+
   context "followed posts" do
     it "#followed_posts should not return any duplicate posts"
 
@@ -12,6 +22,20 @@ describe User do
     it "#countries_posts returns all the posts written by people in a country that a user is following"
 
     it "#published_at should return array of posts ordered by published_at"    
+  end
+
+  context "authorization" do
+    it "can have multiple authorizations" do
+      sammyboy.authorizations << [google_login_auth, fb_login_auth, tumblr_login_auth]
+      sammyboy.authorizations.count.should eq 3
+      sammyboy.authorizations.should eq [tumblr_login_auth, fb_login_auth, google_login_auth]
+    end
+
+    it "can have multiple auth_providers" do
+      sammyboy.authorizations << [google_login_auth, fb_login_auth, tumblr_login_auth]
+      sammyboy.auth_providers.count.should eq 3
+      sammyboy.auth_providers.should eq [tumblr, facebook, google]
+    end
   end
 
 end

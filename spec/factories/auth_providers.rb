@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :auth_provider do
-    name "MyString"
+    name 'Google'
   end
 end
