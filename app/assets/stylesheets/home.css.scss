@@ -12,7 +12,12 @@ body {
   width: 200px;
 }
 
+/* hack to stop flat ui icons from appear multiple times
+*/
 
+.fui-icons-h *{
+  display: none;
+}
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */

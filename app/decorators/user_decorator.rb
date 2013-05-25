@@ -2,7 +2,7 @@ class UserDecorator < Draper::Decorator
   delegate_all
 
   def follow_link(followable_obj)
-    if !self.nil? && h.current_user.user_followings_by_type[class_string(followable_obj)] && h.current_user.user_followings_by_type[class_string(followable_obj)].include?(followable_obj.id)
+    if !self.nil? && self.user_followings_by_type[class_string(followable_obj)] && self.user_followings_by_type[class_string(followable_obj)].include?(followable_obj.id)
       h.link_to "Unfollow #{class_string(followable_obj)}", follows_path(followable_obj), :method => :delete
     else
       h.link_to "Follow #{class_string(followable_obj)}", follows_path(followable_obj), :method => :post
