@@ -59,6 +59,10 @@ describe Follow do
     fanguy.following_countries.first.users.first.should eq african_singer
   end
 
-  it "has no duplicate follows"
+    it "has no duplicate follows" do
+      fanguy.heroes << oprah
+      expect{fanguy.heroes << oprah}.to raise_error
+      fanguy.heroes.should eq([oprah])
+    end
 
 end

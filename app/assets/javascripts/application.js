@@ -17,8 +17,5 @@
 //= require_tree .
 
 
-// Some general UI pack related JS
-// Extend JS String with repeat method
-
 $(document).ready(function(){
 });

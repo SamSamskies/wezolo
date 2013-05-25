@@ -37,6 +37,7 @@ describe User do
       fan.following_countries << [togo, usa]
       fan.heroes << [justin_bieber, oprah]
     end
+    
     it "returns correct hash by calling #user_followings_by_type" do
       fan.user_followings_by_type.should eq({"User"=> [oprah.id, justin_bieber.id], "Country"=> [usa.id, togo.id]})
     end
@@ -57,3 +58,6 @@ describe User do
   end
 
 end
+
+
+

@@ -46,13 +46,12 @@ class User < ActiveRecord::Base
   end
 
   def user_followings_by_type
-    user_followings_by_type = {"User"=>[], "Country" => []}
-    self.followings.each do |following|
-      if user_followings_by_type[following.followable_type] 
-        user_followings_by_type[following.followable_type] << following.followable_id
-      end
+    self.followings.inject({}) do |follow_hash, following|
+      type = following.followable_type
+      id = following.followable_id
+      follow_hash[type] ? follow_hash[type] << id : follow_hash[type] = [id]
+      follow_hash
     end
-    user_followings_by_type
   end
 
   def self.create_with_omniauth(auth)
