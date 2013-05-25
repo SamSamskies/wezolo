@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525005231) do
+ActiveRecord::Schema.define(:version => 20130525070433) do
 
   create_table "auth_providers", :force => true do |t|
     t.string   "name"
@@ -79,13 +79,26 @@ ActiveRecord::Schema.define(:version => 20130525005231) do
 
   add_index "posts", ["blog_id"], :name => "index_posts_on_blog_id"
 
-  create_table "users", :force => true do |t|
+  create_table "profiles", :force => true do |t|
+    t.string   "name"
     t.string   "status"
-    t.string   "email"
     t.string   "sector"
     t.string   "username"
-    t.string   "name"
-    t.string   "avatar_url"
+    t.string   "university"
+    t.string   "major"
+    t.string   "occupation"
+    t.string   "location"
+    t.text     "bio"
+    t.string   "photo_url"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false

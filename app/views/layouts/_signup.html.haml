@@ -1,0 +1,14 @@
+#signupModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Create a Wezolo Account!
+  .modal-body
+    %a{:href => '/auth/google_oauth2'}
+      %img#google-login-button{:src => 'https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png'}
+    =label_tag 'Or Sign Up old school'
+    =form_tag users_path, :method => :post, :remote => true do
+      = email_field_tag :email, nil, :required => true
+      = password_field_tag :password
+      = submit_tag "Sign up", :class => "btn btn-primary"
+    / %button.btn.btn-primary Log in
+  .alert.alert-error
