@@ -11,7 +11,10 @@ gem 'will_paginate', '~> 3.0'
 gem 'draper', '~> 1.0'
 gem "cancan"
 gem "bcrypt-ruby"
+gem "omniauth-google-oauth2"
+
 gem 'tire'
+
 # Gems used only for assets and not required
 # in production environments by default.
 

@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
   #find all the countries(user .following_countries) a user is following
   has_many :following_countries, :through => :followings, :source => :followable, :source_type => "Country"
 
+
+  has_many :authorizations
+  has_many :auth_providers, :through => :authorizations
+
   def followed_posts
     (self.heroes_posts + self.countries_posts).uniq
   end
@@ -36,6 +40,16 @@ class User < ActiveRecord::Base
   #refactor later
   def sort_by_published_date(array)
     array.flatten.sort_by {|post| post.published_at}.reverse
+  end
+
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      provider = AuthProvider.find_by_name(auth["provider"]) #refactor since repeated
+      user.authorizations << provider.authorizations.create(uid: auth["uid"])
+      user.name = auth["info"]["name"]
+      user.email = auth["info"]["email"]
+      user.password = SecureRandom.hex(10)
+    end
   end
 
 end

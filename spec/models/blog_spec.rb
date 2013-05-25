@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Blog do
 
-  let!(:blog) { create(:blog) }
-
-  let!(:fanguy) { create(:user, name: "fanguy") }
+  let!(:fanguy) { create(:user, :name => "fanguy") }
   
   let!(:blogger) { create(:blog_host) }
+
+  let!(:blog) { create(:blog) }
 
   let!(:post1) { create(:post) }
   let!(:post2) { create(:post) }

@@ -1,14 +1,16 @@
 Wezolo::Application.routes.draw do
   get "search/index"
-resource :follows, :only => [:create, :destroy]
-resource :users, :only => [:new, :create, :edit, :destroy, :show]
+  resource :follows, :only => [:create, :destroy]
+  resource :users, :only => [:new, :create, :edit, :destroy, :show]
 
-root :to => "home#landing"
-get '/home' => "home#home"
-# resource :sessions, :only => [:create, :destroy]
-post '/login' => 'sessions#create', :as => "login"
-delete '/logout' => 'sessions#destroy', :as => "logout"
-get '/signup' => 'users#new', :as => "signup"
+  root :to => "home#landing"
+  get '/home' => "home#home"
+  # resource :sessions, :only => [:create, :destroy]
+  post '/login' => 'session#create', :as => "login"
+  delete '/logout' => 'session#destroy', :as => "logout"
+  get '/signup' => 'users#new', :as => "signup"
+  match '/auth/google_oauth2/callback' => "session#create", :auth_provider => 'google'
+  # facebook callback route needs to have :auth_provider => 'facebook'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
