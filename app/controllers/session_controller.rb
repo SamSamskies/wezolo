@@ -14,10 +14,8 @@ class SessionController < ApplicationController
       if user && user.authenticate(params[:password])
         login(user)
       else
-        @error = "User Login or Password Incorrect"
+        @error = "Oh Snap!: User Login or Password Incorrect!"
         render :json => {:error => @error}, :status => :unprocessable_entity
-        # @error = "Invalid email or password Dummy"
-        # redirect_to root_url
       end
     end
   end
