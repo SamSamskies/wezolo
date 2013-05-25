@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524234407) do
+ActiveRecord::Schema.define(:version => 20130525005231) do
 
   create_table "auth_providers", :force => true do |t|
     t.string   "name"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(:version => 20130524234407) do
   end
 
   create_table "authorizations", :force => true do |t|
-    t.string   "uid"
+    t.string   "uid",              :null => false
     t.integer  "user_id"
-    t.integer  "auth_provider_id"
+    t.integer  "auth_provider_id", :null => false
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
