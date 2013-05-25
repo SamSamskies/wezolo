@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'tire'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -61,7 +62,7 @@ module Wezolo
 
     #searchbox elastic search
     Tire.configure do
-        url ENV['SEARCHBOX_URL']
+        url ENV['ELASTICSEARCH_URL']
     end
 end
 end
