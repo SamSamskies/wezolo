@@ -1,7 +1,7 @@
 module Authentication
   def login(user)
-    session[:id] = user.id
-    redirect_to root_path
+    session[:user_id] = user.id
+    redirect_to '/home'
   end
 
   def current_user
