@@ -41,3 +41,4 @@ user_ids = User.pluck(:id)
   end
 end
 
+AuthProvider.create(name: "google_oauth2")

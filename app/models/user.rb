@@ -50,6 +50,7 @@ class User < ActiveRecord::Base
       user.authorizations << provider.authorizations.create(uid: auth["uid"])
       user.name = auth["info"]["name"]
       user.email = auth["info"]["email"]
+      user.username = auth["info"]["email"]
       user.password = SecureRandom.hex(10)
     end
   end

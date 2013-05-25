@@ -2,8 +2,6 @@
   .container
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
-        %a#google-login-button{:href => '/auth/google_oauth2'}
-          %img{:src => 'https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png'}
         %a.brand{:href => "#"} Project name
         = link_to "Wezolo", root_path, :class => "brand"
         %ul.nav
@@ -28,6 +26,8 @@
                 %a{:href => "#"} One more separated link
           %li.signin.pull-right
             - unless current_user
+              %a{:href => '/auth/google_oauth2'}
+                %img#google-login-button{:src => 'https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png'}
               =form_tag login_path, :method => :post do
                 = email_field_tag :email
                 = password_field_tag :password
