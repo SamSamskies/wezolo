@@ -58,5 +58,10 @@ module Wezolo
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-  end
+
+    #searchbox elastic search
+    Tire.configure do
+        url ENV['SEARCHBOX_URL']
+    end
+end
 end

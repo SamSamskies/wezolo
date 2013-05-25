@@ -1,4 +1,6 @@
-%h1 Users Newsfeed
--@blog.each do |celeb|
-  -celeb.posts.each do |post|
-    %p=post.title
+.container
+  %h1 Users Newsfeed
+  -@newsfeed.each do |post|
+    %h3=post.title
+    %p=post.body
+
