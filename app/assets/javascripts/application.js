@@ -23,7 +23,8 @@ $(document).ready(function(){
   });
 
   $("form").on('ajax:success', function(event, xhr, status) {
-    $("#loginModal").hide();
+    $("#loginModal").modal("hide");
+    window.location = "/home";
   });
 
 });

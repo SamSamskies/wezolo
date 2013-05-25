@@ -26,6 +26,7 @@
                 %a{:href => "#"} One more separated link
           %li.signin.pull-right
             - unless current_user
+              =link_to "Sign up", "#signupModal", {"data-toggle" => "modal"}
               =link_to "Log in", "#loginModal", {"data-toggle" => "modal"}
             - else
               =link_to "Log out", logout_path, :method => :delete
