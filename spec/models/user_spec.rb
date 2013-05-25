@@ -21,7 +21,9 @@ describe User do
 
     it "#countries_posts returns all the posts written by people in a country that a user is following"
 
-    it "#published_at should return array of posts ordered by published_at"    
+    it "#published_at should return array of posts ordered by published_at"
+
+    it "returns correct hash by calling #user_followings_by_type"
   end
 
   context "authorization" do
