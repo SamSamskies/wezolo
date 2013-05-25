@@ -7,5 +7,4 @@ class ApplicationController < ActionController::Base
     @current_user_followings ||= current_user.present? ? current_user.user_followings_by_type : {}
   end
 
-
 end
