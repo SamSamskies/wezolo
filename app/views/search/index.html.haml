@@ -2,15 +2,7 @@
   - @users.each do |user|
     %li= user.username
     = user.followers
-    - if current_user && current_user.user_followings_by_type["User"].include?(user.id)
-      %li= link_to "unfollow user", follows_path(:followable_id => user.id, :followable_type => user.class.to_s), :method => :delete
-    - else
-      %li= link_to "follow user", follows_path(:followable_id => user.id, :followable_type => user.class.to_s), :method => :post
+    %li= current_user.follow_link(user)
     - user.countries.each do |country|
       %li=country.name 
-      - if current_user && current_user.user_followings_by_type["Country"].include?(country.id)
-        %li= link_to "unfollow country", follows_path(:followable_id => country.id, :followable_type => country.class.to_s), :method => :delete
-      - else
-        %li=link_to "follow country", follows_path(:followable_id => country.id, :followable_type => country.class.to_s), :method => :post
-  
-
+      %li= current_user.follow_link(country)
