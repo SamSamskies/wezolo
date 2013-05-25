@@ -1,7 +1,6 @@
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base  
   include Tire::Model::Search
   include Tire::Model::Callbacks
-  
   has_secure_password
   attr_accessible :avatar_url, :name, :password_digest, :sector, :status, :username, :email, :country, :password, :password_confirmation, :countries_attributes, :follower
   has_and_belongs_to_many :countries

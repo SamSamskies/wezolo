@@ -1,6 +1,4 @@
 class Blog < ActiveRecord::Base
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
   has_many :posts, :dependent => :destroy
   belongs_to :blog_host
   belongs_to :user
