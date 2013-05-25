@@ -43,6 +43,16 @@ body {
   text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 }
 
+.navbar .nav {
+  float: none;
+}
+
+
+.navbar .nav > li.pull-right {
+  float: right;
+}
+
+
 /* Navbar links: increase padding for taller navbar */
 .navbar .nav > li > a {
   padding: 15px 20px;
