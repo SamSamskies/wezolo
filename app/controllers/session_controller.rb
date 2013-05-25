@@ -14,8 +14,10 @@ class SessionController < ApplicationController
       if user && user.authenticate(params[:password])
         login(user)
       else
-        flash[:notice] = "Invalid email or password"
-        redirect_to root_url
+        @error = "User Login or Password Incorrect"
+        render :json => {:error => @error}, :status => :unprocessable_entity
+        # @error = "Invalid email or password Dummy"
+        # redirect_to root_url
       end
     end
   end

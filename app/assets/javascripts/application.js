@@ -18,4 +18,12 @@
 
 
 $(document).ready(function(){
+  $("form").on('ajax:error', function(event, xhr, status) {
+    $(".error").text($.parseJSON(xhr.responseText).error);
+  });
+
+  $("form").on('ajax:success', function(event, xhr, status) {
+    $("#loginModal").hide();
+  });
+
 });

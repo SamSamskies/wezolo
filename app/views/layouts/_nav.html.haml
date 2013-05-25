@@ -26,12 +26,7 @@
                 %a{:href => "#"} One more separated link
           %li.signin.pull-right
             - unless current_user
-              %a{:href => '/auth/google_oauth2'}
-                %img#google-login-button{:src => 'https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png'}
-              =form_tag login_path, :method => :post do
-                = email_field_tag :email
-                = password_field_tag :password
-                = submit_tag "Sign in"
+              =link_to "Log in", "#loginModal", {"data-toggle" => "modal"}
             - else
               =link_to "Log out", logout_path, :method => :delete
           %li.search
