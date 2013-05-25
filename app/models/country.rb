@@ -1,6 +1,6 @@
 class Country < ActiveRecord::Base
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  # include Tire::Model::Search
+  # include Tire::Model::Callbacks
   attr_accessible :name
   has_and_belongs_to_many :users
   has_many :blogs, :through => :users

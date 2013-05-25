@@ -1,6 +1,5 @@
 Wezolo::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
@@ -13,6 +12,8 @@ Wezolo::Application.configure do
 
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
+  # Tire::Configuration.url "http://localhost:1234"
+  # Tire::Configuration.client.delete(Tire::Configuration.url)
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
