@@ -42,4 +42,14 @@ class User < ActiveRecord::Base
     array.flatten.sort_by {|post| post.published_at}.reverse
   end
 
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      provider = AuthProvider.find_by_name(auth["provider"]) #refactor since repeated
+      user.authorizations << provider.authorizations.create(uid: auth["uid"])
+      user.name = auth["info"]["name"]
+      user.email = auth["info"]["email"]
+      user.password = SecureRandom.hex(10)
+    end
+  end
+
 end
