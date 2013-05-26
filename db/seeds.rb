@@ -9,9 +9,9 @@ CSV.foreach("./db/countries.csv") do |row|
   Country.create(name: row.first)
 end
 
-test_user = FactoryGirl.create :test
+test_user = FactoryGirl.create(:test)
 FactoryGirl.create(:profile, user: test_user)
-FactoryGirl.create_list (:profile, 100)
+FactoryGirl.create_list(:profile, 100)
 
 User.all.each do |u|
   FactoryGirl.create_list(:involvement, [1,2,3].sample, user: u)

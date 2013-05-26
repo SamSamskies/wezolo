@@ -1,18 +1,21 @@
 .content
   .container
-    .form-effects
+    .form-effects.user-profile
       .row.photo
         .offset1.span5
           %h2=@user.name
           =image_tag(@user.photo)
         .span5.profile
-          %p 
-            Last login:
-            Status:
-            =@user.status
-            Location:
-            -if @user.profile
+          %ul
+            %li
+              Last login:
+            %li 
+              Status:
+              =@user.status
+            %li 
+              Location:
               =@user.profile.location
+            %li 
               Bio:
               =@user.profile.bio
       .row

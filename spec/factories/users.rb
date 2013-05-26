@@ -6,7 +6,7 @@ FactoryGirl.define do
     status ['PCV', 'RPCV', 'Interested'].sample
   end
 
- factory :test do
+ factory :test, :parent => :user do
     email "sam@boss.com"
     password "password"
     name "Sam Samskies"

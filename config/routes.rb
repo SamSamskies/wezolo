@@ -3,7 +3,7 @@ Wezolo::Application.routes.draw do
   get "search/index"
   get "search/results", :to => "search#search_results"
   resource :follows, :only => [:create, :destroy]
-  resources :users, :only => [:new, :create, :edit, :destroy, :show]
+  resources :users
   root :to => "home#landing"
   get '/home' => "home#home"
   post '/login' => 'session#create', :as => "login"
