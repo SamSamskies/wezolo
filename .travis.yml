@@ -6,10 +6,7 @@ env:
 script:
   - bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
-  - bundle exec rake spec
-before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - xvfb-run bundle exec rake spec
 before_script:
   - bundle exec rake db:create RAILS_ENV=test
   - "export DISPLAY=:99.0"
