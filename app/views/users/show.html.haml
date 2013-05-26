@@ -32,5 +32,6 @@
                 %li=i.sector
                 %li=i.start_date
                 %li=i.end_date
+                %li=link_to "Edit", edit_involvement_path(i), :class => "btn btn-primary"
         .pull-right
           =link_to "Add", new_involvement_path, :class => "btn btn-primary"
