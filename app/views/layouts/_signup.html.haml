@@ -7,8 +7,12 @@
       %img#google-login-button{:src => 'https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png'}
     =label_tag 'Or Sign Up old school'
     =form_tag users_path, :method => :post, :remote => true do
+      =label_tag 'Email:'
       = email_field_tag :email, nil, :required => true
-      = password_field_tag :password
-      = submit_tag "Sign up", :class => "btn btn-primary"
+      = label_tag 'Password:'
+      = password_field_tag :password, nil, :required => true
+      = label_tag :password_confirmation
+      = password_field_tag :password_confirmation, nil, :required => true
+      = submit_tag "Sign Up", {:class =>"btn btn-primary"}
     / %button.btn.btn-primary Log in
   .alert.alert-error

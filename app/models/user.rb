@@ -2,11 +2,14 @@ class User < ActiveRecord::Base
   # include Tire::Model::Search
   # include Tire::Model::Callbacks
   has_secure_password
-  attr_accessible :avatar_url, :name, :password_digest, :sector, :status, :username, :email, :country, :password, :password_confirmation, :countries_attributes, :follower
-  has_and_belongs_to_many :countries
+  attr_accessible :avatar_url, :name, :password_digest, :sector, :status, :email, :country, :password, :password_confirmation, :countries_attributes, :follower
+  
+  has_many :involvements
+  has_many :countries, :through => :involvements
+
   accepts_nested_attributes_for :countries
   
-  validates :email, :uniqueness => true
+  # validates :email, :uniqueness => true
   # validates :username, :uniqueness => true
 
   has_many :blogs

@@ -1,0 +1,18 @@
+#signup2Modal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel SIGN UP PART II!
+  .modal-body
+    =label_tag 'Complete the required profile information!'
+    =form_tag profile_create_path :remote => true do
+      / =label_tag 'Current Status (ex PCV)'
+      
+      / = select_tag :status, [['Interested in Peace Corp','interested'],['PCV (Peace Corps Volunteer)','PCV'],['RPCV (Returned Peace Corps Volunteers','RPCV']], {:include_blank => true, :required => true}
+
+      = collection_select :country_ids, nil, Country.all, :id, :name, {}, {:multiple=>true, :class => "tagsinput" }
+      / = password_field_tag :password, nil, :required => true
+      / = label_tag :password_confirmation
+      / = password_field_tag :password_confirmation, nil, :required => true
+      = button_to "Lets gooo", "#signup2Modal", :class => "btn btn-primary"
+    / %button.btn.btn-primary Log in
+  .alert.alert-error

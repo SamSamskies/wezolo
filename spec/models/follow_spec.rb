@@ -5,11 +5,11 @@ describe Follow do
   let!(:togo) { create(:country, name: "Africa") }
   let!(:usa) { create(:country, name: "usa") }
 
-  let!(:fanguy) { create(:user, username: "fanguy") }
-  let!(:justin_bieber) { create(:user, username: "justin_bieber") }
-  let!(:african_singer) { create(:user, username: "african_singer") }
+  let!(:fanguy) { create(:user, name: "fanguy") }
+  let!(:justin_bieber) { create(:user, name: "justin_bieber") }
+  let!(:african_singer) { create(:user, name: "african_singer") }
   
-  let!(:oprah) { create(:user, username: "oprah") }
+  let!(:oprah) { create(:user, name: "oprah") }
 
 
   it "a user can be followed" do

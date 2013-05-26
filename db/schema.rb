@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525070433) do
+ActiveRecord::Schema.define(:version => 20130526003158) do
 
   create_table "auth_providers", :force => true do |t|
     t.string   "name"
@@ -52,11 +52,6 @@ ActiveRecord::Schema.define(:version => 20130525070433) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "countries_users", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "country_id"
-  end
-
   create_table "follows", :force => true do |t|
     t.integer  "followable_id"
     t.string   "followable_type"
@@ -67,6 +62,15 @@ ActiveRecord::Schema.define(:version => 20130525070433) do
 
   add_index "follows", ["followable_id", "followable_type", "follower_id"], :name => "follow_unique_index"
   add_index "follows", ["follower_id"], :name => "index_follows_on_follower_id"
+
+  create_table "involvements", :force => true do |t|
+    t.integer "user_id"
+    t.integer "country_id"
+    t.text    "description"
+    t.string  "sector"
+    t.date    "start_date"
+    t.date    "end_date"
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title"
@@ -80,13 +84,6 @@ ActiveRecord::Schema.define(:version => 20130525070433) do
   add_index "posts", ["blog_id"], :name => "index_posts_on_blog_id"
 
   create_table "profiles", :force => true do |t|
-    t.string   "name"
-    t.string   "status"
-    t.string   "sector"
-    t.string   "username"
-    t.string   "university"
-    t.string   "major"
-    t.string   "occupation"
     t.string   "location"
     t.text     "bio"
     t.string   "photo_url"
@@ -102,6 +99,8 @@ ActiveRecord::Schema.define(:version => 20130525070433) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "name"
+    t.string   "status"
   end
 
 end
