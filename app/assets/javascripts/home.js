@@ -10,7 +10,12 @@ $(document).ready(function(){
 
   $("#signupModal").on('ajax:success', function(event, xhr, status) {
     $("#signupModal").modal("hide");
-    window.location.replace("/home")
+    window.location.replace("/home");
+  });
+
+   $("#signupModal").on('ajax:error', function(event, xhr, status) {
+    $(".alert.alert-error").text($.parseJSON(xhr.responseText).error);
+    // window.location.replace('/');
   });
 
 });
