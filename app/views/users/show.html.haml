@@ -27,7 +27,7 @@
           -unless @user.involvements.empty?
             -@user.involvements.each do |i|
               %ul
-                %li=i.country
+                %li=i.country.name if i.country
                 %li=i.description
                 %li=i.sector
                 %li=i.start_date
