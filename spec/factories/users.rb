@@ -13,11 +13,19 @@ FactoryGirl.define do
     status "RPCV" 
  end
 
- factory :RPCV, :parent => :user do
+ factory :rpcv, :parent => :user do
     status "RPCV"
   end
 
-  factory :PCV, :parent => :user do
+  factory :pcv, :parent => :user do
     status "PCV"
   end
+
+  factory :profile do
+    location Faker::Address.city
+    bio Faker::Lorem.paragraph
+    photo_url "http://agarwal.seas.upenn.edu/wp-content/uploads/2011/01/person_default_208x208-1.png"
+    user
+  end
+
 end

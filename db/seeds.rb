@@ -1,31 +1,26 @@
 require 'CSV'
+Country.delete_all
+User.delete_all
+Profile.delete_all
+Involvement.delete_all
+
+
 CSV.foreach("./db/countries.csv") do |row|
   Country.create(name: row.first)
 end
 
-FactoryGirl.create :test
-# FactoryGirl.create_list (:user, 25, )
+test_user = FactoryGirl.create :test
+FactoryGirl.create(:profile, user: test_user)
+FactoryGirl.create_list (:profile, 100)
 
-25.times do 
-  User.create(status: ['PCV', 'RPCV', 'Interested'].sample, 
-              email: Faker::Internet.email, 
-              sector: ['Business', 'Health', 'Agriculture'].sample, 
-              username: Faker::Internet.user_name,
-              name: Faker::Name.name,
-              avatar_url: Faker::Internet.url,
-              password: 'password')
+User.all.each do |u|
+  FactoryGirl.create_list(:involvement, [1,2,3].sample, user: u)
 end
-
-countries = Country.all
-User.all.each do |user|
-  user.countries << countries.sample
-end
-
 
 blogger = BlogHost.create(name: 'Blogger')
 blogger = BlogHost.first
 user_ids = User.pluck(:id)
-100.times do
+300.times do
   blog = blogger.blogs.create(title: Faker::Company.catch_phrase, 
                        url: 'http://' + Faker::Lorem.characters(10) + '.blogspot.com', 
                        external_id: Array.new(7){rand 10}.join,
