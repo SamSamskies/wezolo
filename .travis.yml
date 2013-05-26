@@ -3,10 +3,12 @@ rvm:
   - 1.9.3
 env:
   - DB=postgresql
+  - DISPLAY=":99.0"
 script:
   - bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
   - bundle exec rake spec
 before_script:
   - bundle exec rake db:create RAILS_ENV=test
+  - 'sh -e /etc/init.d/xvfb start'
 bundler_args: --binstubs=./bundler_stubs
