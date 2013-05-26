@@ -5,9 +5,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    p params[:status]
-    p params[:status].first
-    p params[:status].last
     user = User.new(email: params[:email], password: params[:password],password_confirmation: params[:password_confirmation], name: params[:name], status: params[:status].first)
     if user.save
       session[:user_id] = user.id
