@@ -2,7 +2,11 @@ class User < ActiveRecord::Base
   # include Tire::Model::Search
   # include Tire::Model::Callbacks
   has_secure_password
-  attr_accessible :avatar_url, :name, :password_digest, :sector, :status, :email, :country, :password, :password_confirmation, :countries_attributes, :follower
+
+  attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile
+
+  validates :status, :presence => true
+
   has_many :involvements
   has_many :countries, :through => :involvements
 
@@ -63,6 +67,7 @@ class User < ActiveRecord::Base
       user.name = auth["info"]["name"]
       user.email = auth["info"]["email"]
       user.password = SecureRandom.hex(10)
+      user.create_profile(photo_url: auth["info"]["image"])
     end
   end
 

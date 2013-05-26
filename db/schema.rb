@@ -95,12 +95,12 @@ ActiveRecord::Schema.define(:version => 20130526003158) do
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "status"
     t.string   "email"
-    t.string   "name"
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "name"
+    t.string   "status"
   end
 
 end

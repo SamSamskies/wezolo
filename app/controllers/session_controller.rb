@@ -31,25 +31,13 @@ class SessionController < ApplicationController
   end
 
   private
-
-  def find_user_by_uid
-    Authorization.find_by_uid(auth["uid"]).user
-  end
-
-  def create_user_by_uid
-    User.create_with_omniauth(auth) # how does this work?
-  end
-
-  def find_or_create_user_by_uid
-    @user = find_user_by_uid || create_user_by_uid
-  end
-
+  
   def auth
     request.env["omniauth.auth"]
   end
 
   def external_provider_login?
-    return true if params[:auth_provider] 
+    true if params[:auth_provider] 
   end
 
 end
