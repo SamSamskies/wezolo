@@ -13,10 +13,7 @@
       = select :status, nil, [['Interested in Peace Corps','interested'],['PCV (Peace Corps Volunteer)','PCV'],['RPCV (Returned Peace Corps Volunteers','RPCV']], {:include_blank => true, :required => true}
       %br
       = password_field_tag :password, nil, {:required => true, :placeholder => "Password"}
-      = password_field_tag :password_confirmation, nil, {:required => true, :placeholder => "Password Confirmation"}
-
-
- 
+      = password_field_tag :password_confirmation, nil, {:required => true, :placeholder => "Password Confirmation"} 
       = submit_tag "Sign Up", {:class =>"btn btn-primary"}
     / %button.btn.btn-primary Log in
   .alert.alert-error

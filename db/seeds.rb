@@ -3,12 +3,8 @@ CSV.foreach("./db/countries.csv") do |row|
   Country.create(name: row.first)
 end
 
-User.create(status: 'PCV', 
-            email: 'test@pc.com',
-            sector: 'Business',
-            username: 'test',
-            name: 'test',
-            password: 'password')
+FactoryGirl.create :test
+# FactoryGirl.create_list (:user, 25, )
 
 25.times do 
   User.create(status: ['PCV', 'RPCV', 'Interested'].sample, 

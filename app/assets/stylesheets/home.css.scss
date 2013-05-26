@@ -6,7 +6,8 @@
 body {
   padding-bottom: 40px;
   color: #5a5a5a;
-  background-color: #ecf0f1;
+  // background-color: #ecf0f1;
+  background-image:url("cream_pixels.png")
 }
 
 .content {
@@ -21,12 +22,11 @@ body {
   margin-top: 50px;
 }
 
-/* hack to stop flat ui icons from appear multiple times
-*/
-
+/* hack to stop flat ui icons from appear multiple times */
 .fui-icons-h *{
   display: none;
 }
+/* end */ 
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
@@ -41,9 +41,6 @@ body {
   margin-top: 20px;
   margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
 }
-.navbar-wrapper .navbar {
-
-}
 
 /* Remove border and change up box shadow for more contrast */
 .navbar .navbar-inner {
@@ -56,8 +53,6 @@ body {
 
 /* Downsize the brand/project name a bit */
 .navbar .brand {
-  padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
-  font-size: 16px;
   font-weight: bold;
   text-shadow: 0 -1px 0 rgba(0,0,0,.5);
   border: none;
@@ -66,7 +61,6 @@ body {
 .navbar .nav {
   float: none;
 }
-
 
 .navbar .nav > li.pull-right {
   float: right;
@@ -206,7 +200,6 @@ body {
     border-radius: 0;
     margin: -20px 0;
   }
-
   .carousel .item {
     height: 500px;
   }
@@ -274,3 +267,25 @@ body {
   }
 
 }
+
+
+/* form-effects */
+.form-effects {
+  background-color: #F7F9FA;
+  -webkit-box-shadow: 5px 10px 6px -6px #777;
+  -moz-box-shadow: 5px 10px 6px -6px #777;
+  box-shadow: 0px 10px 6px -6px #777;
+}
+
+.form-effects:before {
+  -webkit-box-shadow: 5px 10px 6px -6px #777;
+  -moz-box-shadow: 5px 10px 6px -6px #777;
+  box-shadow: 0px 10px 6px -6px #777;
+}
+
+.form-effects:after {
+  -webkit-box-shadow: 5px 100px 6px -6px #777;
+  -moz-box-shadow: 5px 10px 6px -6px #777;
+  box-shadow: 0px 10px 6px -6px #777;
+}
+/* form-effects */

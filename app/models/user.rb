@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # include Tire::Model::Callbacks
   has_secure_password
   attr_accessible :avatar_url, :name, :password_digest, :sector, :status, :email, :country, :password, :password_confirmation, :countries_attributes, :follower
-  
+  after_create :titleize_name
   has_many :involvements
   has_many :countries, :through => :involvements
 
@@ -65,6 +65,13 @@ class User < ActiveRecord::Base
       user.email = auth["info"]["email"]
       user.password = SecureRandom.hex(10)
     end
+  end
+
+  private
+  
+  def titleize
+    self.name = self.name.titleize
+    self.save 
   end
 
 end

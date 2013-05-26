@@ -9,6 +9,10 @@ class UserDecorator < Draper::Decorator
     end
   end
 
+  def photo
+    "http://agarwal.seas.upenn.edu/wp-content/uploads/2011/01/person_default_208x208-1.png"
+  end
+
   def follows_path(followable_obj)
     h.follows_path(:followable_id => followable_obj.id, :followable_type => class_string(followable_obj))
   end
