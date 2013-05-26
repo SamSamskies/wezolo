@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # include Tire::Model::Callbacks
   has_secure_password
 
-  attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile
+  attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status
 
   validates :status, :presence => true
 
@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
   has_many :auth_providers, :through => :authorizations
 
   has_one :profile
+
+  after_create :initialize_auth_status
 
   def followed_posts
     (self.heroes_posts + self.countries_posts).uniq
@@ -69,6 +71,10 @@ class User < ActiveRecord::Base
       user.password = SecureRandom.hex(10)
       user.create_profile(photo_url: auth["info"]["image"])
     end
+  end
+
+  def initialize_auth_status
+    self.update_attributes(:auth_status => "user") if self.status == ["interested"]
   end
 
 end
