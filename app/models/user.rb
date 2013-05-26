@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status
 
-  validates :status, :presence => true
+  # validates :status, :presence => true
 
   has_many :involvements
   has_many :countries, :through => :involvements

@@ -6,20 +6,14 @@ describe Authorization do
 
   let!(:fanguy) { create(:user, :name => 'fanguy') }
 
-  let!(:fb_login_auth) { create(:authorization, :user => fanguy) }
+  let!(:fb_login_auth) { create(:authorization, :auth_provider => facebook, :user => fanguy) }
 
-  # it "has a user" do
-  #   fb_login_auth.user = fanguy
-  #   fb_login_auth.save
-  #   fb_login_auth.reload
-  #   fb_login_auth.user.should eq fanguy
-  # end
+  it "has a user" do
+    fb_login_auth.user.should eq fanguy
+  end
 
-  # it "has one auth provider" do
-  #   fb_login_auth.auth_provider = facebook
-  #   fb_login_auth.save
-  #   fb_login_auth.reload
-  #   fb_login_auth.auth_provider.should eq facebook
-  # end
+  it "has one auth provider" do
+    fb_login_auth.auth_provider.should eq facebook
+  end
 
 end
