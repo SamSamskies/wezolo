@@ -5,14 +5,18 @@
   .modal-body
     %a{:href => '/auth/google_oauth2'}
       %img#google-login-button{:src => 'https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png'}
-    =label_tag 'Or Sign Up old school'
+    %h4.top-spacer Or fill out the following:
     =form_tag users_path, :method => :post, :remote => true do
-      =label_tag 'Email:'
-      = email_field_tag :email, nil, :required => true
-      = label_tag 'Password:'
-      = password_field_tag :password, nil, :required => true
-      = label_tag :password_confirmation
-      = password_field_tag :password_confirmation, nil, :required => true
+      = text_field_tag :name, nil, {:required => true, :placeholder => "Full Name"}
+      = email_field_tag :email, nil, {:required => true, :placeholder => "Email"}
+      = label_tag :status
+      = select :status, nil, [['Interested in Peace Corps','interested'],['PCV (Peace Corps Volunteer)','PCV'],['RPCV (Returned Peace Corps Volunteers','RPCV']], {:include_blank => true, :required => true}
+      %br
+      = password_field_tag :password, nil, {:required => true, :placeholder => "Password"}
+      = password_field_tag :password_confirmation, nil, {:required => true, :placeholder => "Password Confirmation"}
+
+
+ 
       = submit_tag "Sign Up", {:class =>"btn btn-primary"}
     / %button.btn.btn-primary Log in
   .alert.alert-error

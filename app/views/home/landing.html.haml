@@ -9,7 +9,7 @@
           .carousel-caption
             %h1 Example headline.
             %p.lead Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-            =link_to "Sign up today", signup_path, :class => "btn btn-large btn-primary"
+            =link_to "Sign up today", "#signupModal", {"data-toggle" => "modal", :class => "btn btn-large btn-primary"}
       .item
         %img{:src => "https://s3.amazonaws.com/jetstrap-site/images/2.0/assets/cta_image2.jpg"}/
         .container
