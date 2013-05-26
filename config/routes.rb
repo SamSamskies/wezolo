@@ -5,7 +5,7 @@ Wezolo::Application.routes.draw do
   resource :follows, :only => [:create, :destroy]
   resources :users
   resources :profiles, :only => [:edit, :update]
-  resources :involvements, :only => [:new, :create, :update, :destroy]
+  resources :involvements, :only => [:new, :create, :edit, :update, :destroy]
   root :to => "home#landing"
   get '/home' => "home#home"
   post '/login' => 'session#create', :as => "login"
