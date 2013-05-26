@@ -6,8 +6,8 @@
 body {
   padding-bottom: 40px;
   color: #5a5a5a;
-  // background-color: #ecf0f1;
-  background-image:url("cream_pixels.png")
+  background-color: #ecf0f1;
+  // background-image:url("cream_pixels.png")
 }
 
 .content {
@@ -271,21 +271,22 @@ body {
 
 /* form-effects */
 .form-effects {
-  background-color: #F7F9FA;
+  border: 1px solid #CDD2D4;
+  background-color: white;
   -webkit-box-shadow: 5px 10px 6px -6px #777;
   -moz-box-shadow: 5px 10px 6px -6px #777;
-  box-shadow: 0px 10px 6px -6px #777;
+  box-shadow: 3px 10px 6px -6px #777;
 }
 
 .form-effects:before {
   -webkit-box-shadow: 5px 10px 6px -6px #777;
   -moz-box-shadow: 5px 10px 6px -6px #777;
-  box-shadow: 0px 10px 6px -6px #777;
+  box-shadow: 3px 10px 6px -6px #777;
 }
 
 .form-effects:after {
   -webkit-box-shadow: 5px 100px 6px -6px #777;
   -moz-box-shadow: 5px 10px 6px -6px #777;
-  box-shadow: 0px 10px 6px -6px #777;
+  box-shadow: 3px 10px 6px -6px #777;
 }
 /* form-effects */
