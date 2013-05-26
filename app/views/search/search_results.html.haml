@@ -1,7 +1,8 @@
-%h1 Search Results
-%ul 
-- @results.each do |result|
-  %li= result.name
-  %ul
-    - result.users.each do |user|
-      %li=user.username
+.content
+  %h1 Search Results
+  %ul 
+  - @results.each do |result|
+    %li= result.name
+    %ul
+      - result.users.each do |user|
+        %li=user.username

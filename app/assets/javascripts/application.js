@@ -17,16 +17,4 @@
 //= require_tree .
 
 
-$(document).ready(function(){
-  $("#loginModal").on('ajax:error', function(event, xhr, status) {
-    $(".alert.alert-error").text($.parseJSON(xhr.responseText).error);
-  });
 
-  $("#loginModal").on('ajax:success', function(event, xhr, status) {
-    $("#loginModal").modal("hide");
-    window.location = "/home";
-  });
-
-
-
-});

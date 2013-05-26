@@ -2,37 +2,21 @@
   .container
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
-        %a.brand{:href => "#"} Project name
-        = link_to "Wezolo", root_path, :class => "brand"
+        -if current_user
+          = link_to "Wezolo", home_path, :class => "brand"
+        - else
+          = link_to "Wezolo", root_path, :class => "brand"
         %ul.nav
-          %li.active
-            =link_to "Home", home_path
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Dropdown
-              %b.caret
-            %ul.dropdown-menu
-              %li
-                %a{:href => "#"} Action
-              %li
-                %a{:href => "#"} Another action
-              %li
-                %a{:href => "#"} Something else here
-              %li.divider
-              %li.nav-header Nav header
-              %li
-                %a{:href => "#"} Separated link
-              %li
-                %a{:href => "#"} One more separated link
           %li.signin.pull-right
             - unless current_user
               =link_to "Log in", "#loginModal", {"data-toggle" => "modal"}
 
             - else
               =link_to "Log out", logout_path, :method => :delete
-          %li.search
-            =form_tag search_results_path, :method => :get, :class => "form-search" do
-              .input-append
-                =text_field_tag "search", nil,:class => "search-query-8 span2 small search-query search-query-rounded", :placeholder => "Search"
-                %button.btn.btn-small{:type => "submit"}
-                  %span.fui-search.fui-icons-h
+          - if current_user
+            %li.search.pull-right
+              =form_tag search_results_path, :method => :get, :class => "form-search" do
+                .input-append
+                  =text_field_tag "search", nil,:class => "search-query-8 span2 small search-query search-query-rounded", :placeholder => "Search Countries"
+                  %button.btn.btn-small{:type => "submit"}
+                    %span.fui-search.fui-icons-h
