@@ -1,8 +1,10 @@
 .content
-  %ul
-    - @users.each do |user|
-      %li= user.name
-      %li= current_user.follow_link(user)
-      - user.countries.each do |country|
-        %li=country.name 
-        %li= current_user.follow_link(country)
+  .container
+    %ul
+      - @users.each do |user|
+        %li= user.name
+        %li= current_user.follow_link(user)
+        - user.countries.each do |country|
+          %ul
+            %li=country.name 
+            %li= current_user.follow_link(country)
