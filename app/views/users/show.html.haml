@@ -2,8 +2,9 @@
   .container
     .form-effects.user-profile
       .row.photo
-        .offset1.span5
+        .offset1.span11
           %h2=@user.name
+        .offset1.span3
           =image_tag(@user.photo)
         .span5.profile
           %ul
@@ -18,13 +19,20 @@
             %li 
               Bio:
               =@user.profile.bio
+            %li
+              =link_to "Edit", edit_profile_path(@user.profile), :class => "btn btn-primary"
       .row
         .offset1.span10
           Coutries of service:
           -unless @user.involvements.empty?
-            =@user.involvements.each do |i|
-              =i.country
-              =i.description
-              =i.sector
-              =i.start_date
-              =i.end_date
+            -@user.involvements.each do |i|
+              %ul
+                %hr
+                %li=i.country.name if i.country
+                %li=i.description
+                %li=i.sector
+                %li=i.start_date
+                %li=i.end_date
+                %li=link_to "Edit", edit_involvement_path(i), :class => "btn btn-primary"
+        .offset10
+          =link_to "Add", new_involvement_path, :class => "btn btn-primary"

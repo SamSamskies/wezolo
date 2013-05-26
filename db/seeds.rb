@@ -3,18 +3,19 @@ Country.delete_all
 User.delete_all
 Profile.delete_all
 Involvement.delete_all
-
+BlogHost.delete_all
+Blog.delete_all
 
 CSV.foreach("./db/countries.csv") do |row|
   Country.create(name: row.first)
 end
-
+countries = Country.all
 test_user = FactoryGirl.create(:test)
 FactoryGirl.create(:profile, user: test_user)
 FactoryGirl.create_list(:profile, 100)
 
 User.all.each do |u|
-  FactoryGirl.create_list(:involvement, [1,2,3].sample, user: u)
+  FactoryGirl.create_list(:involvement, [1,2,3].sample, user: u, country: countries.sample)
 end
 
 blogger = BlogHost.create(name: 'Blogger')
