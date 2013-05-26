@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
   # include Tire::Model::Search
   # include Tire::Model::Callbacks
   has_secure_password
+
   attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile
-  
+
   has_many :involvements
   has_many :countries, :through => :involvements
 

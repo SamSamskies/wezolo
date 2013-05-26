@@ -1,2 +1,30 @@
-%h1 Users#show
-%p Find me in app/views/users/show.html.haml
+.content
+  .container
+    .form-effects.user-profile
+      .row.photo
+        .offset1.span5
+          %h2=@user.name
+          =image_tag(@user.photo)
+        .span5.profile
+          %ul
+            %li
+              Last login:
+            %li 
+              Status:
+              =@user.status
+            %li 
+              Location:
+              =@user.profile.location
+            %li 
+              Bio:
+              =@user.profile.bio
+      .row
+        .offset1.span10
+          Coutries of service:
+          -unless @user.involvements.empty?
+            =@user.involvements.each do |i|
+              =i.country
+              =i.description
+              =i.sector
+              =i.start_date
+              =i.end_date
