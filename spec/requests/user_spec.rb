@@ -35,17 +35,16 @@ describe "When I visit the homepage" do
     end
 
     it "shows errors when passwords don't match" do
-      # visit '/'
-      # click_link("Sign up")
-      # find('.alert-error').text.should eq ""
-      # sleep(1)
-      # fill_in 'name', :with => 'Jimmy'
-      # fill_in 'email', :with => 'jimmy@email.com'
-      # fill_in 'password', :with => 'password'
-      # fill_in 'password_confirmation', :with => 'password1'
-      # find(".createaccount").click
-      # find('.alert-error').text.should eq "Password doesn't match confirmation"
-      pending
+      visit '/'
+      click_link("Sign up")
+      find('.alert-error').text.should eq ""
+      sleep(1)
+      fill_in 'name', :with => 'Jimmy'
+      fill_in 'email', :with => 'jimmy@email.com'
+      fill_in 'password', :with => 'password'
+      fill_in 'password_confirmation', :with => 'password1'
+      find(".createaccount").click
+      find('.alert-error').text.should eq "Password doesn't match confirmation"
     end
   end
 end
