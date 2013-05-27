@@ -1,15 +1,15 @@
 .content
   .container
     %h1 Messages#index
-    %p Find me in app/views/messages/index.html.haml
-      - @incomings.each do |incoming|
-        = incoming.user.name
-        = incoming.question
-        %p Answers so far
-        - incoming.answers.each do |a|
-          = a.answer
-        %form{:action => "/send_message", :method => "post"}
-          %input{:name => "to", :placeholder => "to-number", :type => "hidden", :value => incoming.user.phone_number}/
-          %input{:name => "question_id", :placeholder => "to-number", :type => "hidden", :value => incoming.id}/
-          %textarea{:name => "message", :placeholder => "message", :type => "text"}
-          %input{:type => "submit", :value => "send"}/
+    - @incomings.each do |incoming|
+      %p Question:
+      %p= incoming.user.name
+      %p= incoming.message
+      %p Answers:
+      - incoming.outgoings.each do |outgoing|
+        %p= outgoing.message
+      =form_tag(messages_path, :method => :post) do
+        =hidden_field_tag("user_id", incoming.user.id)
+        =hidden_field_tag("question_id", incoming.id)
+        =text_area_tag("message")
+        =submit_tag("send")
