@@ -47,9 +47,12 @@
                 - if can? :add_involvement, @user
                   = link_to "Add", "#service-details-add-modal", {"data-toggle" => "modal"}
           -unless @user.involvements.empty?
-            - @user.involvements.each do |i|
-              %hr
+            - @user.involvements.each_with_index do |i, index|
               %table.table
+                %tr
+                  %td
+                  %td.pull-right
+                    =link_to "Edit", "#service-details-edit-modal-" + index.to_s, {"data-toggle" => "modal"}
                 %tr
                   %td.small Country:
                   %td.large
@@ -75,7 +78,9 @@
                   %td
                     .user-info
                       = i.end_date
+                .widgets= render "/layouts/modal", :title => "Edit Service Details", :id => "service-details-edit-modal-"+index.to_s , :body => render("involvements/form", :involvement => i)
+              %hr
         .widgets
           = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)
           = render "/layouts/modal", :title => "Add New Service Details", :id => "service-details-add-modal" , :body => render("involvements/form", :involvement => Involvement.new)
-
+          
