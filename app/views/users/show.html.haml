@@ -85,6 +85,15 @@
                     .user-info
                       = i.end_date
               %hr
+      .row
+        .offset4.span7.profile
+          %table.table
+            %tr.info
+              %th{:colspan => 3} Connect Your Blog
+            %tr
+              %td Blogger
+              %td Wordpress
+              %td Tumblr
 .widgets
   - if can? :update, @user.profile
     = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)
