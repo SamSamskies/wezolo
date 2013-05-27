@@ -1,10 +1,10 @@
-
 %body
   .landing-container
+    .error-notice
+      - if flash[:notice]
+        = flash.now[:notice]
     .container
       .carousel-caption
-        - if flash[:notice]
-          = flash.now[:notice]
         %h1 Live The Peace Corps Life
         %p.lead Welcome to Wezolo where you can connect with Peace Corps volunteers past, present and future! We're a family, so let's help each other. 
         =link_to "Sign up today", "#signupModal", {"data-toggle" => "modal", :class => "btn btn-large btn-primary"}
