@@ -13,10 +13,71 @@ describe User do
   let!(:tumblr_login_auth) { create(:authorization, :auth_provider => tumblr) }
 
   context "followed posts" do
-    it "#followed_posts should not return any duplicate posts"
 
-    it "#followed_posts should?/shouldnot? return any posts written by the current user if the user is in the country that he/she is in"
+  let!(:blogdude) { create(:user) }
+  let!(:blogger) { create(:blog_host) }
 
+  let!(:blog) { create(:blog) }
+  let!(:post1) { create(:post, :published_at => (1..365).to_a.sample.days.ago) }
+  let!(:post2) { create(:post, :published_at => (1..365).to_a.sample.days.ago) }
+  let!(:post3) { create(:post,:published_at => (1..365).to_a.sample.days.ago) }
+  let!(:spain) { create(:country, name: "spain") }
+
+    it "user should not have any followed post without following other users" do
+      sammyboy.followed_posts.empty?.should eq true
+    end
+
+    it "blogger can have post through a blog" do
+      blogdude.blogs << blog
+      blogdude.blogs.first.posts << post1
+      blogdude.posts.count.should eq 1
+    end
+
+    it "a user following one user can see all their followed post" do
+      blogdude.blogs << blog
+      blogdude.blogs.first.posts << post1
+      blogdude.blogs.first.posts << post2
+      blogdude.followers << sammyboy
+      sammyboy.followed_posts.count.should eq 2
+    end
+
+    it "countries_post returns post for that country" do
+      blogdude.blogs << blog
+      blogdude.blogs.first.posts << post1
+      blogdude.blogs.first.posts << post2
+      blogdude.countries << spain
+      spain.followers << sammyboy
+      sammyboy.countries_posts.count.should eq 2
+    end
+    it "hereos_posts returns post for that country" do
+      blogdude.blogs << blog
+      blogdude.blogs.first.posts << post1
+      blogdude.blogs.first.posts << post2
+      blogdude.followers << sammyboy
+      sammyboy.heroes_posts.count.should eq 2
+    end
+
+    it "followed_post returns post from followed countries and heroes without duplicates" do
+      blogdude.blogs << blog
+      blogdude.blogs.first.posts << post1
+      blogdude.blogs.first.posts << post2
+      blogdude.followers << sammyboy
+      blogdude.countries << spain
+      spain.followers << sammyboy
+      sammyboy.followed_posts.count.should eq 2
+    end
+
+    it "#followed_posts should return post ordered by published_at" do
+      blogdude.blogs << blog
+      blogdude.blogs.first.posts << post1
+      blogdude.blogs.first.posts << post2
+      blogdude.blogs.first.posts << post3
+      blogdude.followers << sammyboy
+      blogdude.countries << spain
+      spain.followers << sammyboy
+      p sammyboy.followed_posts.map(&:published_at)
+      sammyboy.followed_posts.count.should eq 2
+    end
     it "#heroes_posts returns all the posts written by people that a user is following"
 
     it "#countries_posts returns all the posts written by people in a country that a user is following"

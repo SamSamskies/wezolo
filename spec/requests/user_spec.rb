@@ -76,11 +76,6 @@ describe "When I visit the homepage" do
   context "User Not Logged in" do
     it "should not beable to see newsfeed if not logged in" do
       visit '/home'
-      # click_link("Log in")
-      # fill_in 'email', :with => 'sam@boss.com'
-      # fill_in 'password', :with => 'password'
-      # find(".loginmein").click
-      # sleep(5)
       uri = URI.parse(current_url)
       "#{uri.path}".should == "/"
     end
