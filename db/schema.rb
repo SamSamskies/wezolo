@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527223206) do
+ActiveRecord::Schema.define(:version => 20130527223417) do
 
   create_table "auth_providers", :force => true do |t|
     t.string   "name"
@@ -81,6 +81,17 @@ ActiveRecord::Schema.define(:version => 20130527223206) do
     t.date    "start_date"
     t.date    "end_date"
   end
+
+  create_table "outgoings", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "message"
+    t.integer  "incoming_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "outgoings", ["incoming_id"], :name => "index_outgoings_on_incoming_id"
+  add_index "outgoings", ["user_id"], :name => "index_outgoings_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title"

@@ -1,4 +1,7 @@
 Wezolo::Application.routes.draw do
+  get "messages/index"
+  get "messages/create"
+
   get "profile/create"
   get "search/index"
   get "search/results", :to => "search#search_results"
