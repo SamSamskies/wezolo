@@ -12,7 +12,7 @@
               %th Basic Info
               %th.align-right
                 - if can? :update, @user.profile
-                  = link_to "Edit", edit_profile_path(@user.profile)
+                  = link_to "Edit", "#basic-edit-info-modal", {"data-toggle" => "modal"}
             %tr
               %td.small Last login: 
               %td.large 
@@ -42,7 +42,7 @@
         .span7.profile
           %table.table
             %tr.info
-              %th Countries of Service
+              %th Service Details
               %th.align-right
                 - if can? :add_involvement, @user
                   = link_to "Add", new_involvement_path
@@ -75,3 +75,8 @@
                   %td
                     .user-info
                       = i.end_date
+        .widgets
+          - content_for :modal_body do
+            = render :partial => "profiles/form", :locals => {:profile => @user.profile}
+          = render :partial => "/layouts/modal", :locals => {:title => "Basic Info", :id => "basic-edit-info-modal"}
+

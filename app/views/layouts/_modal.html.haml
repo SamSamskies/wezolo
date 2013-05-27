@@ -1,0 +1,7 @@
+.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :id => id}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel 
+      = title
+  .modal-body
+    = content_for :modal_body

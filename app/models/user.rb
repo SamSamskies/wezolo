@@ -51,7 +51,8 @@ class User < ActiveRecord::Base
 
   end
 
-
+  #search
+  
   # tire do
   #   mapping do
   #     indexes :id,          :index => :not_analyzed
@@ -98,6 +99,8 @@ class User < ActiveRecord::Base
     involvements.map(&:sector) if self.involvements.present?
   end
 
+
+  # associations
   def followed_posts
     (self.heroes_posts + self.countries_posts).uniq
   end
@@ -111,7 +114,7 @@ class User < ActiveRecord::Base
   end
 
 
-
+  
   def user_followings_by_type
     self.followings.inject({}) do |follow_hash, following|
       type = following.followable_type
