@@ -9,12 +9,36 @@ class UserDecorator < Draper::Decorator
     end
   end
 
+  def photo
+    "http://agarwal.seas.upenn.edu/wp-content/uploads/2011/01/person_default_208x208-1.png"
+  end
+
   def follows_path(followable_obj)
     h.follows_path(:followable_id => followable_obj.id, :followable_type => class_string(followable_obj))
   end
 
   def class_string(followable_obj)
     followable_obj.class.to_s
+  end
+
+  def blog_connect(blog_host)
+    if blog_connected?(blog_host)
+      if h.current_user == self
+        h.link_to "Disconnect your blog", "#"
+      else
+        h.link_to "Blog URL", "#"
+      end
+    else
+      if h.current_user == self
+        h.link_to "Connect your blog", "#"
+      else
+        "Not connected"
+      end
+    end
+  end
+
+  def blog_connected?(blog_host)
+    self.blogs.map(&:blog_host).map(&:name).include?(blog_host)
   end
 
 end

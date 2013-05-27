@@ -1,10 +1,14 @@
 module Authentication
   def login(user)
-    session[:user_id] = user.id
+    set_session(user)
     redirect_to '/home'
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]).decorate if session[:user_id]
+    @current_user ||= User.find(session[:user_id]).decorate if session[:user_id] 
   end
+end
+
+def set_session(user)
+  session[:user_id] = user.id
 end

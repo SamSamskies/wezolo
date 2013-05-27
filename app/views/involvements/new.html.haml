@@ -1,0 +1,9 @@
+.content
+  .container.green-full-width.Sign.In
+    .form-effects.form-margins
+      .offset1
+        %h2 Add Service Details
+        - if flash[:notice]
+          %p= flash[:notice]
+        = render :partial => "involvements/form", :locals => {:involvement => @involvement}
+      

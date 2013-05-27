@@ -31,6 +31,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 
 group :development, :test do
+  gem "debugger"
   gem 'rspec-rails', '~> 2.0'
   gem 'capybara'
   gem 'selenium-webdriver'
@@ -42,6 +43,7 @@ group :development, :test do
   gem 'sextant'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'pry-rails'
 end
 
 # To use ActiveModel has_secure_password

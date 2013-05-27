@@ -1,3 +1,48 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.form-margins {
+  margin-top: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+
+.user-box {
+  margin-top: 20px;
+  width: 400px;
+  height: 250px;
+  padding: 20px;
+}
+
+.user-box img {
+  height: 100px;
+}
+
+.img-container {
+  float: left;
+  margin-top: 5%;
+  height: 100%;
+}
+
+.user-box .btn a{
+  color: white;
+}
+
+.country-list {
+  text-align: center;
+}
+
+.country-list span {
+  margin-right: 10px;
+}
+
+.country {
+  margin-top: 10px;
+}
+
+.btn-small a {
+  color: white;
+}

@@ -5,20 +5,20 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(params[:user])
-    #delete_if is used because there is a bug in collection select that adds a blank ""
-    countries = params[:country_ids].delete_if(&:empty?).map{|id| Country.find(id)}
-    user.countries << countries
+    user = User.new(email: params[:email], password: params[:password],password_confirmation: params[:password_confirmation], name: params[:name], status: params[:status].first)
     if user.save
-      session[:user_id] = user.id
-      redirect_to root_path
+      user.create_profile
+      set_session(user)
+      render :json => {:redirect => "/home"}
     else
-      flash[:error] = user.errors
-      render "new"
+      @error = user.errors.full_messages
+      render :json => {:error => @error}, :status => :unprocessable_entity
     end
   end
 
   def show
+    @user = User.includes(:profile, :involvements => :country).find(params[:id]).decorate
+    authorize! :read, @user
   end
 
   def edit

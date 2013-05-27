@@ -1,0 +1,12 @@
+.user-box.form-effects.form-margins.span6
+  .img-container
+    = image_tag avatar_url(user), :class => "img-polaroid"
+  .info-section.pagination-centered
+    %h4= link_to (user.name), user
+    .btn.btn-info.btn-small= current_user.follow_link(user)
+    %h6 Countries of service:
+  .country-list
+    - user.countries.each do |country|
+      .country
+      %span= country.name     
+      .btn.btn-mini= current_user.follow_link(country)

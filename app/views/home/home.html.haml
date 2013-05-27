@@ -1,6 +1,7 @@
-.container
-  %h1 Users Newsfeed
-  -@newsfeed.each do |post|
-    %h3=post.title
-    %p=post.body
+.content
+  .container
+    %h1 Users Newsfeed
+    -@newsfeed.each do |post|
+      %h3=post.title
+      %p=post.body
 
