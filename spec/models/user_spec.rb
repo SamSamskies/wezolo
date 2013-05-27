@@ -17,7 +17,8 @@ describe User do
   let!(:blogdude) { create(:user) }
   let!(:blogger) { create(:blog_host) }
 
-  let!(:blog) { create(:blog) }
+  let!(:blog) { create(:blog, :url => "http://#{Faker::Lorem.characters(10)}.blogspot.com")}
+  let!(:blog2) { create(:blog, :url => "http://#{Faker::Lorem.characters(10)}.blogspot.com") }
   let!(:post1) { create(:post, :published_at => (1..365).to_a.sample.days.ago) }
   let!(:post2) { create(:post, :published_at => (1..365).to_a.sample.days.ago) }
   let!(:post3) { create(:post,:published_at => (1..365).to_a.sample.days.ago) }
@@ -67,7 +68,7 @@ describe User do
       sammyboy.followed_posts.count.should eq 2
     end
 
-    it "#followed_posts should return post ordered by published_at" do
+    it "followed_posts should return post ordered by published_at" do
       blogdude.blogs << blog
       blogdude.blogs.first.posts << post1
       blogdude.blogs.first.posts << post2
@@ -76,14 +77,36 @@ describe User do
       blogdude.countries << spain
       spain.followers << sammyboy
       dates = sammyboy.followed_posts.map(&:published_at)
-      dates[2].should > dates[1]
+      dates[0].should > dates[1]
+      dates[1].should > dates[2]
+      dates[0].should > dates[2]
     end
-    it "#heroes_posts returns all the posts written by people that a user is following"
 
-    it "#countries_posts returns all the posts written by people in a country that a user is following"
+    it "followed_posts should return with a user's own post in results" do
+      blogdude.blogs << blog
+      blogdude.blogs.first.posts << post1
+      blogdude.blogs.first.posts << post2
 
-    it "#published_at should return array of posts ordered by published_at"
+      sammyboy.blogs << blog2
+      sammyboy.blogs.first.posts << post3
 
+      blogdude.countries << spain
+      sammyboy.countries << spain
+      spain.followers << sammyboy
+      sammyboy.followed_posts.count.should eq 3
+    end
+
+    it "followed_posts should not disclude a user's own post in results" do
+      blogdude.blogs << blog
+      blogdude.blogs.first.posts << post1
+      blogdude.blogs.first.posts << post2
+      sammyboy.blogs << blog2
+      sammyboy.blogs.first.posts << post3
+      blogdude.countries << spain
+      sammyboy.countries << spain
+      spain.followers << sammyboy
+      sammyboy.followed_posts.count.should_not eq 2
+    end
     
   end
 
