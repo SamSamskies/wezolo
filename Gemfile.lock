@@ -255,6 +255,7 @@ DEPENDENCIES
   draper (~> 1.0)
   factory_girl_rails
   faker
+  faraday
   guard
   guard-rspec
   haml-rails

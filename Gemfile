@@ -12,7 +12,7 @@ gem 'draper', '~> 1.0'
 gem "cancan"
 gem "bcrypt-ruby"
 gem "omniauth-google-oauth2"
-
+gem "faraday"
 gem 'tire'
 
 # Gems used only for assets and not required
