@@ -45,7 +45,7 @@
               %th Service Details
               %th.align-right
                 - if can? :add_involvement, @user
-                  = link_to "Add", new_involvement_path
+                  = link_to "Add", "#service-details-add-modal", {"data-toggle" => "modal"}
           -unless @user.involvements.empty?
             - @user.involvements.each do |i|
               %hr
@@ -76,7 +76,6 @@
                     .user-info
                       = i.end_date
         .widgets
-          - content_for :modal_body do
-            = render :partial => "profiles/form", :locals => {:profile => @user.profile}
-          = render :partial => "/layouts/modal", :locals => {:title => "Basic Info", :id => "basic-edit-info-modal"}
+          = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)
+          = render "/layouts/modal", :title => "Add New Service Details", :id => "service-details-add-modal" , :body => render("involvements/form", :involvement => Involvement.new)
 
