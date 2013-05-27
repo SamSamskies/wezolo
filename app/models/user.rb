@@ -68,12 +68,13 @@ class User < ActiveRecord::Base
       user.create_profile(photo_url: auth["info"]["image"])
     end
   end
-private
+
 
   def initialize_auth_status
     self.update_attributes(:auth_status => "user") if self.status == ["interested"]
   end
 
+private
   def sort_by_published_date(array)
     array.flatten.sort_by {|post| post.published_at}.reverse
   end
