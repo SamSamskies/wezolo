@@ -5,26 +5,28 @@
         .offset1.span11
           %h2=@user.name
         .offset1.span3
-          =image_tag(@user.photo)
-        .span5.profile
-          %ul
-            %li
-              Last login:
-            %li 
-              Status:
+          =image_tag avatar_url(@user), :class => "img-polaroid"
+        .span7.profile
+          %table.table
+            %tr.info
+              %th Basic Info
+              %th.align-right
+                - if can? :update, @user.profile
+                  =link_to "Edit", edit_profile_path(@user.profile)
+            %tr
+              %td Last login: 
+            %tr
+              %td Status:
               =@user.status
-            %li 
-              Location:
+            %tr
+              %td Location:
               =@user.profile.location
-            %li 
-              Bio:
+            %tr  
+              %td Bio:
               =@user.profile.bio
-            - if can? :update, @user.profile
-              %li
-                =link_to "Edit", edit_profile_path(@user.profile), :class => "btn btn-primary"
       .row
         .offset1.span10
-          Coutries of service:
+          Countries of service:
           -unless @user.involvements.empty?
             -@user.involvements.each do |i|
               %ul
