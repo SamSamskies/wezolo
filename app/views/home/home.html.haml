@@ -1,7 +1,21 @@
 .content
   .container
+    .well.sidebar-nav
+    %ul.nav.nav-list
+      %li.nav-header Filter feed
+      %li.active
+        = link_to "PCV", "/home?query=PCV"
+      %li
+        = collection_select :country_ids, nil, Country.all, :id, :name, {}, {:class => "country-filter" }
+      %li
+        = select :status, nil, [['Interested in Peace Corp','interested'],['PCV (Peace Corps Volunteer)','PCV'],['RPCV (Returned Peace Corps Volunteers','RPCV']], {:include_blank => true, :class => "status-filter"}
+      %li
+        = select("post", "person_id", [["Education"], ["Health"],["Community Economic Development"], ["Environment"], ["Youth in Development"], ["Agriculuture"]], {:prompt => 'Select Person', :class => "sector-filter"})
     %h1 Users Newsfeed
     -@newsfeed.each do |post|
       %h3=post.title
       %p=post.body
+  .span3
+
+
 

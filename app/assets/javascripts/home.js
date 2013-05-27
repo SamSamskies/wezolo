@@ -18,5 +18,15 @@ $(document).ready(function(){
     // window.location.replace('/');
   });
 
+   $('.country-filter').change(function() {
+  window.location = "/home?query=" + $(this).find('option:selected').text();
+});
+   $('.status-filter').change(function() {
+  window.location = "/home?query=" + $(this).find('option:selected').text();
+});
+   $('.sector-filter').change(function() {
+  window.location = "/home?query=" + $(this).find('option:selected').text();
+});
+
 });
 
