@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base  
-<<<<<<< HEAD
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
