@@ -34,8 +34,7 @@ class User < ActiveRecord::Base
 
   has_one :profile
 
-  has_many :incomings
-  has_many :outgoings
+  has_many :messages
 
   after_create :initialize_auth_status
   # before_create :initialize_user_profile

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527223417) do
+ActiveRecord::Schema.define(:version => 20130527234001) do
 
   create_table "auth_providers", :force => true do |t|
     t.string   "name"
@@ -63,16 +63,6 @@ ActiveRecord::Schema.define(:version => 20130527223417) do
   add_index "follows", ["followable_id", "followable_type", "follower_id"], :name => "follow_unique_index"
   add_index "follows", ["follower_id"], :name => "index_follows_on_follower_id"
 
-  create_table "incomings", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "message"
-    t.string   "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "incomings", ["user_id"], :name => "index_incomings_on_user_id"
-
   create_table "involvements", :force => true do |t|
     t.integer "user_id"
     t.integer "country_id"
@@ -82,16 +72,18 @@ ActiveRecord::Schema.define(:version => 20130527223417) do
     t.date    "end_date"
   end
 
-  create_table "outgoings", :force => true do |t|
-    t.integer  "user_id"
+  create_table "messages", :force => true do |t|
     t.string   "message"
-    t.integer  "incoming_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+    t.string   "msg_type"
+    t.string   "status"
+    t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "outgoings", ["incoming_id"], :name => "index_outgoings_on_incoming_id"
-  add_index "outgoings", ["user_id"], :name => "index_outgoings_on_user_id"
+  add_index "messages", ["parent_id"], :name => "index_messages_on_parent_id"
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title"
