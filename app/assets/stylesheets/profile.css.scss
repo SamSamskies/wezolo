@@ -14,6 +14,25 @@
   border: 0;
 }
 
+.table td.small {
+  width: 25%;
+}
+
+.table td.large {
+  width: 75%;
+}
+
 th.align-right {
   text-align: right;
 }
+
+.following {
+  background-color: #bdc3c7;
+  top-margin: 100px;
+  color: white;
+}
+
+.user-info {
+  color: black;
+}
+

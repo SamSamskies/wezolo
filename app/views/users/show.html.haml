@@ -1,43 +1,76 @@
 .content
   .container
     .form-effects.form-margins
-      .row.photo
+      .row
         .offset1.span11
-          %h2=@user.name
+          %h3= @user.name
         .offset1.span3
-          =image_tag avatar_url(@user), :class => "img-polaroid"
+          = image_tag avatar_url(@user), :class => "img-polaroid bottom-spacer"
         .span7.profile
           %table.table
             %tr.info
               %th Basic Info
               %th.align-right
                 - if can? :update, @user.profile
-                  =link_to "Edit", edit_profile_path(@user.profile)
+                  = link_to "Edit", edit_profile_path(@user.profile)
             %tr
-              %td Last login: 
+              %td.small Last login: 
+              %td.large 
             %tr
-              %td Status:
-              =@user.status
+              %td Status: 
+              %td 
+                .user-info
+                  = @user.status
             %tr
               %td Location:
-              =@user.profile.location
+              %td  
+                .user-info
+                  = @user.profile.location
             %tr  
               %td Bio:
-              =@user.profile.bio
+              %td  
+                .user-info
+                  = @user.profile.bio
       .row
-        .offset1.span10
-          Countries of service:
+        .offset1.span3
+          %table.table
+            %tr.following
+              %th Following
+        .span7.profile
+          %table.table
+            %tr.info
+              %th Countries of Service
+              %th.align-right
+                - if can? :create, Involvement
+                  = link_to "Add", new_involvement_path
           -unless @user.involvements.empty?
             -@user.involvements.each do |i|
-              %ul
-                %hr
-                %li=i.country.name if i.country
-                %li=i.description
-                %li=i.sector
-                %li=i.start_date
-                %li=i.end_date
-                - if can? :update, i
-                  %li=link_to "Edit", edit_involvement_path(i), :class => "btn btn-primary"
-        .offset10
-          - if can? :create, Involvement
-            =link_to "Add", new_involvement_path, :class => "btn btn-primary"
+              %hr
+              %table.table
+                %tr
+                  %td.small Country:
+                  %td.large
+                    .user-info
+                      = i.country.name if i.country
+                %tr
+                  %td Description: 
+                  %td
+                    .user-info
+                      = i.description
+                %tr
+                  %td Sector: 
+                  %td
+                    .user-info
+                      = i.sector
+                %tr
+                  %td Start Date:
+                  %td
+                    .user-info
+                      = i.start_date
+                %tr
+                  %td End Date:
+                  %td
+                    .user-info
+                      = i.end_date
+                  / - if can? :update, i
+                  /   %li= link_to "Edit", edit_involvement_path(i), :class => "btn btn-primary"
