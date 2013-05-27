@@ -17,14 +17,14 @@ class Ability
       can :destroy, Follow do |follow|
         follow.try(:user) == user
       end
-
+      can :read, Post
       can :read, User
     end
 
     if user.incomplete_auth?
 
       cannot :create, Follow
-
+      cannot :read, Post
       cannot :read, User do |user_profile|
         user_profile != user
       end

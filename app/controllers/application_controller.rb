@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
       redirect_to new_involvement_path, :notice => "Please complete your profile before you can follow other users!"
     elsif exception.action == :read && exception.subject.class == UserDecorator && current_user.auth_status == "incomplete"
       redirect_to new_involvement_path, :notice => "Please complete your profile before you can see other user profiles!"
+    elsif exception.action == :read && exception.subject == Post && current_user.auth_status == "incomplete"
+      redirect_to new_involvement_path, :notice => "Please complete your profile before you can see the newsfeed!"
     else
       redirect_to root_path, :notice => exception.message
     end
