@@ -2,4 +2,4 @@
   %h1 Search Results
   %ul 
   - @results.each do |user|
-    %li=link_to user.name, user_path(user)
+    = render_user_box(user)

@@ -41,7 +41,7 @@
             %tr.info
               %th Countries of Service
               %th.align-right
-                - if can? :create, Involvement
+                - if can? :add_involvement, @user
                   = link_to "Add", new_involvement_path
           -unless @user.involvements.empty?
             -@user.involvements.each do |i|

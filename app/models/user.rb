@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base  
-  # include Tire::Model::Search
+  include Tire::Model::Search
   # include Tire::Model::Callbacks
 
   has_secure_password

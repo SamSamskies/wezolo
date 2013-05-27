@@ -5,6 +5,11 @@ class Ability
     user ||= User.new auth_status: "guest"
     if user.user_auth?
       can :create, Involvement
+      # refactor this later
+      can :add_involvement, User do |user_shown|
+        user_shown == user
+      end
+
       can [:update, :destroy], Involvement do |involvement|
         involvement.try(:user) == user
       end
