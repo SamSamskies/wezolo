@@ -35,6 +35,21 @@ class User < ActiveRecord::Base
 
   after_create :initialize_auth_status
 
+  AUTH_STATUSES = %w[incomplete user admin]
+
+  AUTH_STATUSES.each do |auth_status|
+    #ability inheritance
+    define_method "#{auth_status}_auth?" do
+      AUTH_STATUSES.index(self.auth_status) <= AUTH_STATUSES.index(auth_status)
+    end
+
+    define_method "#{auth_status}?" do
+      self.auth_status == auth_status
+    end
+
+  end
+
+
   def followed_posts
     (self.heroes_posts + self.countries_posts).uniq
   end

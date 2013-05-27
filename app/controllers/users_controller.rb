@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.includes(:profile, :involvements => :country).find(params[:id]).decorate
+    authorize! :read, @user
   end
 
   def edit

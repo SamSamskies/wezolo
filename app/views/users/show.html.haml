@@ -19,8 +19,9 @@
             %li 
               Bio:
               =@user.profile.bio
-            %li
-              =link_to "Edit", edit_profile_path(@user.profile), :class => "btn btn-primary"
+            - if can? :update, @user.profile
+              %li
+                =link_to "Edit", edit_profile_path(@user.profile), :class => "btn btn-primary"
       .row
         .offset1.span10
           Coutries of service:
@@ -33,6 +34,8 @@
                 %li=i.sector
                 %li=i.start_date
                 %li=i.end_date
-                %li=link_to "Edit", edit_involvement_path(i), :class => "btn btn-primary"
+                - if can? :update, i
+                  %li=link_to "Edit", edit_involvement_path(i), :class => "btn btn-primary"
         .offset10
-          =link_to "Add", new_involvement_path, :class => "btn btn-primary"
+          - if can? :create, Involvement
+            =link_to "Add", new_involvement_path, :class => "btn btn-primary"
