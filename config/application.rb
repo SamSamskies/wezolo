@@ -61,8 +61,8 @@ module Wezolo
     config.assets.version = '1.0'
 
     #searchbox elastic search
-    Tire.configure do
-        url ENV['ELASTICSEARCH_URL']
-    end
+    # Tire.configure do
+    #     url ENV['ELASTICSEARCH_URL']
+    # end
 end
 end
