@@ -75,8 +75,8 @@ describe User do
       blogdude.followers << sammyboy
       blogdude.countries << spain
       spain.followers << sammyboy
-      p sammyboy.followed_posts.map(&:published_at)
-      sammyboy.followed_posts.count.should eq 2
+      dates = sammyboy.followed_posts.map(&:published_at)
+      dates[2].should > dates[1]
     end
     it "#heroes_posts returns all the posts written by people that a user is following"
 
