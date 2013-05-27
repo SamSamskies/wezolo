@@ -2,8 +2,12 @@
   .container
     .form-effects.form-margins
       .row
-        .offset1.span11
+        .offset1.span6
           %h3= @user.name
+        .offset2.span2
+          - unless current_user == @user
+            .pull-right.btn.btn-info.btn-small= current_user.follow_link(@user.object)
+      .row
         .offset1.span3
           = image_tag avatar_url(@user), :class => "img-polaroid bottom-spacer"
         .span7.profile
@@ -52,7 +56,9 @@
                 %tr
                   %td
                   %td.pull-right
-                    =link_to "Edit", "#service-details-edit-modal-" + index.to_s, {"data-toggle" => "modal"}
+                    - if can? :update, i
+                      =link_to "Edit", "#service-details-edit-modal-" + index.to_s, {"data-toggle" => "modal"}
+                      .widgets= render "/layouts/modal", :title => "Edit Service Details", :id => "service-details-edit-modal-"+index.to_s , :body => render("involvements/form", :involvement => i)
                 %tr
                   %td.small Country:
                   %td.large
@@ -78,9 +84,9 @@
                   %td
                     .user-info
                       = i.end_date
-                .widgets= render "/layouts/modal", :title => "Edit Service Details", :id => "service-details-edit-modal-"+index.to_s , :body => render("involvements/form", :involvement => i)
               %hr
-        .widgets
-          = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)
-          = render "/layouts/modal", :title => "Add New Service Details", :id => "service-details-add-modal" , :body => render("involvements/form", :involvement => Involvement.new)
-          
+.widgets
+  - if can? :update, @user.profile
+    = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)
+  - if can? :add_involvement, @user
+    = render "/layouts/modal", :title => "Add New Service Details", :id => "service-details-add-modal" , :body => render("involvements/form", :involvement => Involvement.new)
