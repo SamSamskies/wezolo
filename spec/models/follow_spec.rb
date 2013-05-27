@@ -21,7 +21,7 @@ describe Follow do
   it "a follower should beable to get all their heroes" do
     fanguy.heroes << [justin_bieber, oprah]
     fanguy.heroes.count.should eq 2
-    fanguy.heroes.first.should eq [oprah, justin_bieber]
+    fanguy.heroes.should eq [oprah, justin_bieber]
   end
 
 
