@@ -25,7 +25,7 @@ class SessionController < ApplicationController
   end
 
   def external_provider_login?
-    defined?(params[:auth_provider])
+    return true if params[:auth_provider]
   end
 
   def authenticate_user_by_external_provider
