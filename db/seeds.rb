@@ -19,7 +19,7 @@ end
 
 User.all.each do |u|
   1.upto(rand(1..3)) do |i|
-    FactoryGirl.create(:involvement, user: u, country: countries.sample)
+    FactoryGirl.create(:involvement, user: u, country: countries.sample, sector: ['ICT', 'Health', 'Agriculture', 'Community Development', 'Education'].sample)
   end
   FactoryGirl.create(:profile, user: u)
 end
