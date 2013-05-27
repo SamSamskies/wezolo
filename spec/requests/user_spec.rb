@@ -10,7 +10,6 @@ describe "When I visit the homepage" do
   end
 
   context "login" do
-
     it "has a login button" do
       visit '/'
       page.should have_content("Log in")
@@ -32,7 +31,23 @@ describe "When I visit the homepage" do
       sleep 1
       current_path.should eq "/involvements/new"
     end
+  end
 
+  context "logout" do
+    it "has a logout button if logged in" do
+      stub_current_user(user)
+      visit '/'
+      find('.dropdown-toggle').click
+      page.should have_content("Log out")
+    end
+
+    it "will redirect to the home page" do
+
+    end
+
+    it "has a logout button" do
+
+    end
   end
 
   context "signup" do
@@ -76,7 +91,7 @@ describe "When I visit the homepage" do
     end
 
   end
-  
+
   context "User Not Logged in" do
     it "should not be able to see newsfeed if not logged in" do
       visit '/home'
