@@ -76,12 +76,12 @@ describe "When I visit the homepage" do
     end
 
   end
+  
   context "User Not Logged in" do
     it "should not be able to see newsfeed if not logged in" do
-      pending
-    #   visit '/home'
-    #   uri = URI.parse(current_url)
-    #   "#{uri.path}".should == "/"
+      visit '/home'
+      current_path.should eq '/'
+      find('.error-notice').text.should eq "You are not authorized to access this page."
     end
   end
 end
