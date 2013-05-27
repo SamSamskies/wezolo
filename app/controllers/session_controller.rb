@@ -25,7 +25,7 @@ class SessionController < ApplicationController
   end
 
   def external_provider_login?
-    true if params[:auth_provider]
+    defined?(params[:auth_provider])
   end
 
   def authenticate_user_by_external_provider
@@ -43,7 +43,7 @@ class SessionController < ApplicationController
     if user && user.authenticate(params[:password])
       login(user)
     else
-      @error = "Oh Snap!: User Login or Password Incorrect!"
+      @error = "Oh Snap! User Login or Password Incorrect!"
       render :json => {:error => @error}, :status => :unprocessable_entity
     end
   end
