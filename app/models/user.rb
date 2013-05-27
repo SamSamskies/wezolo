@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
 
   has_one :profile
 
+  has_many :incomings
+
   def followed_posts
     (self.heroes_posts + self.countries_posts).uniq
   end
