@@ -22,6 +22,18 @@ body {
   margin-top: 50px;
 }
 
+.landing-container {
+  height: 800px;
+      /* This image will be displayed fullscreen */
+    background:url('main1.JPG') no-repeat center center;
+
+    /* Ensure the html element always takes up the full height of the browser window */
+    min-height:100%;
+
+    /* The Magic */
+    background-size:cover;
+}
+
 /* hack to stop flat ui icons from appear multiple times */
 .fui-icons-h *{
   display: none;
