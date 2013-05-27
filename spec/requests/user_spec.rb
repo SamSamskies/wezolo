@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "When I visit the homepage" do
 
-  let!(:user) { create(:test) }
+  let!(:user) { create(:user) }
 
   it "can be seen" do
     # visit root_path # doesn't work?
