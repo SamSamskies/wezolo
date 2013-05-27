@@ -12,10 +12,16 @@ end
 countries = Country.all
 test_user = FactoryGirl.create(:test)
 FactoryGirl.create(:profile, user: test_user)
-FactoryGirl.create_list(:profile, 100)
+
+100.times do
+  FactoryGirl.create(:user, status: ['PCV', 'RPCV', 'Interested'].sample, name: Faker::Name.name)
+end
 
 User.all.each do |u|
-  FactoryGirl.create_list(:involvement, [1,2,3].sample, user: u, country: countries.sample)
+  1.upto(rand(1..3)) do |i|
+    FactoryGirl.create(:involvement, user: u, country: countries.sample)
+  end
+  FactoryGirl.create(:profile, user: u)
 end
 
 blogger = BlogHost.create(name: 'Blogger')

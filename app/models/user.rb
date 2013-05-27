@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base  
   include Tire::Model::Search
   include Tire::Model::Callbacks
+
   has_secure_password
 
   attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status
@@ -34,6 +35,7 @@ class User < ActiveRecord::Base
   has_one :profile
 
   after_create :initialize_auth_status
+  # before_create :initialize_user_profile
 
   AUTH_STATUSES = %w[incomplete user admin]
 
@@ -49,6 +51,51 @@ class User < ActiveRecord::Base
 
   end
 
+
+  tire do
+    mapping do
+      indexes :id,          :index => :not_analyzed
+      indexes :name,        :boost => 100
+      indexes :username
+      indexes :status
+      indexes :country_names
+      indexes :user_bio
+      indexes :user_location
+      indexes :user_involvement_descriptions
+      indexes :user_involvement_sectors
+    end
+  end
+
+  def self.search(params)
+    tire.search(load: true) do
+      query { string params[:search], default_operator: "AND" } if params[:search].present?
+      # filter :range, published_at: {lte: Time.zone.now}
+    end
+  end
+
+  def to_indexed_json
+    to_json(methods: [:country_names, :user_bio, :user_location, :user_involvement_descriptions, :user_involvement_sectors])
+  end
+
+  def country_names
+    countries.map(&:name) if self.countries.present?
+  end
+
+  def user_bio
+    profile.bio if self.profile.present?
+  end
+
+  def user_location
+    profile.location if self.profile.present?
+  end
+
+  def user_involvement_descriptions
+    involvements.map(&:description) if self.involvements.present?
+  end
+
+  def user_involvement_sectors
+    involvements.map(&:sector) if self.involvements.present?
+  end
 
   def followed_posts
     (self.heroes_posts + self.countries_posts).uniq
@@ -89,7 +136,11 @@ class User < ActiveRecord::Base
     self.update_attributes(:auth_status => "user") if self.status == ["interested"]
   end
 
-private
+  # def initialize_user_profile
+  #   create_profile
+  # end
+
+  private
   def sort_by_published_date(array)
     array.flatten.sort_by {|post| post.published_at}.reverse
   end

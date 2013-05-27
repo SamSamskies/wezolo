@@ -5,6 +5,6 @@ class SearchController < ApplicationController
 
 #figure out how to search by all indices
   def search_results
-    @results = Country.search(params[:search], :load => true)
+    @results = User.search(params)
   end
 end
