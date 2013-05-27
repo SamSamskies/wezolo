@@ -22,9 +22,8 @@ describe Follow do
     fanguy.heroes << justin_bieber
     fanguy.heroes << oprah
     fanguy.heroes.count.should eq 2
-    fanguy.heroes.should eq [oprah,justin_bieber]
-    fanguy.heroes.first.should eq oprah
-    fanguy.heroes.last.should eq justin_bieber
+    fanguy.heroes.first.should eq justin_bieber
+    fanguy.heroes.last.should eq oprah
   end
 
 

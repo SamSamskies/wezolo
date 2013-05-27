@@ -7,7 +7,7 @@ FactoryGirl.define do
   end
 
  factory :test, :parent => :user do
-    email "sam@boss-#{Time.now.to_i}@example.com"
+    email "sam@boss.com"
     password "password"
     name "Sam Samskies"
     status "RPCV" 

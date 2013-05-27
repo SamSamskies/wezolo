@@ -22,14 +22,14 @@ describe "When I visit the homepage" do
       find("#loginModal")['aria-hidden'].should eq "false"
     end
 
-    it "user can login" do
+    it "user can login and get redirected to add new involvement" do
       visit '/'
       click_link("Log in")
       fill_in 'email', :with => 'sam@boss.com'
       fill_in 'password', :with => 'password'
       find(".loginmein").click
       sleep 1
-      current_path.should eq "/home"
+      current_path.should eq "/involvements/new"
       save_page
     end
 
