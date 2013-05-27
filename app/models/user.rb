@@ -12,8 +12,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :countries
   
-  # validates :email, :uniqueness => true
-  # validates :username, :uniqueness => true
+  validates :email, :uniqueness => true
 
   has_many :blogs
   has_many :posts, :through => :blogs
