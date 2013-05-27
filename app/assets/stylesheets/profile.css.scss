@@ -1,3 +1,38 @@
 // Place all the styles related to the profile controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile li {
+  list-style-type: none;
+}
+
+.table tbody tr.info th {
+  background-color: #d9edf7;
+}
+
+.table td {
+  border: 0;
+}
+
+.table td.small {
+  width: 25%;
+}
+
+.table td.large {
+  width: 75%;
+}
+
+th.align-right {
+  text-align: right;
+}
+
+.following {
+  background-color: #bdc3c7;
+  top-margin: 100px;
+  color: white;
+}
+
+.user-info {
+  color: black;
+}
+
