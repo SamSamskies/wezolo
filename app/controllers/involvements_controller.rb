@@ -1,5 +1,5 @@
 class InvolvementsController < ApplicationController
-
+  load_and_authorize_resource
   def new
     @involvement = Involvement.new
   end
