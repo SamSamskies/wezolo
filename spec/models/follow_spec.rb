@@ -18,10 +18,11 @@ describe Follow do
     justin_bieber.followers.first.should eq fanguy
   end
 
-  it "a follower should beable to get all their heroes" do
+  it "a follower should be able to get all their heroes" do
     fanguy.heroes << [justin_bieber, oprah]
     fanguy.heroes.count.should eq 2
-    fanguy.heroes.should eq [oprah, justin_bieber]
+    fanguy.heroes.should include(justin_bieber)
+    fanguy.heroes.should include(oprah)
   end
 
 
@@ -31,12 +32,12 @@ describe Follow do
   end
 
 
-  it "a follower should beable to get all the countries"do
+  it "a follower should be able to get all the countries"do
     togo.followers << fanguy
     usa.followers << fanguy
     fanguy.following_countries.count.should eq 2
   end
-  it "a follow should beable to get all the users from a country" do
+  it "a follow should be able to get all the users from a country" do
     justin_bieber.countries << usa
     oprah.countries << usa
     african_singer.countries << togo
@@ -46,7 +47,7 @@ describe Follow do
     fanguy.following_countries.first.users.first.should eq african_singer
   end
 
-    it "a follow should beable to get all the users from a country using eager loading" do
+    it "a follow should be able to get all the users from a country using eager loading" do
     justin_bieber.countries << usa
     oprah.countries << usa
     african_singer.countries << togo
