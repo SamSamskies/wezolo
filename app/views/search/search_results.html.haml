@@ -2,4 +2,4 @@
   %h1 Search Results
   %ul 
   - @results.each do |user|
-    %li= user.name
+    %li=link_to user.name, user_path(user)

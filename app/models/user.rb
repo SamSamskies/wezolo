@@ -67,7 +67,8 @@ class User < ActiveRecord::Base
   end
 
   def self.search(params)
-    tire.search(load: true) do
+    tire.search(:load => true) do
+      size 100
       query { string params[:search], default_operator: "AND" } if params[:search].present?
       # filter :range, published_at: {lte: Time.zone.now}
     end
