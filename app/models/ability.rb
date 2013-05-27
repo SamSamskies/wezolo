@@ -3,10 +3,31 @@ class Ability
 
   def initialize(user)
     user ||= User.new auth_status: "guest"
-    if user.auth_status == "incomplete"
+    if user.user_auth?
+      can :create, Involvement
+      can [:update, :destroy], Involvement do |involvement|
+        involvement.try(:user) == user
+      end
+
+      can [:update, :destroy], Profile do |profile|
+        profile.try(:user) == user
+      end
+
+      can :create, Follow
+      can :destroy, Follow do |follow|
+        follow.try(:user) == user
+      end
+
+      can :read, User
+    end
+
+    if user.incomplete_auth?
+
       cannot :create, Follow
-    elsif user.auth_status == "user"
-      can :manage, Follow
+
+      cannot :read, User do |user_profile|
+        user_profile != user
+      end
     end
 
     # Define abilities for the passed in user here. For example:

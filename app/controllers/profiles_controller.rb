@@ -1,7 +1,5 @@
 class ProfilesController < ApplicationController
-  def create
-  end
-
+  load_and_authorize_resource
   def edit
     @profile = Profile.find(params[:id])
   end
