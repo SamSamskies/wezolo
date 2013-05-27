@@ -28,9 +28,8 @@ describe "When I visit the homepage" do
       fill_in 'email', :with => 'sam@boss.com'
       fill_in 'password', :with => 'password'
       find(".loginmein").click
-      sleep 1
+      sleep 2
       current_path.should eq "/home"
-      save_page
     end
 
   end
@@ -51,26 +50,27 @@ describe "When I visit the homepage" do
     it "shows errors when passwords don't match" do
       visit '/'
       click_link("Sign up")
-      find('.alert-error').text.should eq ""
+      find('.signup-error').text.should eq ""
       sleep(1)
       fill_in 'name', :with => 'Jimmy'
       fill_in 'email', :with => 'jimmy@email.com'
       fill_in 'password', :with => 'password'
       fill_in 'password_confirmation', :with => 'password1'
       find(".createaccount").click
-      find('.alert-error').text.should eq "Password doesn't match confirmation"
+      find('.signup-error').text.should eq "Password doesn't match confirmation"
     end
 
     it "shows errors when user email already exist" do
       visit '/'
       click_link("Sign up")
+      find('.signup-error').text.should eq ""
       sleep(1)
       fill_in 'name', :with => 'Sam Samskies'
       fill_in 'email', :with => 'sam@boss.com'
       fill_in 'password', :with => 'password'
       fill_in 'password_confirmation', :with => 'password'
       find(".createaccount").click
-      find('.alert-error').text.should eq "Email has already been taken"
+      find('.signup-error').text.should eq "Email has already been taken"
     end
 
   end
