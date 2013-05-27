@@ -42,13 +42,10 @@ class User < ActiveRecord::Base
   end
 
   def countries_posts
-    sort_by_published_date(self.countries.includes(:posts).map(&:posts))
+    sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
   end
 
-  #refactor later
-  def sort_by_published_date(array)
-    array.flatten.sort_by {|post| post.published_at}.reverse
-  end
+
 
   def user_followings_by_type
     self.followings.inject({}) do |follow_hash, following|
@@ -69,5 +66,9 @@ class User < ActiveRecord::Base
       user.create_profile(photo_url: auth["info"]["image"])
     end
   end
+private
 
+  def sort_by_published_date(array)
+    array.flatten.sort_by {|post| post.published_at}.reverse
+  end
 end
