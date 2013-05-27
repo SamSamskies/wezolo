@@ -52,19 +52,19 @@ class User < ActiveRecord::Base
   end
 
 
-  tire do
-    mapping do
-      indexes :id,          :index => :not_analyzed
-      indexes :name,        :boost => 100
-      indexes :username
-      indexes :status
-      indexes :country_names
-      indexes :user_bio
-      indexes :user_location
-      indexes :user_involvement_descriptions
-      indexes :user_involvement_sectors
-    end
-  end
+  # tire do
+  #   mapping do
+  #     indexes :id,          :index => :not_analyzed
+  #     indexes :name,        :boost => 100
+  #     indexes :username
+  #     indexes :status
+  #     indexes :country_names
+  #     indexes :user_bio
+  #     indexes :user_location
+  #     indexes :user_involvement_descriptions
+  #     indexes :user_involvement_sectors
+  #   end
+  # end
 
   def self.search(params)
     tire.search(:load => true) do
