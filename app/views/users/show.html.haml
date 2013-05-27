@@ -36,15 +36,18 @@
           %table.table
             %tr.following
               %th Following
+          .thumbnails
+            - @user.heroes.each do |hero| 
+              = image_tag avatar_url(hero), :alt => hero.name, :class => "thumbnail"
         .span7.profile
           %table.table
             %tr.info
               %th Countries of Service
               %th.align-right
-                - if can? :create, Involvement
+                - if can? :add_involvement, @user
                   = link_to "Add", new_involvement_path
           -unless @user.involvements.empty?
-            -@user.involvements.each do |i|
+            - @user.involvements.each do |i|
               %hr
               %table.table
                 %tr
@@ -72,5 +75,3 @@
                   %td
                     .user-info
                       = i.end_date
-                  / - if can? :update, i
-                  /   %li= link_to "Edit", edit_involvement_path(i), :class => "btn btn-primary"
