@@ -1,4 +1,5 @@
 class FollowsController < ApplicationController
+  load_and_authorize_resource
   def create
     Follow.create(follow_params)
     redirect_to search_index_path
