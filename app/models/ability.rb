@@ -28,6 +28,7 @@ class Ability
       cannot :read, User do |user_profile|
         user_profile != user
       end
+
     end
 
     # Define abilities for the passed in user here. For example:

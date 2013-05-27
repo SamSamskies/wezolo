@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   end
 
   def home
-    @newsfeed = current_user.followed_posts
     authorize! :read, Post
+    @newsfeed = current_user.followed_posts
   end
 end

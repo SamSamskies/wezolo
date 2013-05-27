@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   after_create :initialize_auth_status
   # before_create :initialize_user_profile
 
-  AUTH_STATUSES = %w[incomplete user admin]
+  AUTH_STATUSES = %w[guest incomplete user admin]
 
   AUTH_STATUSES.each do |auth_status|
     #ability inheritance
