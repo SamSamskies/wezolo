@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "When I visit the homepage" do
+describe "Homepage" do
 
   let!(:user) { create(:user) }
 
