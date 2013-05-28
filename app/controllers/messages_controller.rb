@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
 
   def create
     sending_message_to = User.find(params[:incoming_user_id]).phone_number
-    conn = Faraday.new(:url => 'http://localhost:9393/') do |faraday|
+    conn = Faraday.new(:url => 'http://wezolo-twillio.herokuapp.com/') do |faraday|
       faraday.request  :url_encoded             # form-encode POST params
       faraday.response :logger                  # log requests to STDOUT
       faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
