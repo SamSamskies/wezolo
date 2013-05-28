@@ -17,15 +17,12 @@ Wezolo::Application.routes.draw do
 
   match '/auth/tumblr/callback' => "tumblr#connect", :auth_provider => 'tumblr'
   match '/tumblr/disconnect/' => "tumblr#disconnect"
-  resources :blogs
+
   post '/receive_callback' => "messages#receive_callback"
+
   match 'auth/blogger' => 'blogger#request_blogger_access'
   match '/auth/blogger/callback' => "blogger#authorize_blogger", :auth_provider => 'blogger'
   post "/tumblr/create_blog_and_posts" => "tumblr#create_blog_and_posts"
   post "/blogger/create_blog_and_posts" => "blogger#create_blog_and_posts"
-  # post "/create_blog_and_posts" => "tumblr#create_blog_and_posts"
-  # match 'oauth2authorize' => "blogger#step2"
-  get 'blogger/new'
-  # match '/auth/tumblr/callback' => 'session#tumblr'
-  # facebook callback route needs to have :auth_provider => 'facebook'
+
 end
