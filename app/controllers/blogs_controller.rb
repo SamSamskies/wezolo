@@ -15,13 +15,27 @@ class BlogsController < ApplicationController
     client = Tumblr::Client.new
     @posts = client.posts(blog.url.gsub("http://", ""))["posts"]
     @posts.each do |post| 
-      post["body"] = "null" unless post["body"]
-      blog.posts.create(:title => post["title"], :body => post["body"])
+      if post["type"] == "text"
+        blog.posts.create(:title => post["title"], :body => post["body"], :published_at => post["date"])
+      elsif post["type"] == "photo"
+        blog.posts.create(:body => build_photo_body(post["photos"], post["caption"]), :published_at => post["date"])
+      end
     end
-    p blog.posts
-
-
 
     redirect_to user_path(current_user)
+  end
+
+  private
+
+  def build_photo_body(photos, caption)
+    body = ""
+    alt_sizes = photos.map { |photo| photo["alt_sizes"] }.flatten
+    size_500 = alt_sizes.select { |photo| photo["width"] == 500 }
+    urls = size_500.map { |photo| photo["url"] }
+    urls.each do |url|
+      body += "<img src='#{url}'>\n\n"
+    end
+
+    body += caption
   end
 end
