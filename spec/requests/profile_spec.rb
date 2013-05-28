@@ -29,6 +29,25 @@ describe "Profile" do
     page.should have_content("#{profile.user.status}")
   end
 
+  context 'edit' do
+    it "should have an edit button" do
+      page.set_rack_session(:user_id => profile.user.id)
+      visit user_path(profile.user)
+      page.should have_content("Edit")
+    end
+
+    it "shouldn't have an edit button if not logged in" do
+      pending
+    end
+
+    it "should bring up the edit modal" do
+      page.set_rack_session(:user_id => profile.user.id)
+      visit user_path(profile.user)
+      click_link("Edit")
+      find('#basic-edit-info-modal')['aria-hidden'].should eq "false"
+    end
+  end
+
   # context "login" do
   #   it "has a login button" do
   #     visit '/'
