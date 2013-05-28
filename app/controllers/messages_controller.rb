@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   def index
     @messages = Message.includes(:user).all
-    @incomings = @messages.select {|m| m.msg_type == "incoming"}
+    @incomings = Incoming.all
   end
 
   def create
