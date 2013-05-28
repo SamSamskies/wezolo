@@ -17,12 +17,11 @@ Wezolo::Application.routes.draw do
 
   match '/auth/tumblr/callback' => "tumblr#connect", :auth_provider => 'tumblr'
   match '/tumblr/disconnect/' => "tumblr#disconnect"
-
   post '/receive_callback' => "messages#receive_callback"
 
   match 'auth/blogger' => 'blogger#request_blogger_access'
   match '/auth/blogger/callback' => "blogger#authorize_blogger", :auth_provider => 'blogger'
   post "/tumblr/create_blog_and_posts" => "tumblr#create_blog_and_posts"
   post "/blogger/create_blog_and_posts" => "blogger#create_blog_and_posts"
-  get 'blogger/new'
+
 end
