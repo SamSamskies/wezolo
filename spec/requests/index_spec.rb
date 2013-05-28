@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "When I visit the homepage" do
+describe "Homepage" do
 
   let!(:user) { create(:user) }
 
@@ -10,7 +10,6 @@ describe "When I visit the homepage" do
   end
 
   context "login" do
-
     it "has a login button" do
       visit '/'
       page.should have_content("Log in")
@@ -33,6 +32,35 @@ describe "When I visit the homepage" do
       current_path.should eq "/involvements/new"
     end
 
+    it "will display the user's email address" do
+      create(:sam)
+      visit '/'
+      click_link("Log in")
+      fill_in 'email', :with => 'sam@gmail.com'
+      fill_in 'password', :with => 'password'
+      find(".loginmein").click
+      sleep 1
+      find('.dropdown-toggle').text.should eq "sam@gmail.com"
+    end
+  end
+
+  context "logout" do
+    it "has a logout button if logged in" do
+      stub_current_user(user)
+      visit '/'
+      find('.dropdown-toggle').click
+      page.should have_content("Log out")
+    end
+
+    it "will redirect to the home page and display the login button" do
+      page.set_rack_session(:user_id => user.id)
+      visit '/home'
+      find('.dropdown-toggle').click
+      click_link("Log out")
+      sleep(1)
+      current_path.should eq '/'
+      page.should have_content("Log in")
+    end
   end
 
   context "signup" do
@@ -76,7 +104,7 @@ describe "When I visit the homepage" do
     end
 
   end
-  
+
   context "User Not Logged in" do
     it "should not be able to see newsfeed if not logged in" do
       visit '/home'
