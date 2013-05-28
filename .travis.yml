@@ -13,3 +13,5 @@ before_install:
 before_script:
   - bundle exec rake db:create RAILS_ENV=test
 bundler_args: --binstubs=./bundler_stubs
+services:
+  - elasticsearch
