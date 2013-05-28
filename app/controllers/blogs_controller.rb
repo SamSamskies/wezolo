@@ -33,7 +33,7 @@ class BlogsController < ApplicationController
     size_500 = alt_sizes.select { |photo| photo["width"] == 500 }
     urls = size_500.map { |photo| photo["url"] }
     urls.each do |url|
-      body += "<img src='#{url}'>\n\n"
+      body += "<img src='#{url}'>"
     end
 
     body += caption
