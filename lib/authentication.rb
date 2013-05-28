@@ -5,10 +5,10 @@ module Authentication
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]).decorate if session[:user_id] 
+    @current_user ||= User.find(session[:user_id]).decorate if session[:user_id]
   end
-end
 
-def set_session(user)
-  session[:user_id] = user.id
+  def set_session(user)
+    session[:user_id] = user.id
+  end
 end

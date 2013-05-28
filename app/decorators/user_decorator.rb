@@ -30,7 +30,10 @@ class UserDecorator < Draper::Decorator
       end
     else
       if h.current_user == self
-        h.link_to "Connect your blog", "#"
+        if blog_host == "tumblr"
+          authorize_url = "/auth/tumblr"
+        end
+        h.link_to "Connect your blog", authorize_url
       else
         "Not connected"
       end
