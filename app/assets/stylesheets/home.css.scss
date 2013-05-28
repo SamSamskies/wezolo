@@ -38,6 +38,13 @@ body {
     background-size:cover;
 }
 
+.error-notice {
+  color: red;
+  position: fixed;
+  top: 70px;
+  left: 30px;
+}
+
 /* hack to stop flat ui icons from appear multiple times */
 .fui-icons-h *{
   display: none;
@@ -83,7 +90,7 @@ body {
 }
 
 .navbar .nav > li.search {
-  margin-top: 8px;
+  margin-top: 4px;
     form {
     margin-bottom: 0px;
   }

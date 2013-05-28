@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status
+  attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status, :phone_number
 
   # validates :status, :presence => true
 
@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
 
   has_one :profile
 
+  has_many :messages
+  has_many :incomings
+  has_many :responses
+
   after_create :initialize_auth_status
   # before_create :initialize_user_profile
 
@@ -51,7 +55,8 @@ class User < ActiveRecord::Base
 
   end
 
-
+  #search
+  
   # tire do
   #   mapping do
   #     indexes :id,          :index => :not_analyzed
@@ -98,6 +103,8 @@ class User < ActiveRecord::Base
     involvements.map(&:sector) if self.involvements.present?
   end
 
+
+  # associations
   def followed_posts
     (self.heroes_posts + self.countries_posts).uniq
   end
@@ -111,7 +118,7 @@ class User < ActiveRecord::Base
   end
 
 
-
+  
   def user_followings_by_type
     self.followings.inject({}) do |follow_hash, following|
       type = following.followable_type

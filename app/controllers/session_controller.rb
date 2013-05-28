@@ -41,7 +41,8 @@ class SessionController < ApplicationController
   def authenticate_user_by_email
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      login(user)
+      set_session(user)
+      render :json => {:redirect => "/home"}
     else
       @error = "Oh Snap! User Login or Password Incorrect!"
       render :json => {:error => @error}, :status => :unprocessable_entity

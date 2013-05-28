@@ -2,8 +2,12 @@
   .container
     .form-effects.form-margins
       .row
-        .offset1.span11
+        .offset1.span6
           %h3= @user.name
+        .offset2.span2
+          - unless current_user == @user
+            .pull-right.btn.btn-info.btn-small= current_user.follow_link(@user.object)
+      .row
         .offset1.span3
           = image_tag avatar_url(@user), :class => "img-polaroid bottom-spacer"
         .span7.profile
@@ -12,7 +16,7 @@
               %th Basic Info
               %th.align-right
                 - if can? :update, @user.profile
-                  = link_to "Edit", edit_profile_path(@user.profile)
+                  = link_to "Edit", "#basic-edit-info-modal", {"data-toggle" => "modal"}
             %tr
               %td.small Last login: 
               %td.large 
@@ -21,6 +25,11 @@
               %td 
                 .user-info
                   = @user.status
+            %tr  
+              %td Phone:
+              %td  
+                .user-info
+                  = @user.phone_number
             %tr
               %td Location:
               %td  
@@ -30,26 +39,31 @@
               %td Bio:
               %td  
                 .user-info
-                  = @user.profile.bio
+                  = @user.profile.bio                  
       .row
         .offset1.span3
           %table.table
             %tr.following
               %th Following
           .thumbnails
-            - @user.heroes.each do |hero| 
-              = image_tag avatar_url(hero), :alt => hero.name, :class => "thumbnail"
+            - @user.heroes.each do |hero|
+              = link_to((image_tag avatar_url(hero), :titleC => hero.name, :class => "thumbnail"), hero)
         .span7.profile
           %table.table
             %tr.info
-              %th Countries of Service
+              %th Service Details
               %th.align-right
                 - if can? :add_involvement, @user
-                  = link_to "Add", new_involvement_path
+                  = link_to "Add", "#service-details-add-modal", {"data-toggle" => "modal"}
           -unless @user.involvements.empty?
-            - @user.involvements.each do |i|
-              %hr
+            - @user.involvements.each_with_index do |i, index|
               %table.table
+                %tr
+                  %td
+                  %td.pull-right
+                    - if can? :update, i
+                      =link_to "Edit", "#service-details-edit-modal-" + index.to_s, {"data-toggle" => "modal"}
+                      .widgets= render "/layouts/modal", :title => "Edit Service Details", :id => "service-details-edit-modal-"+index.to_s , :body => render("involvements/form", :involvement => i)
                 %tr
                   %td.small Country:
                   %td.large
@@ -75,3 +89,34 @@
                   %td
                     .user-info
                       = i.end_date
+              %hr
+      .row
+        .offset4.span7.profile
+          %table.table
+            %tr.info
+              %th{:colspan => 3} Connect Your Blog
+            %tr
+              %td 
+                Blogger:
+              %td 
+                = @user.blog_connect "Blogger"
+            %tr
+              %td 
+                Wordpress:
+              %td 
+                = @user.blog_connect "Wordpress" 
+            %tr  
+              %td 
+                Tumblr:
+              %td 
+                = @user.blog_connect "Tumblr"
+.widgets
+  - if can? :update, @user.profile
+    = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)
+  - if can? :add_involvement, @user
+    = render "/layouts/modal", :title => "Add New Service Details", :id => "service-details-add-modal" , :body => render("involvements/form", :involvement => Involvement.new)
+  = render "/layouts/modal", :title => "Confirm Blog", :id => "confirm-blog-modal", :body => "", :blogs => @blogs
+
+
+  
+

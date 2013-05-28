@@ -12,7 +12,9 @@ gem 'draper', '~> 1.0'
 gem "cancan"
 gem "bcrypt-ruby"
 gem "omniauth-google-oauth2"
-
+gem "faraday"
+gem 'omniauth-tumblr'
+gem 'tumblr_client'
 gem 'tire'
 
 # Gems used only for assets and not required
@@ -31,6 +33,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 
 group :development, :test do
+  gem "debugger"
   gem 'rspec-rails', '~> 2.0'
   gem 'capybara'
   gem 'selenium-webdriver'
@@ -43,6 +46,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
+  gem 'rack_session_access'
 end
 
 # To use ActiveModel has_secure_password

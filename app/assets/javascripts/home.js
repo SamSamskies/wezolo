@@ -3,20 +3,20 @@ $(document).ready(function(){
     $(".alert.alert-error.login-error").text($.parseJSON(xhr.responseText).error);
   });
 
-  $("#loginModal").on('ajax:success', function(event, xhr, status) {
+  $("#loginModal").on('ajax:success', function(event, data) {
     $("#loginModal").modal("hide");
-    window.location = "/home";
+    window.location.replace(data.redirect);
   });
 
-  $("#signupModal").on('ajax:success', function(event, xhr, status) {
+  $("#signupModal").on('ajax:success', function(event, data) {
     $("#signupModal").modal("hide");
-    window.location.replace("/home");
+    window.location.replace(data.redirect);
   });
 
    $("#signupModal").on('ajax:error', function(event, xhr, status) {
     $(".alert.alert-error.signup-error").text($.parseJSON(xhr.responseText).error);
-    // window.location.replace('/');
   });
-
 });
+
+
 

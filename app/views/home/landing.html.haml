@@ -1,41 +1,16 @@
-
 %body
   .landing-container
+    .error-notice
+      - if flash[:notice]
+        = flash.now[:notice]
     .container
       .carousel-caption
-        - if flash[:notice]
-          = flash.now[:notice]
         %h1 Live The Peace Corps Life
         %p.lead Welcome to Wezolo where you can connect with Peace Corps volunteers past, present and future! We're a family, so let's help each other. 
         =link_to "Sign up today", "#signupModal", {"data-toggle" => "modal", :class => "btn btn-large btn-primary"}
       .row.pagination-centered.top-spacer
         %a{:href => "#bottom"}
           = image_tag "down-arrow.png", :class => "img-circle"
-  / #myCarousel.carousel.slide{"data-pause" => "remove"}
-  /   .carousel-inner
-  /     .item.active
-  /       = image_tag "main1.JPG"
-  /       .container
-  /         .carousel-caption
-  /           %h1 Example headline.
-  /           %p.lead Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-  /           =link_to "Sign up today", "#signupModal", {"data-toggle" => "modal", :class => "btn btn-large btn-primary"}
-  /     .item
-  /       = image_tag "main1.JPG"
-  /       .container
-  /         .carousel-caption
-  /           %h1 Another example headline.
-  /           %p.lead Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-  /           %a.btn.btn-large.btn-primary{:href => "#"} Learn more
-  /     .item
-  /       = image_tag "main1.JPG"
-  /       .container
-  /         .carousel-caption
-  /           %h1 One more for good measure.
-  /           %p.lead Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-  /           %a.btn.btn-large.btn-primary{:href => "#"} Browse gallery
-  /   %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"} ‹
-  /   %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"} ›
   .container.marketing.top-spacer#bottom
     .row
       .span4
@@ -43,43 +18,16 @@
         %h2 Discover
         %p Thinking of joining the Peace Corps? Check out our What's Going On? feed. Our feed is populated by our user's Blogger/Blogspot, Wordpress and Tumblr blogs. Everything in one place. BOOM!
         %p
-          / %a.btn{:href => "#"} View details »
-      / /.span4
       .span4
         = image_tag "connect.jpg", :class => "img-circle"
         %h2 Connect
         %p Easily search for other users by country of service, sector, university, major, current location, etc. Make new friends and/or find your old buddies. WATDATDATDATDATDUKEN!
         %p
-          / %a.btn{:href => "#"} View details »
-      / /.span4
       .span4
         = image_tag "nokia.jpg", :class => "img-circle"
         %h2 Communicate
         %p Stuck in village with no data network? Check out our SMS tool that let's you send a question to our site via text messaging. When users respond to your question, you'll get the responses via SMS. BOOYAH!
         %p
-          / %a.btn{:href => "#"} View details »
-    / %hr.featurette-divider/
-    / .featurette
-    /   %img.featurette-image.pull-right{:src => "http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-chrome.png"}/
-    /   %h2.featurette-heading
-    /     First featurette headling.
-    /     %span.muted It'll blow your mind.
-    /   %p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-    / %hr.featurette-divider/
-    / .featurette
-    /   %img.featurette-image.pull-left{:src => "http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-firefox.png"}/
-    /   %h2.featurette-heading
-    /     Oh yeah, it's that good.
-    /     %span.muted See for yourself.
-    /   %p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-    / %hr.featurette-divider/
-    / .featurette
-    /   %img.featurette-image.pull-right{:src => "http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-safari.png"}/
-    /   %h2.featurette-heading
-    /     And lastly, this one.
-    /     %span.muted Checkmate.
-    /   %p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-    / %hr.featurette-divider/
     %footer.top-spacer
       %p.pull-right
         %a{:href => "#"} Back to top

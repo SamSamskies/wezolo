@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "When I visit the homepage" do
+describe "Homepage" do
 
   let!(:user) { create(:user) }
 
@@ -10,7 +10,6 @@ describe "When I visit the homepage" do
   end
 
   context "login" do
-
     it "has a login button" do
       visit '/'
       page.should have_content("Log in")
@@ -22,17 +21,46 @@ describe "When I visit the homepage" do
       find("#loginModal")['aria-hidden'].should eq "false"
     end
 
-    it "user can login and get redirected to add new involvement" do
+    it "will redirect to add new involvement" do
+      create(:sam)
       visit '/'
       click_link("Log in")
-      fill_in 'email', :with => 'sam@boss.com'
+      fill_in 'email', :with => 'sam@gmail.com'
       fill_in 'password', :with => 'password'
       find(".loginmein").click
       sleep 1
       current_path.should eq "/involvements/new"
-      save_page
     end
 
+    it "will display the user's email address" do
+      create(:sam)
+      visit '/'
+      click_link("Log in")
+      fill_in 'email', :with => 'sam@gmail.com'
+      fill_in 'password', :with => 'password'
+      find(".loginmein").click
+      sleep 1
+      find('.dropdown-toggle').text.should eq "sam@gmail.com"
+    end
+  end
+
+  context "logout" do
+    it "has a logout button if logged in" do
+      stub_current_user(user)
+      visit '/'
+      find('.dropdown-toggle').click
+      page.should have_content("Log out")
+    end
+
+    it "will redirect to the home page and display the login button" do
+      page.set_rack_session(:user_id => user.id)
+      visit '/home'
+      find('.dropdown-toggle').click
+      click_link("Log out")
+      sleep(1)
+      current_path.should eq '/'
+      page.should have_content("Log in")
+    end
   end
 
   context "signup" do
@@ -61,26 +89,27 @@ describe "When I visit the homepage" do
       find('.signup-error').text.should eq "Password doesn't match confirmation"
     end
 
-    it "shows errors when user email already exist" do
+    it "shows errors when user email already exists" do
+      create(:fab)
       visit '/'
       click_link("Sign up")
       find('.signup-error').text.should eq ""
       sleep(1)
-      fill_in 'name', :with => 'Sam Samskies'
-      fill_in 'email', :with => 'sam@boss.com'
-      fill_in 'password', :with => 'password'
-      fill_in 'password_confirmation', :with => 'password'
+      fill_in 'name', :with => 'Fab Mackojc'
+      fill_in 'email', :with => 'fab@gmail.com'
+      fill_in 'password', :with => '123'
+      fill_in 'password_confirmation', :with => '123'
       find(".createaccount").click
       find('.signup-error').text.should eq "Email has already been taken"
     end
 
   end
+
   context "User Not Logged in" do
-    it "should not beable to see newsfeed if not logged in" do
-      pending
-    #   visit '/home'
-    #   uri = URI.parse(current_url)
-    #   "#{uri.path}".should == "/"
+    it "should not be able to see newsfeed if not logged in" do
+      visit '/home'
+      current_path.should eq '/'
+      find('.error-notice').text.should eq "You are not authorized to access this page."
     end
   end
 end
