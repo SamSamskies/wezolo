@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe MessagesController do
+  FakeWeb.register_uri(:post, "http://wezolo-twillio.herokuapp.com/send_message", :body => "Message Sent", :status => 200)
   describe "POST 'receive_callback'" do
-    FakeWeb.register_uri(:post, "http://wezolo-twillio.herokuapp.com/send_message", :body => "Message Sent", :status => 200)
     let!(:wezolo_sam) { create(:user, :phone_number => "+18082183629")}
     let(:params) { {"AccountSid"=>"AC8a06c3113311d16af3e84c54054b77b3", 
                     "Body"=>"Callback in rails ", 
@@ -31,5 +31,15 @@ describe MessagesController do
       response.should be_success
     end
   end
+  describe "post 'create'" do
+    let!(:wezolo_sam) { create(:user, :phone_number => "+18082183629")}
+    let!(:crazy_stalker) { create(:user, :phone_number => "+123")}
+    let!(:wezolo_sam_message) { create(:incoming) }
+    let(:params) { {"incoming_user_id"=>"1", "response_user_id"=>"2", "incoming_id"=>"1", "message"=>"i love you, wezolo sam! marry me", "commit"=>"send", "action"=>"create", "controller"=>"messages"} }
+    it "sends and saves the message with valid params" do
+      post 'create', params
+      Response.last.message.should eq("i love you, wezolo sam! marry me")
+      FakeWeb.last_request.body.should eq("to=%2B18082183629&body=i+love+you%2C+wezolo+sam%21+marry+me")
+    end
+  end
 end
-# receive_callback
