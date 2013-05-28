@@ -6,10 +6,11 @@
       %p= incoming.user.name
       %p= incoming.message
       %p Answers:
-      - incoming.outgoings.each do |outgoing|
+      - incoming.children.each do |outgoing|
         %p= outgoing.message
       =form_tag(messages_path, :method => :post) do
-        =hidden_field_tag("user_id", incoming.user.id)
+        =hidden_field_tag("to_user_id", incoming.user.id)
+        =hidden_field_tag("from_user_id", current_user.id)
         =hidden_field_tag("incoming_id", incoming.id)
         =text_area_tag("message")
         =submit_tag("send")
