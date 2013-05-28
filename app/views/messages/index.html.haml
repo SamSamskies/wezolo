@@ -6,7 +6,7 @@
       %p= incoming.user.name
       %p= incoming.message
       %p Answers:
-      - incoming.children.each do |response|
+      - incoming.responses.each do |response|
         %p= response.message
       =form_tag(messages_path, :method => :post) do
         =hidden_field_tag("incoming_user_id", incoming.user.id)
