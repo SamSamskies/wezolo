@@ -153,4 +153,8 @@ class User < ActiveRecord::Base
   def sort_by_published_date(array)
     array.flatten.sort_by {|post| post.published_at}.reverse
   end
+
+  def self.phone_number(user_id)
+    User.find(user_id).phone_number
+  end
 end

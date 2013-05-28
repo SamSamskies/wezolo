@@ -3,6 +3,7 @@ FactoryGirl.define do
     sequence(:email) {|n| "email-#{n}-#{Time.now.to_i}@example.com"  }
     password "password"
     name Faker::Name.name
+    phone_number "+11234567890"
     status ['PCV', 'RPCV', 'Interested'].sample
   end
 
