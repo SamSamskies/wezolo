@@ -1,7 +1,9 @@
 Wezolo::Application.routes.draw do
+  resources :messages, :only => [:create, :index]
   get "profile/create"
   get "search/index"
   get "search/results", :to => "search#search_results"
+  get "test" => "tumblr#show"
   resource :follows, :only => [:create, :destroy]
   resources :users
   resources :profiles, :only => [:edit, :update]

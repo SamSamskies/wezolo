@@ -14,6 +14,7 @@ gem "bcrypt-ruby"
 gem "omniauth-google-oauth2"
 gem 'omniauth-tumblr'
 gem 'tumblr_client'
+gem "faraday"
 gem 'tire'
 
 # Gems used only for assets and not required

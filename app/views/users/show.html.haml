@@ -25,6 +25,11 @@
               %td 
                 .user-info
                   = @user.status
+            %tr  
+              %td Phone:
+              %td  
+                .user-info
+                  = @user.phone_number
             %tr
               %td Location:
               %td  
@@ -34,7 +39,7 @@
               %td Bio:
               %td  
                 .user-info
-                  = @user.profile.bio
+                  = @user.profile.bio                  
       .row
         .offset1.span3
           %table.table
@@ -102,6 +107,18 @@
               %td 
                 Tumblr:
                 = @user.blog_connect "tumblr"
+              %td 
+                = @user.blog_connect "Blogger"
+            %tr
+              %td 
+                Wordpress:
+              %td 
+                = @user.blog_connect "Wordpress" 
+            %tr  
+              %td 
+                Tumblr:
+              %td 
+                = @user.blog_connect "Tumblr"
 .widgets
   - if can? :update, @user.profile
     = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)
