@@ -24,4 +24,5 @@ Wezolo::Application.routes.draw do
   match '/auth/blogger/callback' => "blogger#authorize_blogger", :auth_provider => 'blogger'
   post "/tumblr/create_blog_and_posts" => "tumblr#create_blog_and_posts"
   post "/blogger/create_blog_and_posts" => "blogger#create_blog_and_posts"
+  get 'blogger/new'
 end
