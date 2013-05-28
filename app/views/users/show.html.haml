@@ -93,14 +93,17 @@
             %tr
               %td 
                 Blogger:
+              %td 
                 = @user.blog_connect "Blogger"
             %tr
               %td 
                 Wordpress:
+              %td 
                 = @user.blog_connect "Wordpress" 
             %tr  
               %td 
                 Tumblr:
+              %td 
                 = @user.blog_connect "Tumblr"
 .widgets
   - if can? :update, @user.profile
