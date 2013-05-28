@@ -31,6 +31,17 @@ describe "When I visit the homepage" do
       sleep 1
       current_path.should eq "/involvements/new"
     end
+
+    it "will display the user's email address" do
+      create(:sam)
+      visit '/'
+      click_link("Log in")
+      fill_in 'email', :with => 'sam@gmail.com'
+      fill_in 'password', :with => 'password'
+      find(".loginmein").click
+      sleep 1
+      find('.dropdown-toggle').text.should eq "sam@gmail.com"
+    end
   end
 
   context "logout" do
