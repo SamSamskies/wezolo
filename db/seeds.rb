@@ -10,7 +10,7 @@ CSV.foreach("./db/countries.csv") do |row|
   Country.create(name: row.first)
 end
 countries = Country.all
-test_user = FactoryGirl.create(:test)
+test_user = FactoryGirl.create(:sam)
 FactoryGirl.create(:profile, user: test_user)
 
 100.times do
@@ -24,7 +24,8 @@ User.all.each do |u|
   FactoryGirl.create(:profile, user: u)
 end
 
-blogger = BlogHost.create(name: 'Blogger')
+blogger = BlogHost.create(name: 'blogger')
+tumblr = BlogHost.create(name: 'tumblr')
 blogger = BlogHost.first
 user_ids = User.pluck(:id)
 300.times do
@@ -40,3 +41,4 @@ user_ids = User.pluck(:id)
 end
 
 AuthProvider.create(name: "google_oauth2")
+AuthProvider.create(name: "tumblr")

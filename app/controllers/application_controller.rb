@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     @current_user_followings ||= current_user.present? ? current_user.user_followings_by_type : {}
   end
 
+  def find_auth_provider_id(auth_provider_name)
+    AuthProvider.find_by_name(auth_provider_name).id
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     # if user is not auhorized to create a follow they are redirected to involvement page to complete profile
     if current_user.present? && exception.action == :create && exception.subject.class == Follow && current_user.auth_status == "incomplete"
