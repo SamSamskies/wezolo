@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status
+  attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status, :phone_number
 
   # validates :status, :presence => true
 
@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
   has_many :auth_providers, :through => :authorizations
 
   has_one :profile
+
+  has_many :messages
+  has_many :incomings
+  has_many :responses
 
   after_create :initialize_auth_status
   # before_create :initialize_user_profile

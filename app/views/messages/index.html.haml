@@ -1,0 +1,16 @@
+.content
+  .container
+    %h1 Messages#index
+    - @incomings.each do |incoming|
+      %p Question:
+      %p= incoming.user.name
+      %p= incoming.message
+      %p Answers:
+      - incoming.responses.each do |response|
+        %p= response.message
+      =form_tag(messages_path, :method => :post) do
+        =hidden_field_tag("incoming_user_id", incoming.user.id)
+        =hidden_field_tag("response_user_id", current_user.id)
+        =hidden_field_tag("incoming_id", incoming.id)
+        =text_area_tag("message")
+        =submit_tag("send")

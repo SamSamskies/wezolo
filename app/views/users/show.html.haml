@@ -25,6 +25,11 @@
               %td 
                 .user-info
                   = @user.status
+            %tr  
+              %td Phone:
+              %td  
+                .user-info
+                  = @user.phone_number
             %tr
               %td Location:
               %td  
@@ -34,7 +39,7 @@
               %td Bio:
               %td  
                 .user-info
-                  = @user.profile.bio
+                  = @user.profile.bio                  
       .row
         .offset1.span3
           %table.table

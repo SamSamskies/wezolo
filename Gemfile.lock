@@ -295,6 +295,7 @@ DEPENDENCIES
   draper (~> 1.0)
   factory_girl_rails
   faker
+  faraday
   google-api-client
   guard
   guard-rspec
