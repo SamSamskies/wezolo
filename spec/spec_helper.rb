@@ -51,10 +51,6 @@ RSpec.configure do |config|
 
   # setting up tire gem testing environment
   RSpec.configure do |config|
-    config.after(:all, type: :request) { delete_user_index }
-  end
-
-  def delete_movie_index
-    User.index.delete
+    config.after(:all, type: :request) { User.index.delete }
   end
 end

@@ -149,6 +149,13 @@ describe User do
     end
   end
 
+  context "#self.search" do
+    it "can search for users that are indexed" do
+      justin = create(:user, :name => "justin bieber")
+      User.search("justin bieber")[0].should eq(justin)
+    end
+  end
+
 end
 
 
