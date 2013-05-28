@@ -15,6 +15,7 @@ gem "omniauth-google-oauth2"
 gem 'omniauth-tumblr'
 gem 'tumblr_client'
 gem 'tire'
+gem 'google-api-client'
 
 # Gems used only for assets and not required
 # in production environments by default.
