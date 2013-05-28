@@ -3,6 +3,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
 
+  def auth
+    request.env["omniauth.auth"]
+  end
+
+  def disconnect_blog(blog_host)
+    delete_id = BlogHost.find_by_name(blog_host).id
+    current_user.blogs.select { |blog| blog.blog_host_id == delete_id  }.first.destroy
+    redirect_to user_path(current_user)
+  end
+
   def user_followings_by_type
     @current_user_followings ||= current_user.present? ? current_user.user_followings_by_type : {}
   end

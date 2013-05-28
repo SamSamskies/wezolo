@@ -1,4 +1,4 @@
-module ApplicationHelper
+module ApplicationHelper  
   def avatar_url(user)
     if user.profile.photo_url.present?
       user.profile.photo_url

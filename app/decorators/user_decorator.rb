@@ -27,6 +27,8 @@ class UserDecorator < Draper::Decorator
         href = "#"
         if blog_host == "tumblr"
           href = "/tumblr/disconnect"
+        elsif blog_host == "blogger"
+          href = "/blogger/disconnect"
         end
         h.link_to "Disconnect your blog", href
       else

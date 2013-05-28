@@ -64,5 +64,9 @@ class BloggerController < ApplicationController
     end
     redirect_to user_path(current_user)
   end
+
+  def disconnect
+    disconnect_blog("blogger")
+  end
   
 end

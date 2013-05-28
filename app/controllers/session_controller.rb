@@ -20,10 +20,6 @@ class SessionController < ApplicationController
 
   private
 
-  def auth
-    request.env["omniauth.auth"]
-  end
-
   def external_provider_login?
     return true if params[:auth_provider]
   end
