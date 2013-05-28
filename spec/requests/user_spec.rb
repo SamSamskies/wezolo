@@ -41,12 +41,14 @@ describe "When I visit the homepage" do
       page.should have_content("Log out")
     end
 
-    it "will redirect to the home page" do
-
-    end
-
-    it "has a logout button" do
-
+    it "will redirect to the home page and display the login button" do
+      page.set_rack_session(:user_id => user.id)
+      visit '/home'
+      find('.dropdown-toggle').click
+      click_link("Log out")
+      sleep(1)
+      current_path.should eq '/'
+      page.should have_content("Log in")
     end
   end
 
