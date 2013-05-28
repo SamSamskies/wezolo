@@ -1,0 +1,14 @@
+.content
+  .container
+    .form-effects.form-margins
+      .row
+        .offset1.span11
+          %h1 Enter your Blogger URL:
+          =form_for Blog.new do |f|
+            = f.text_field :url
+            = f.hidden_field :url, {:value => blog["url"]}
+            = f.hidden_field :title, {:value => blog["title"]}
+            = f.hidden_field :external_id, {:value => blog["name"]}
+            = hidden_field :blog_host, "name", {:value => "blogger" }
+            = f.submit "Connect this blog", :class => "btn btn-primary"
+

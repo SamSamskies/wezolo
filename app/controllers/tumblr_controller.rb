@@ -11,11 +11,18 @@ class TumblrController < ApplicationController
     client = Tumblr::Client.new
     @blogs = client.info["user"]["blogs"]
 
-
     provider = AuthProvider.find_or_create_by_name("tumblr") 
     current_user.authorizations << provider.authorizations.create(:token => auth["credentials"]["token"], :secret => auth["credentials"]["secret"])
-    # redirect_to user_path(current_user.id)
   end
+
+  private
+
+  def auth
+    request.env["omniauth.auth"]
+  end
+end
+
+
 
   # def show
   #   conn = Faraday.new(:url => 'http://api.tumblr.com/') do |faraday|
@@ -27,10 +34,3 @@ class TumblrController < ApplicationController
   #   p response
   #   redirect_to root_path
   # end
-
-  private
-
-  def auth
-    request.env["omniauth.auth"]
-  end
-end

@@ -1,55 +1,37 @@
 class BloggerController < ApplicationController
   require 'google/api_client'
 
-  def step1
+  def new
+  end
 
-    # auth.code = ''
-    # auth.fetch_access_token!
-
-    # response = client.execute(:api_method => blogger.posts.list,
-    #   :parameters => {"blogId" => "16879703"},
-    #   :auth => auth)
+  def request_blogger_access
     user_credentials
-    p user_credentials.authorization_uri.to_s
-    p user_credentials
-    # p response
-    # p response.data
-
     redirect_to user_credentials.authorization_uri.to_s
   end
 
-  def step2
+  def authorize_blogger
     user_credentials.code = params[:code] if params[:code]
     @auth.fetch_access_token!
-    response = @client.execute(:api_method => @blogger.posts.list,
-      :parameters => {"blogId" => "16879703", "prettyPrint" => true},
+    session[:access_token] = @auth.access_token
+    session[:refresh_token] = @auth.refresh_token
+    session[:expires_in] = @auth.expires_in
+    session[:issued_at] = @auth.issued_at
+    provider = AuthProvider.find_or_create_by_name("blogger") # could write params["auth_provider"]
+    current_user.authorizations << provider.authorizations.create(:token => @auth.access_token, :secret => @auth.refresh_token)
+    response = @client.execute(:api_method => @blogger.blogs.list_by_user,
+      :parameters => {"userId" => 'self'},
       :authorization => @auth)
-    puts "**********"
-    puts response
-    puts response.inspect
-    puts response.methods
-    puts response.data
-    puts response.data.methods
-    puts "howdy//................................"
-    puts response.data.items
-    puts response.data.items.first.content
-    redirect_to ('/')
+    @blogs = response.data.items
+
   end
 
   def user_credentials
     @client = Google::APIClient.new
     @blogger = @client.discovered_api('blogger', 'v3')
-
-    # Initialize OAuth 2.0 @client
-    @client.authorization.client_id = '584173826906.apps.googleusercontent.com'
-    @client.authorization.client_secret = 'gsxulxyKi3M0Ej6lzy4F9gnH'
-    @client.authorization.redirect_uri = 'http://localhost:3000/oauth2authorize'
-
-    @client.authorization.scope = 'https://www.googleapis.com/auth/blogger'
-
-    redirect_uri = @client.authorization.authorization_uri
-
+    @client.authorization.client_id = ENV["BLOGGER_CLIENT_ID"]
+    @client.authorization.client_secret = ENV["BLOGGER_CLIENT_SECRET"]
+    @client.authorization.redirect_uri = 'http://localhost:3000/auth/blogger/callback'
+    @client.authorization.scope = 'https://www.googleapis.com/auth/blogger.readonly'
     @auth = @client.authorization.dup
   end
-
 end
