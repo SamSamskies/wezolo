@@ -93,17 +93,22 @@
             %tr
               %td 
                 Blogger:
-                = @user.blog_connect "Blogger"
+                = @user.blog_connect "blogger"
             %tr
               %td 
                 Wordpress:
-                = @user.blog_connect "Wordpress" 
+                = @user.blog_connect "wordpress" 
             %tr  
               %td 
                 Tumblr:
-                = @user.blog_connect "Tumblr"
+                = @user.blog_connect "tumblr"
 .widgets
   - if can? :update, @user.profile
     = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)
   - if can? :add_involvement, @user
     = render "/layouts/modal", :title => "Add New Service Details", :id => "service-details-add-modal" , :body => render("involvements/form", :involvement => Involvement.new)
+  = render "/layouts/modal", :title => "Confirm Blog", :id => "confirm-blog-modal", :body => "", :blogs => @blogs
+
+
+  
+

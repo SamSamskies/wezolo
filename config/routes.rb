@@ -12,5 +12,10 @@ Wezolo::Application.routes.draw do
   delete '/logout' => 'session#destroy', :as => "logout"
   get '/signup' => 'users#new', :as => "signup"
   match '/auth/google_oauth2/callback' => "session#create", :auth_provider => 'google'
+
+  match '/auth/tumblr/callback' => "tumblr#new", :auth_provider => 'tumblr'
+  resources :blogs
+
+  # match '/auth/tumblr/callback' => 'session#tumblr'
   # facebook callback route needs to have :auth_provider => 'facebook'
 end

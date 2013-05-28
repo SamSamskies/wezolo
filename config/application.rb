@@ -64,5 +64,5 @@ module Wezolo
     # Tire.configure do
     #     url ENV['ELASTICSEARCH_URL']
     # end
-end
+  end
 end
