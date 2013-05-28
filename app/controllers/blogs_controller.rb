@@ -1,21 +1,10 @@
 class BlogsController < ApplicationController
-  def tumblr
-    Tumblr.configure do |config|
-      config.consumer_key = ENV["TUMBLR_KEY"]
-      config.consumer_secret = ENV["TUMBLR_SECRET"]
-      config.oauth_token = auth["credentials"]["token"]
-      config.oauth_token_secret = auth["credentials"]["secret"]
-    end
-    client = Tumblr::Client.new
 
-    p client.info
-    p request.env["omniauth.auth"]
-    redirect_to :root
-  end
-
-private
-
-  def auth
-    request.env["omniauth.auth"]
+  def create
+    blog = Blog.create(params[:blog])
+    blog.blog_host = BlogHost.find_or_create_by_name(params["blog_host"]["name"])
+    blog.save
+    current_user.blogs << blog
+    redirect_to user_path(current_user)
   end
 end
