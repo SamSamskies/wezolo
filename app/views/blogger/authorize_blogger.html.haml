@@ -3,10 +3,10 @@
     .form-effects.form-margins
       .row
         .offset1.span11
-          %h1 Please connect one blogger to Wezolo
+          %h1 Please connect one blog to Wezolo
           - @blogs.each do |blog|
             .blog-choice
-              =form_for Blog.new do |f|
+              =form_for Blog.new, :url => url_for(:controller => 'blogger', :action => 'create_blog_and_posts') do |f|
                 %h5= blog["name"]
                 %p= blog["description"]
                 / %p= blog.to_hash
