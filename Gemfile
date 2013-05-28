@@ -31,6 +31,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 
 group :development, :test do
+  gem "fakeweb", "~> 1.3"
   gem "debugger"
   gem 'rspec-rails', '~> 2.0'
   gem 'capybara'

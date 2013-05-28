@@ -141,6 +141,14 @@ describe User do
     end
   end
 
+  context "#phone number" do
+    let!(:user) { create(:user) }
+    it "returns the correct phone number given user id" do
+      id = user.id
+      User.phone_number(id).should eq("+11234567890")
+    end
+  end
+
 end
 
 

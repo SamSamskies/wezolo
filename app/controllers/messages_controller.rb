@@ -5,12 +5,29 @@ class MessagesController < ApplicationController
   end
 
   def create
-    conn = Faraday.new(:url => 'http://localhost:9393/') do |faraday|
-      faraday.request  :url_encoded             # form-encode POST params
-      faraday.response :logger                  # log requests to STDOUT
-      faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-    end
-    conn.post '/send_message', params
+    Response.send_and_save_message(params,
+                                   {:to => User.phone_number(params[:incoming_user_id]),
+                                    :body => params[:message]})
     redirect_to messages_path
   end
+
+  def receive_callback
+    if user = User.find_by_phone_number(params["From"])
+      Incoming.create(message: params["Body"], user: user)
+    else
+      Message.send_message({:to => params["From"],
+                            :body => NUM_NOT_FOUND})
+    end
+    render :nothing => true, :status => :ok
+  end
+
+  private
+  NUM_NOT_FOUND = "Your phone number does not seem to be on our system. Please register your number at www.wezolo.com"
 end
+
+
+
+# params
+# "incoming_user_id"=>"715", "response_user_id"=>"714", "incoming_id"=>"16", "message"=>"fda", "commit"=>"send", "action"=>"create", "controller"=>"messages"
+  # USER_NOT_FOUND_MSG = "Your number does not seem to be on our system. Please register an your number at www.wezolo.com!"
+  # VERIFY_PHONE_NUM_MSG = "Please enter the following code into the registration website: #{SecureRandom.hex(2)}"
