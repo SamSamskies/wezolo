@@ -13,15 +13,17 @@ Wezolo::Application.routes.draw do
   post '/login' => 'session#create', :as => "login"
   delete '/logout' => 'session#destroy', :as => "logout"
   get '/signup' => 'users#new', :as => "signup"
+  post '/receive_callback' => "messages#receive_callback"
   match '/auth/google_oauth2/callback' => "session#create", :auth_provider => 'google'
 
   match '/auth/tumblr/callback' => "tumblr#connect", :auth_provider => 'tumblr'
   match '/tumblr/disconnect/' => "tumblr#disconnect"
+  post "/tumblr/create_blog_and_posts" => "tumblr#create_blog_and_posts"
+
   post '/receive_callback' => "messages#receive_callback"
 
   match 'auth/blogger' => 'blogger#request_blogger_access'
   match '/auth/blogger/callback' => "blogger#authorize_blogger", :auth_provider => 'blogger'
-  post "/tumblr/create_blog_and_posts" => "tumblr#create_blog_and_posts"
   post "/blogger/create_blog_and_posts" => "blogger#create_blog_and_posts"
-
+  match '/blogger/disconnect/' => "blogger#disconnect"
 end
