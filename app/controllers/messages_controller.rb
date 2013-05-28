@@ -5,7 +5,6 @@ class MessagesController < ApplicationController
   end
 
   def create
-    p params
     conn = Faraday.new(:url => 'http://localhost:9393/') do |faraday|
       faraday.request  :url_encoded             # form-encode POST params
       faraday.response :logger                  # log requests to STDOUT
