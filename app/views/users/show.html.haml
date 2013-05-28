@@ -98,18 +98,15 @@
             %tr
               %td 
                 Blogger:
-              %td 
-                = @user.blog_connect "Blogger"
+                = @user.blog_connect "blogger"
             %tr
               %td 
                 Wordpress:
-              %td 
-                = @user.blog_connect "Wordpress" 
+                = @user.blog_connect "wordpress" 
             %tr  
               %td 
                 Tumblr:
-              %td 
-                = @user.blog_connect "Tumblr"
+                = @user.blog_connect "tumblr"
 .widgets
   - if can? :update, @user.profile
     = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)

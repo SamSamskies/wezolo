@@ -14,14 +14,3 @@
                 = f.hidden_field :external_id, {:value => blog["name"]}
                 = hidden_field :blog_host, "name", {:value => "tumblr" }
                 = f.submit "Connect this blog", :class => "btn btn-primary"
-
-
-  / create_table "blogs", :force => true do |t|
-  /   t.string   "title"
-  /   t.string   "url",          :null => false
-  /   t.string   "external_id"
-  /   t.integer  "blog_host_id"
-  /   t.integer  "user_id"
-  /   t.datetime "created_at",   :null => false
-  /   t.datetime "updated_at",   :null => false
-  / end

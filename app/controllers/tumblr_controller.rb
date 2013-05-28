@@ -1,7 +1,7 @@
 class TumblrController < ApplicationController
   #helpful references
   #http://behindtechlines.com/2011/08/using-the-tumblr-api-v2-on-rails-with-omniauth/
-  def new
+  def connect
     Tumblr.configure do |config|
       config.consumer_key = ENV["TUMBLR_KEY"]
       config.consumer_secret = ENV["TUMBLR_SECRET"]
@@ -10,20 +10,18 @@ class TumblrController < ApplicationController
     end
     client = Tumblr::Client.new
     @blogs = client.info["user"]["blogs"]
-    posts = client.posts("nothingisweird.tumblr.com")
-    p posts
-    # redirect_to user_path(current_user.id, )
-    # render :json => render_to_string(:partial => 'tumblr/form', :locals => {:blogs => auth["user"]["blogs"] })
+    provider = AuthProvider.find_or_create_by_name("tumblr") 
+    current_user.authorizations << provider.authorizations.create(:token => auth["credentials"]["token"], :secret => auth["credentials"]["secret"])
   end
 
+  def disconnect
+    current_user.blogs.select { |blog| blog.url.include?("tumblr") }.first.destroy
+    redirect_to user_path(current_user)
+  end
 
-private
+  private
 
   def auth
     request.env["omniauth.auth"]
   end
 end
-
-# function(event, data)
-  
-#   $('#service-details-add-modal').html(data).pop()
