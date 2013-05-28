@@ -21,7 +21,6 @@ describe MessagesController do
       post 'receive_callback', :params => {}
       request = FakeWeb.last_request 
       FakeWeb.last_request.body.should eq("to&body=Your+phone+number+does+not+seem+to+be+on+our+system.+Please+register+your+number+at+www.wezolo.com")
-    end
   end
 
 end

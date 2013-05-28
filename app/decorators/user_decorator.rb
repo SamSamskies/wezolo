@@ -24,13 +24,22 @@ class UserDecorator < Draper::Decorator
   def blog_connect(blog_host)
     if blog_connected?(blog_host)
       if h.current_user == self
-        h.link_to "Disconnect your blog", "#"
+        href = "#"
+        if blog_host == "tumblr"
+          href = "/tumblr/disconnect"
+        end
+        h.link_to "Disconnect your blog", href
       else
         h.link_to "Blog URL", "#"
       end
     else
       if h.current_user == self
-        h.link_to "Connect your blog", "#"
+        if blog_host == "tumblr"
+          authorize_url = "/auth/tumblr"
+        elsif blog_host == "blogger"
+          authorize_url = "/auth/blogger"
+        end
+        h.link_to "Connect your blog", authorize_url
       else
         "Not connected"
       end

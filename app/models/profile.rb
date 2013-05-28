@@ -3,9 +3,9 @@ class Profile < ActiveRecord::Base
   attr_accessible :bio, :location, :major, :occupation, :photo_url, :sector, :status, :university, :username, :user_attributes
   accepts_nested_attributes_for :user, :allow_destroy => true
   
-  # after_save :update_user_search_index
+  after_save :update_user_search_index
 
-  # def update_user_search_index
-  #   user.update_index
-  # end
+  def update_user_search_index
+    user.update_index
+  end
 end

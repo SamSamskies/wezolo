@@ -16,13 +16,11 @@ class MessagesController < ApplicationController
       Incoming.create(message: params["Body"], user: user)
     else
       Message.send_message({:to => params["From"],
-                            :body => NUM_NOT_FOUND})
+                            :body => "Your phone number does not seem to be on our system. Please register your number at www.wezolo.com"})
     end
     render :nothing => true, :status => :ok
   end
 
-  private
-  NUM_NOT_FOUND = "Your phone number does not seem to be on our system. Please register your number at www.wezolo.com"
 end
 
 

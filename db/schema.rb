@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527234001) do
+ActiveRecord::Schema.define(:version => 20130528061924) do
 
   create_table "auth_providers", :force => true do |t|
     t.string   "name"
@@ -20,11 +20,13 @@ ActiveRecord::Schema.define(:version => 20130527234001) do
   end
 
   create_table "authorizations", :force => true do |t|
-    t.string   "uid",              :null => false
+    t.string   "uid"
     t.integer  "user_id"
     t.integer  "auth_provider_id", :null => false
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "token"
+    t.string   "secret"
   end
 
   add_index "authorizations", ["auth_provider_id"], :name => "index_authorizations_on_auth_provider_id"
@@ -108,12 +110,12 @@ ActiveRecord::Schema.define(:version => 20130527234001) do
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "status"
     t.string   "email"
-    t.string   "name"
     t.string   "password_digest"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+    t.string   "name"
+    t.string   "status"
     t.string   "auth_status",     :default => "incomplete"
     t.string   "phone_number"
   end

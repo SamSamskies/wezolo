@@ -1,0 +1,18 @@
+.content
+  .container
+    .form-effects.form-margins
+      .row
+        .offset1.span11
+          %h1 Please connect one blogger to Wezolo
+          - @blogs.each do |blog|
+            .blog-choice
+              =form_for Blog.new do |f|
+                %h5= blog["name"]
+                %p= blog["description"]
+                / %p= blog.to_hash
+                = f.hidden_field :url, {:value => blog["url"]}
+                = f.hidden_field :title, {:value => blog["name"]}
+                = f.hidden_field :external_id, {:value => blog["id"]}
+                = hidden_field :blog_host, "name", {:value => "blogger" }
+                = f.submit "Connect this blog", :class => "btn btn-primary"
+

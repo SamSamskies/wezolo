@@ -13,7 +13,10 @@ gem "cancan"
 gem "bcrypt-ruby"
 gem "omniauth-google-oauth2"
 gem "faraday"
+gem 'omniauth-tumblr'
+gem 'tumblr_client'
 gem 'tire'
+gem 'google-api-client'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -45,6 +48,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
+  gem 'rack_session_access'
 end
 
 # To use ActiveModel has_secure_password
