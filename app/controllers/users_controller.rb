@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    #refactor the form so that you don't have pass all these params
     user = User.new(email: params[:email], password: params[:password],password_confirmation: params[:password_confirmation], name: params[:name], status: params[:status].first)
     if user.save
       user.create_profile
