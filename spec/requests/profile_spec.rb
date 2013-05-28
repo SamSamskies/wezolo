@@ -5,7 +5,6 @@ describe "Profile" do
   let!(:profile) { create(:profile) }
 
   it "can be seen" do
-    # visit root_path # doesn't work?
     page.set_rack_session(:user_id => profile.user.id)
     visit '/'
     find('.dropdown-toggle').click
@@ -22,7 +21,13 @@ describe "Profile" do
     page.should have_content("#{profile.user.name}")
   end
 
-  # it "displays the user's status"
+  it "displays the user's status" do
+    page.set_rack_session(:user_id => profile.user.id)
+    visit '/'
+    find('.dropdown-toggle').click
+    click_link("Profile")
+    page.should have_content("#{profile.user.status}")
+  end
 
   # context "login" do
   #   it "has a login button" do
