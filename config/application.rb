@@ -60,6 +60,9 @@ module Wezolo
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # not to bootstrap application for heroku deployment ; refactor 
+    config.assets.initialize_on_precompile = false
+
     #searchbox elastic search
     # Tire.configure do
     #     url ENV['ELASTICSEARCH_URL']

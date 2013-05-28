@@ -15,7 +15,8 @@ Wezolo::Application.routes.draw do
   get '/signup' => 'users#new', :as => "signup"
   match '/auth/google_oauth2/callback' => "session#create", :auth_provider => 'google'
 
-  match '/auth/tumblr/callback' => "tumblr#new", :auth_provider => 'tumblr'
+  match '/auth/tumblr/callback' => "tumblr#connect", :auth_provider => 'tumblr'
+  match '/tumblr/disconnect/' => "tumblr#disconnect"
   resources :blogs
 
   # match '/auth/tumblr/callback' => 'session#tumblr'

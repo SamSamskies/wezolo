@@ -6,9 +6,10 @@ class BlogsController < ApplicationController
     blog.save!
     current_user.blogs << blog
 
-     Tumblr.configure do |config|
-      config.oauth_token = current_user.authorizations.select{|a| a.auth_provider_id == 5}.first.token
-      config.oauth_token_secret = current_user.authorizations.select{|a| a.auth_provider_id == 5}.first.secret
+    tumblr_id = find_auth_provider_id("tumblr")
+    Tumblr.configure do |config|
+      config.oauth_token = current_user.authorizations.select{|a| a.auth_provider_id == tumblr_id}.first.token
+      config.oauth_token_secret = current_user.authorizations.select{|a| a.auth_provider_id == tumblr_id}.first.secret
     end
 
     client = Tumblr::Client.new
