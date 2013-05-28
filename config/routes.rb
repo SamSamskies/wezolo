@@ -16,7 +16,7 @@ Wezolo::Application.routes.draw do
 
   match '/auth/tumblr/callback' => "tumblr#new", :auth_provider => 'tumblr'
   resources :blogs
-
+  post '/receive_callback' => "messages#receive_callback"
   # match '/auth/tumblr/callback' => 'session#tumblr'
   # facebook callback route needs to have :auth_provider => 'facebook'
 end
