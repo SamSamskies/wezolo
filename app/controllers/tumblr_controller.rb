@@ -10,6 +10,8 @@ class TumblrController < ApplicationController
     end
     client = Tumblr::Client.new
     @blogs = client.info["user"]["blogs"]
+    posts = client.posts("nothingisweird.tumblr.com")
+    p posts
     # redirect_to user_path(current_user.id, )
     # render :json => render_to_string(:partial => 'tumblr/form', :locals => {:blogs => auth["user"]["blogs"] })
   end
