@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base  
   include Tire::Model::Search
-  # include Tire::Model::Callbacks
+  include Tire::Model::Callbacks
+  index_name "#{Tire::Model::Search.index_prefix}users"
 
   has_secure_password
 
@@ -57,24 +58,24 @@ class User < ActiveRecord::Base
 
   #search
   
-  # tire do
-  #   mapping do
-  #     indexes :id,          :index => :not_analyzed
-  #     indexes :name,        :boost => 100
-  #     indexes :username
-  #     indexes :status
-  #     indexes :country_names
-  #     indexes :user_bio
-  #     indexes :user_location
-  #     indexes :user_involvement_descriptions
-  #     indexes :user_involvement_sectors
-  #   end
-  # end
+  tire do
+    mapping do
+      indexes :id,          :index => :not_analyzed
+      indexes :name,        :boost => 100
+      indexes :username
+      indexes :status
+      indexes :country_names
+      indexes :user_bio
+      indexes :user_location
+      indexes :user_involvement_descriptions
+      indexes :user_involvement_sectors
+    end
+  end
 
-  def self.search(params)
+  def self.search(search_query)
     tire.search(:load => true) do
       size 100
-      query { string params[:search], default_operator: "AND" } if params[:search].present?
+      query { string search_query, default_operator: "AND" } if search_query.present?
       # filter :range, published_at: {lte: Time.zone.now}
     end
   end

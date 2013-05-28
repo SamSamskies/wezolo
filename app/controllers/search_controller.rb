@@ -5,6 +5,6 @@ class SearchController < ApplicationController
 
 #figure out how to search by all indices
   def search_results
-    @results = User.search(params)
+    @results = User.search(params[:search])
   end
 end

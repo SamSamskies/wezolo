@@ -48,4 +48,13 @@ RSpec.configure do |config|
   Draper::ViewContext.test_strategy :fast do
     include ApplicationHelper
   end
+
+  # setting up tire gem testing environment
+  RSpec.configure do |config|
+    config.after(:all, type: :request) { delete_user_index }
+  end
+
+  def delete_movie_index
+    User.index.delete
+  end
 end
