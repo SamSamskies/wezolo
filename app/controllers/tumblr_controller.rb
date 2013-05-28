@@ -1,7 +1,7 @@
 class TumblrController < ApplicationController
   #helpful references
   #http://behindtechlines.com/2011/08/using-the-tumblr-api-v2-on-rails-with-omniauth/
-  def new
+  def connect
     Tumblr.configure do |config|
       config.consumer_key = ENV["TUMBLR_KEY"]
       config.consumer_secret = ENV["TUMBLR_SECRET"]
@@ -15,22 +15,14 @@ class TumblrController < ApplicationController
     current_user.authorizations << provider.authorizations.create(:token => auth["credentials"]["token"], :secret => auth["credentials"]["secret"])
   end
 
+  def disconnect
+    current_user.blogs.select { |blog| blog.url.include?("tumblr") }.first.destroy
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def auth
     request.env["omniauth.auth"]
   end
 end
-
-
-
-  # def show
-  #   conn = Faraday.new(:url => 'http://api.tumblr.com/') do |faraday|
-  #     faraday.request  :url_encoded             # form-encode POST params
-  #     faraday.response :logger                  # log requests to STDOUT
-  #     faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-  #   end
-  #   response = conn.get "/v2/blog/peacecorps.tumblr.com/posts/text?api_key=#{ENV["TUMBLR_KEY"]}&notes_info=true"
-  #   p response
-  #   redirect_to root_path
-  # end
