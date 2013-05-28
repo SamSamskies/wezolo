@@ -6,7 +6,7 @@
           %h1 Please connect one blog to Wezolo
           - @blogs.each do |blog|
             .blog-choice
-              =form_for Blog.new do |f|
+              =form_for Blog.new, :url => url_for(:controller => 'tumblr', :action => 'create_blog_and_posts') do |f|
                 %h5= blog["title"]
                 %p= blog["description"]
                 = f.hidden_field :url, {:value => blog["url"]}
