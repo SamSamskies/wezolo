@@ -10,10 +10,11 @@ class TumblrController < ApplicationController
     end
     client = Tumblr::Client.new
     @blogs = client.info["user"]["blogs"]
-    puts "*" *
-    p client.posts("nothingisweird.tumblr.com")["posts"].count
-    # redirect_to user_path(current_user.id, )
-    # render :json => render_to_string(:partial => 'tumblr/form', :locals => {:blogs => auth["user"]["blogs"] })
+
+
+    provider = AuthProvider.find_or_create_by_name("tumblr") 
+    current_user.authorizations << provider.authorizations.create(:token => auth["credentials"]["token"], :secret => auth["credentials"]["secret"])
+    # redirect_to user_path(current_user.id)
   end
 
   # def show
@@ -22,8 +23,8 @@ class TumblrController < ApplicationController
   #     faraday.response :logger                  # log requests to STDOUT
   #     faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
   #   end
-  #   conn.get "/v2/blog/peacecorps.tumblr.com/posts/text?api_key=#{ENV["TUMBLR_KEY"]}&notes_info=true"
-  #   p params
+  #   response = conn.get "/v2/blog/peacecorps.tumblr.com/posts/text?api_key=#{ENV["TUMBLR_KEY"]}&notes_info=true"
+  #   p response
   #   redirect_to root_path
   # end
 
@@ -33,8 +34,3 @@ class TumblrController < ApplicationController
     request.env["omniauth.auth"]
   end
 end
-
-# function(event, data)
-
-#   $('#service-details-add-modal').html(data).pop()
-# "http://api.tumblr.com/v2/blog/peacecorps.tumblr.com/posts/text?api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4&notes_info=true"
