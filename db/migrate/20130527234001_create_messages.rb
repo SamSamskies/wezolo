@@ -3,7 +3,7 @@ class CreateMessages < ActiveRecord::Migration
     create_table :messages do |t|
       t.string :message
       t.references :user
-      t.string :msg_type
+      t.string :type
       t.string :status
       t.references :parent
 
