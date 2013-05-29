@@ -84,8 +84,9 @@ describe "Homepage" do
       fill_in 'email', :with => 'jimmy@email.com'
       fill_in 'password', :with => 'password'
       fill_in 'password_confirmation', :with => 'password1'
+      find("#status_ option[value='interested']").select_option
       find(".createaccount").click
-      find('.signup-error').text.should eq "Password doesn't match confirmation,Status is not valid!"
+      find('.signup-error').text.should eq "Password doesn't match confirmation"
     end
 
     it "shows errors when user email already exists" do
@@ -98,8 +99,9 @@ describe "Homepage" do
       fill_in 'email', :with => 'fab@gmail.com'
       fill_in 'password', :with => '123'
       fill_in 'password_confirmation', :with => '123'
+      find("#status_ option[value='interested']").select_option
       find(".createaccount").click
-      find('.signup-error').text.should eq "Email has already been taken,Status is not valid!"
+      find('.signup-error').text.should eq "Email has already been taken"
     end
 
   end
