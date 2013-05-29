@@ -5,7 +5,15 @@ Wezolo::Application.routes.draw do
   get "search/results", :to => "search#search_results"
   get "test" => "tumblr#show"
   resource :follows, :only => [:create, :destroy]
-  resources :users
+
+  resources :users do
+    collection do
+     put "update_password" 
+     get "edit_password"
+    end
+  end 
+
+  # :update_password => :put, :edit_password => :get
   resources :profiles, :only => [:edit, :update]
   resources :involvements, :only => [:new, :create, :edit, :update, :destroy]
   root :to => "home#landing"
@@ -26,4 +34,5 @@ Wezolo::Application.routes.draw do
   match '/auth/blogger/callback' => "blogger#authorize_blogger", :auth_provider => 'blogger'
   post "/blogger/create_blog_and_posts" => "blogger#create_blog_and_posts"
   match '/blogger/disconnect/' => "blogger#disconnect"
+
 end

@@ -1,17 +1,1 @@
-.content
-  .container.green-full-width.Sign.In
-    %h1 Sign up for a W
-    = form_for @user do |f|
-      = f.label :status
-      = f.select :status, [['Interested in Peace Corp','interested'],['PCV (Peace Corps Volunteer)','PCV'],['RPCV (Returned Peace Corps Volunteers','RPCV']], {:include_blank => true, :required => true}
-      = label_tag :country_of_service
-      = collection_select :country_ids, nil, Country.all.pluck(:name), :id, :name, {}, {:multiple=>true, :class => "tagsinput" }
-      = f.label :sector
-      = f.text_field :sector, :required => true
-      = f.label :email 
-      = f.email_field :email, :required => true
-      = f.label :password
-      = f.password_field :password, :required => true
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation, :required => true
-      = f.submit "Create my Account"
+
