@@ -1,7 +1,15 @@
 .content
-  .container
+  .container    
     %h1 What's Going On?
     -@newsfeed.each do |post|
-      %h3=post.title
-      %p=post.body.html_safe
+      .form-effects.form-margins.span10
+        .post-container
+          .row
+            .pull-left.vertical-align
+              - user = post.blog.user
+              = link_to((image_tag avatar_url(user, 50), :title => user.name, :class => "img-polaroid"), user)
+            .span7
+              %h3= post.title
+              %p.published-date= post_date(post.published_at) 
+              %p= post.body.html_safe
 

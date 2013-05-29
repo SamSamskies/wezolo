@@ -28,7 +28,7 @@ describe "Homepage" do
       fill_in 'email', :with => 'sam@gmail.com'
       fill_in 'password', :with => 'password'
       find(".loginmein").click
-      sleep 1
+      sleep 2
       current_path.should eq "/involvements/new"
     end
 
