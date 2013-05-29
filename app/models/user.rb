@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :countries
 
   validates :email, :uniqueness => true
+  validate :valid_status?
+  before_validation :downcase_status
+  before_save :follow_sam
 
   has_many :blogs
   has_many :posts, :through => :blogs
@@ -41,6 +44,18 @@ class User < ActiveRecord::Base
 
   def self.statuses_hash
     STATUSES_HASH
+  end
+
+  def valid_status?
+    errors.add(:status, "is not valid!") unless STATUSES_HASH[status]
+  end
+
+  def downcase_status
+    self.status = self.status.downcase
+  end
+
+  def follow_sam
+    self.heroes << User.find_by_email("samprofessional@gmail.com")
   end
 
   AUTH_STATUSES = %w[guest incomplete user admin]
@@ -69,6 +84,14 @@ class User < ActiveRecord::Base
       indexes :user_involvement_sectors
     end
   end
+
+  def change_password(user)
+    if self.authenticate(user[:current_password])
+      self.update_attributes(:password => user["password"], :password_confirmation => user["password_confirmation"])
+    else 
+      self.errors.add(:What?, "Authentication of Current Password Failed")
+    end
+  end 
 
   def self.search(search_query)
     tire.search(:load => true) do
@@ -101,17 +124,19 @@ class User < ActiveRecord::Base
     involvements.map(&:sector) if self.involvements.present?
   end
 
-  def followed_posts
-    (self.heroes_posts + self.countries_posts).uniq
+  def followed_posts(pagination = {})
+    self.heroes_posts.paginate(:page => pagination[:page], :per_page => pagination[:per_page])
+     # + self.countries_posts
   end
 
   def heroes_posts
-    sort_by_published_date(self.heroes.includes(:posts).map(&:posts))
+      Post.includes({:blog => :user}).joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
   end
 
   # method being deprecated
   def countries_posts
-    sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
+    # Post.joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
+    # sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
   end
 
   def user_followings_by_type

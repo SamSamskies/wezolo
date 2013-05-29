@@ -6,4 +6,5 @@ FactoryGirl.define do
   factory :USA do
     name "USA"
   end
+
 end

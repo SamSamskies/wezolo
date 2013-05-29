@@ -37,9 +37,10 @@ describe Follow do
   end
 
   it "a follow should be able to get all the users from a country" do
-    justin_bieber.countries << usa
-    oprah.countries << usa
-    african_singer.countries << togo
+
+    create(:involvement, :country => usa, user: justin_bieber)
+    create(:involvement, :country => usa, user: oprah)
+    create(:involvement, :country => togo, :user => african_singer)
 
     fanguy.following_countries << [usa, togo]
     fanguy.following_countries.last.users.should eq [justin_bieber, oprah]
@@ -47,9 +48,9 @@ describe Follow do
   end
 
   it "a follow should be able to get all the users from a country using eager loading" do
-    justin_bieber.countries << usa
-    oprah.countries << usa
-    african_singer.countries << togo
+    create(:involvement, :country => usa, :user => justin_bieber)
+    create(:involvement, :country => usa, :user => oprah)
+    create(:involvement, :country => togo, :user => african_singer)
 
     fanguy.following_countries << [usa, togo]
     fanguy.following_countries.last.users.should eq [justin_bieber, oprah]

@@ -4,7 +4,7 @@ FactoryGirl.define do
     password "password"
     name Faker::Name.name
     phone_number "+11234567890"
-    status ['PCV', 'RPCV', 'Interested'].sample
+    status ['pcv', 'rpcv', 'interested', "ipcv"].sample
   end
 
   factory :sam, :parent => :user do
@@ -18,15 +18,15 @@ FactoryGirl.define do
     email "fab@gmail.com"
     password "password"
     name "Fab Mackojc"
-    status "Interested"
+    status "interested"
   end
 
   factory :rpcv, :parent => :user do
-    status "RPCV"
+    status "rpcv"
   end
 
   factory :pcv, :parent => :user do
-    status "PCV"
+    status "pcv"
   end
 
   factory :profile do

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :date_to_year
   helper_method :post_date
+  helper_method :peace_corps_years_options
 
   def auth
     request.env["omniauth.auth"]
@@ -41,5 +42,9 @@ class ApplicationController < ActionController::Base
 
   def post_date(time)
     time.strftime("Posted on %m/%d/%Y at %I:%M%p")
+  end
+
+  def peace_corps_years_options
+    (1961..(Time.now.year)).to_a.reverse.map(&:to_s).map { |year| [year, Date.strptime(year, "%Y")]}
   end
 end

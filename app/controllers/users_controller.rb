@@ -28,7 +28,18 @@ class UsersController < ApplicationController
     authorize! :read, @user
   end
 
-  def edit
+  def edit_password
+    @user = current_user
+  end
+
+  def update_password
+    current_user.change_password(params[:user])
+    if current_user.errors.any?
+      flash[:error] = current_user.errors.full_messages.join(", ")
+    else
+      flash[:notice] = "Password Change!"
+    end
+    redirect_to edit_password_users_path
   end
 
   def destroy

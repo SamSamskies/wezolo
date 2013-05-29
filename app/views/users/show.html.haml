@@ -83,12 +83,12 @@
                   %td Start Date:
                   %td
                     .user-info
-                      = i.start_date
+                      = date_to_year(i.start_date)
                 %tr
                   %td End Date:
                   %td
                     .user-info
-                      = i.end_date
+                      = date_to_year(i.end_date)
               %hr
       .row
         .offset4.span7.profile
