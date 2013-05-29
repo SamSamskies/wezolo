@@ -63,7 +63,7 @@ module Wezolo
     # not to bootstrap application for heroku deployment ; refactor 
     config.assets.initialize_on_precompile = false
 
-    #searchbox elastic search
+    # searchbox elastic search
     # Tire.configure do
     #     url ENV['ELASTICSEARCH_URL']
     # end
