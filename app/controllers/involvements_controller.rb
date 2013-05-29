@@ -9,7 +9,8 @@ class InvolvementsController < ApplicationController
     if @involvement.save
       redirect_to(user_path(current_user), :notice => 'Post was successfully created.')
     else
-      render :action => "new", :error => @involvement.errors.full_messages.join(", ")
+      flash[:error] = @involvement.errors.full_messages.join(", ")
+      render :action => "new"
     end
   end
 

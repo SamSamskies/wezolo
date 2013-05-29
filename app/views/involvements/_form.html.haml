@@ -10,4 +10,7 @@
   = f.select :start_date, peace_corps_years_options, {:prompt => true}, {:required => true}
   = f.label :end_date
   = f.select :end_date, peace_corps_years_options, {:prompt => true}, {:required => true}
+
+  = render :partial => "layouts/error", :locals => {:error => flash[:error]}
+  
   #submit_button= f.submit "Confirm", :class => "btn btn-primary"

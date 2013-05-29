@@ -17,7 +17,7 @@ class Involvement < ActiveRecord::Base
   end
 
   def valid_dates?
-    errors.add(:end_date, "can not be before start date!") if start_date > end_date
+    errors.add(:end_date, "can't be before start date!") if start_date > end_date
   end
 
   def downcase_sector
