@@ -9,7 +9,7 @@
             .pull-right.btn.btn-info.btn-small= current_user.follow_link(@user.object)
       .row
         .offset1.span3
-          = image_tag avatar_url(@user, 200), :class => "img-polaroid bottom-spacer"
+          = image_tag avatar_url(@user), :class => "img-polaroid bottom-spacer"
         .span7.profile
           %table.table
             %tr.info
@@ -47,7 +47,7 @@
               %th Following
           .thumbnails
             - @user.heroes.each do |hero|
-              = link_to((image_tag avatar_url(hero, 40), :title => hero.name, :class => "thumbnail"), hero)
+              = link_to((image_tag avatar_url(hero), :title => hero.name, :class => "thumbnail"), hero)
         .span7.profile
           %table.table
             %tr.info

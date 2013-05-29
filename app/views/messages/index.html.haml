@@ -7,7 +7,7 @@
           .row
             .pull-left.vertical-align.offset1
               - user = incoming.user
-              = link_to((image_tag avatar_url(user, 50), :title => user.name, :class => "img-polaroid"), user)
+              = link_to((image_tag avatar_url(user), :title => user.name, :class => "img-polaroid"), user)
             .span7
               %p= link_to (user.name), user
               %p= incoming.message
