@@ -142,6 +142,7 @@ GEM
     mime-types (1.23)
     multi_json (1.7.3)
     multipart-post (1.2.0)
+    newrelic_rpm (3.6.1.88)
     nokogiri (1.5.9)
     oauth (0.4.7)
     oauth2 (0.8.1)
@@ -303,6 +304,7 @@ DEPENDENCIES
   guard-rspec
   haml-rails
   jquery-rails
+  newrelic_rpm
   omniauth-google-oauth2
   omniauth-tumblr
   pg
