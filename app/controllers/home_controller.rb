@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  QUERY_TYPES = ["country", "cector", "status", "follow", "all"]
+  QUERY_TYPES = ["country", "sector", "status", "follow", "all"]
   def landing
 
   end
