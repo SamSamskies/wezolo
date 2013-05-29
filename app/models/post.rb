@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
     elsif query_type == "status"
       self.by_status(filter_choice)
     elsif query_type == "country"
+      self.by_country(filter_choice)
     end
   end
 
@@ -18,8 +19,8 @@ class Post < ActiveRecord::Base
   end
 
   def self.by_country(filter_choice)
-
-    self.joins(:blog => {:user => :involvements}).where("involvements.country" => filter_choice)
+    p "coontry"
+    self.joins(:blog => {:user => :involvements}).where("involvements.country_id" => filter_choice)
   end
 
   def self.by_status(filter_choice)
