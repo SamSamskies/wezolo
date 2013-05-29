@@ -14,12 +14,12 @@ test_user = FactoryGirl.create(:sam)
 FactoryGirl.create(:profile, user: test_user)
 
 100.times do
-  FactoryGirl.create(:user, status: ['PCV', 'RPCV', 'Interested'].sample, name: Faker::Name.name)
+  FactoryGirl.create(:user, status: User.statuses_hash.map{|k,v| k}.sample, name: Faker::Name.name)
 end
 
 User.all.each do |u|
   1.upto(rand(1..3)) do |i|
-    FactoryGirl.create(:involvement, user: u, country: countries.sample, sector: ['ICT', 'Health', 'Agriculture', 'Community Development', 'Education'].sample)
+    FactoryGirl.create(:involvement, user: u, country: countries.sample, sector: Involvement.sectors.sample)
   end
   FactoryGirl.create(:profile, user: u)
 end
