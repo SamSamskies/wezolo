@@ -16,8 +16,7 @@ describe "Discovery" do
       visit '/'
       find('#search').set("justin bieber")
       find('.fui-search').click
-      save_page
-      page.should have_content("justin bieber")
+      page.should have_css('div.user-box.form-effects', :text => 'justin bieber')
     end
   end
 
