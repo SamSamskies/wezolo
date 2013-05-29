@@ -1,16 +1,31 @@
 .content
   .container
-    %h1 Messages#index
+    %h2 Text Questions to 720-259-WEZO
     - @incomings.each do |incoming|
-      %p Question:
-      %p= incoming.user.name
-      %p= incoming.message
-      %p Answers:
-      - incoming.responses.each do |response|
-        %p= response.message
-      =form_tag(messages_path, :method => :post) do
-        =hidden_field_tag("incoming_user_id", incoming.user.id)
-        =hidden_field_tag("response_user_id", current_user.id)
-        =hidden_field_tag("incoming_id", incoming.id)
-        =text_area_tag("message")
-        =submit_tag("send")
+      .form-effects.form-margins.span10
+        .question-container
+          .row
+            .pull-left.vertical-align.offset1
+              - user = incoming.user
+              .thumbnail
+                = link_to((image_tag avatar_url(user), :title => user.name), user)
+            .span7
+              %p= link_to (user.name), user
+              %p= incoming.message
+            .offset2.span7
+              .row.response-container
+                .response-container.pull-left
+                  - incoming.responses.each do |response_obj|
+                    - user = response_obj.user
+                    / = link_to((image_tag avatar_url(user, 25), :title => user.name, :class => "img-polaroid"), user) 
+                    .span6
+                      %p= link_to (user.name), user
+                      %p= response_obj.message
+                      %hr
+                .pagination-centered
+                  =form_tag(messages_path, :method => :post) do
+                    =hidden_field_tag("incoming_user_id", incoming.user.id)
+                    =hidden_field_tag("response_user_id", current_user.id)
+                    =hidden_field_tag("incoming_id", incoming.id)
+                    =text_area_tag("message")
+                    =submit_tag(("send"), :class => "btn btn-primary")

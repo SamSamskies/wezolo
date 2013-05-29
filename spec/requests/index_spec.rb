@@ -5,7 +5,6 @@ describe "Homepage" do
   let!(:user) { create(:user) }
 
   it "can be seen" do
-    # visit root_path # doesn't work?
     visit '/'
   end
 
