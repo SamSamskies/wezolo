@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Authentication
   protect_from_forgery
   helper_method :current_user
+  helper_method :date_to_year
 
   def auth
     request.env["omniauth.auth"]
@@ -32,6 +33,10 @@ class ApplicationController < ActionController::Base
     else
       redirect_to root_path, :notice => exception.message
     end
+  end
+
+  def date_to_year(date)
+    date.strftime("%Y") if date
   end
 
 end
