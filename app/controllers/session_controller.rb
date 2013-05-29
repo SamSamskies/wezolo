@@ -24,6 +24,18 @@ class SessionController < ApplicationController
     return true if params[:auth_provider]
   end
 
+  def find_user_by_uid
+    Authorization.find_by_uid(auth["uid"]).user
+  end
+
+  def create_user_by_uid
+    User.create_with_omniauth(auth)
+  end
+
+  def find_or_create_user_by_uid
+    @user = find_user_by_uid || create_user_by_uid
+  end
+
   def authenticate_user_by_external_provider
     user = User.find_by_email(auth["info"]["email"])
     if user
