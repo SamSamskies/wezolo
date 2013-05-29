@@ -1,12 +1,12 @@
 .basic-info-edit
   = form_for profile do |f|
     = f.fields_for :user do |u_f|
-      =f.label :status  
+      = f.label :status
       = u_f.text_field :status
-      =f.label :phone_number
+      = f.label :phone_number
       = u_f.text_field :phone_number
     = f.label :location
     = f.text_field :location
     = f.label :bio
     = f.text_area :bio, :rows => 10
-    #submit_button= f.submit "Confirm"
+    #submit_button= f.submit "Confirm", :class => "btn btn-primary"

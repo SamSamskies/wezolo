@@ -22,7 +22,7 @@
         %p Post by Sector of Involvement
       - ["Education", "Health", "Community Economic Development", "Environment", "Youth in Development", "Agriculuture"].each do |sector_name|
         %li= link_to sector_name, home_path(query_string: sector_name, :query_type => "Sector")
-    %h1 Users Newsfeed
+    %h1 What's Going On?
     -@newsfeed.each do |post|
       %h3=post.title
       %p=post.body.html_safe
