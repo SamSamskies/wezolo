@@ -3,16 +3,28 @@
     .well.sidebar-nav
     %ul.nav.nav-list
       %li.nav-header Filter feed
-      %li.active
-        = link_to "PCV", "/home?query=PCV"
       %li
-        = collection_select :country_ids, nil, Country.all, :id, :name, {}, {:class => "country-filter" }
+        = link_to "Users You Follow", "/home"
+  
       %li
-        = select :status, nil, [['Interested in Peace Corp','interested'],['PCV (Peace Corps Volunteer)','PCV'],['RPCV (Returned Peace Corps Volunteers','RPCV']], {:include_blank => true, :class => "status-filter"}
+        %p Post by Peace Corp Status
       %li
-        = select("post", "person_id", [["Education"], ["Health"],["Community Economic Development"], ["Environment"], ["Youth in Development"], ["Agriculuture"]], {:prompt => 'Select Person', :class => "sector-filter"})
+        = link_to "Current Peace Corp Member", home_path(query_string: "PCV", :query_type => "status")
+      %li
+        = link_to "Returned Peace Corp Member", home_path(query_string: "RPCV", :query_type => "status")
+      %li
+        = link_to "Interested Peace Corp Member", home_path(query_string: "Interested", :query_type => "status")
+      %li
+        %p Select by Country of Involvement
+      %li
+        = select "query", "country_id", Country.all.map {|c| [c.name, c.name]}, {:include_blank => true}, {:class => "country-filter", :prompt => 'Select a Country'}
+      %li
+        %p Post by Sector of Involvement
+      - ["Education", "Health", "Community Economic Development", "Environment", "Youth in Development", "Agriculuture"].each do |sector_name|
+        %li= link_to sector_name, home_path(query_string: sector_name, :query_type => "Sector")
     %h1 Users Newsfeed
     -@newsfeed.each do |post|
       %h3=post.title
       %p=post.body.html_safe
 
+/ 5 ~ 10 ms

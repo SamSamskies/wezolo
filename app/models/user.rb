@@ -104,19 +104,19 @@ class User < ActiveRecord::Base
     involvements.map(&:sector) if self.involvements.present?
   end
 
-
   # associations
   def followed_posts
-    (self.heroes_posts + self.countries_posts).uniq
+    self.heroes_posts
   end
 
   def heroes_posts
     sort_by_published_date(self.heroes.includes(:posts).map(&:posts))
   end
 
-  def countries_posts
-    sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
-  end
+  # def countries_posts(query_string)
+  #   sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
+   # + self.countries_posts(query_string)
+  # end
 
 
   

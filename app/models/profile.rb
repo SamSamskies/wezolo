@@ -5,6 +5,8 @@ class Profile < ActiveRecord::Base
   
   after_save :update_user_search_index
 
+  SECTORS = ["Education", "Health", "Community Economic Development", "Environment", "Youth in Development", "Agriculuture"]
+
   def update_user_search_index
     user.update_index
   end
