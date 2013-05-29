@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base  
+class User < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
   index_name "#{Tire::Model::Search.index_prefix}users"
@@ -7,27 +7,22 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status, :phone_number
 
-  # validates :status, :presence => true
-
   has_many :involvements
   has_many :countries, :through => :involvements
 
   accepts_nested_attributes_for :countries
-  
+
   validates :email, :uniqueness => true
 
   has_many :blogs
   has_many :posts, :through => :blogs
 
-  #find all the followers(user as named) a user is following
   has_many :follows, :as => :followable, :dependent => :destroy
   has_many :followers, :through => :follows
 
-  #find all the users(use .heroes) a user is following
   has_many :followings, :class_name => "Follow", :foreign_key => "follower_id", :dependent => :destroy
   has_many :heroes, :through => :followings, :source => :followable, :source_type => "User"
 
-  #find all the countries(user .following_countries) a user is following
   has_many :following_countries, :through => :followings, :source => :followable, :source_type => "Country"
 
   has_many :authorizations
@@ -40,12 +35,10 @@ class User < ActiveRecord::Base
   has_many :responses
 
   after_create :initialize_auth_status
-  # before_create :initialize_user_profile
 
   AUTH_STATUSES = %w[guest incomplete user admin]
 
   AUTH_STATUSES.each do |auth_status|
-    #ability inheritance
     define_method "#{auth_status}_auth?" do
       AUTH_STATUSES.index(self.auth_status) <= AUTH_STATUSES.index(auth_status)
     end
@@ -56,8 +49,6 @@ class User < ActiveRecord::Base
 
   end
 
-  #search
-  
   tire do
     mapping do
       indexes :id,          :index => :not_analyzed
@@ -76,7 +67,6 @@ class User < ActiveRecord::Base
     tire.search(:load => true) do
       size 100
       query { string search_query, default_operator: "AND" } if search_query.present?
-      # filter :range, published_at: {lte: Time.zone.now}
     end
   end
 
@@ -104,7 +94,6 @@ class User < ActiveRecord::Base
     involvements.map(&:sector) if self.involvements.present?
   end
 
-  # associations
   def followed_posts
     (self.heroes_posts + self.countries_posts).uniq
   end
@@ -119,8 +108,6 @@ class User < ActiveRecord::Base
   end
    # 
 
-
-  
   def user_followings_by_type
     self.followings.inject({}) do |follow_hash, following|
       type = following.followable_type
@@ -131,26 +118,22 @@ class User < ActiveRecord::Base
   end
 
   def self.create_with_omniauth(auth)
-    create! do |user|
-      provider = AuthProvider.find_by_name(auth["provider"]) #refactor since repeated
+    new_user = create! do |user|
+      provider = set_provider(auth)
       user.authorizations << provider.authorizations.create(uid: auth["uid"])
       user.name = auth["info"]["name"]
       user.email = auth["info"]["email"]
       user.password = SecureRandom.hex(10)
-      user.create_profile(photo_url: auth["info"]["image"])
     end
+    new_user.create_profile(photo_url: auth["info"]["image"])
   end
-
 
   def initialize_auth_status
     self.update_attributes(:auth_status => "user") if self.status == ["interested"]
   end
 
-  # def initialize_user_profile
-  #   create_profile
-  # end
-
   private
+
   def sort_by_published_date(array)
     array.flatten.sort_by {|post| post.published_at}.reverse
   end

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
   helper_method :date_to_year
+  helper_method :post_date
 
   def auth
     request.env["omniauth.auth"]
@@ -39,4 +40,11 @@ class ApplicationController < ActionController::Base
     date.strftime("%Y") if date
   end
 
+  def set_provider(auth)
+    AuthProvider.find_by_name(auth["provider"])
+  end
+
+  def post_date(time)
+    time.strftime("Posted on %m/%d/%Y at %I:%M%p")
+  end
 end
