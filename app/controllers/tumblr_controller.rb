@@ -3,8 +3,6 @@ class TumblrController < ApplicationController
   #http://behindtechlines.com/2011/08/using-the-tumblr-api-v2-on-rails-with-omniauth/
   def connect
     Tumblr.configure do |config|
-      config.consumer_key = ENV["TUMBLR_KEY"]
-      config.consumer_secret = ENV["TUMBLR_SECRET"]
       config.oauth_token = auth["credentials"]["token"]
       config.oauth_token_secret = auth["credentials"]["secret"]
     end
@@ -12,11 +10,6 @@ class TumblrController < ApplicationController
     @blogs = client.info["user"]["blogs"]
     provider = AuthProvider.find_or_create_by_name("tumblr") 
     current_user.authorizations << provider.authorizations.create(:token => auth["credentials"]["token"], :secret => auth["credentials"]["secret"])
-  end
-
-  def disconnect
-    current_user.blogs.select { |blog| blog.url.include?("tumblr") }.first.destroy
-    redirect_to user_path(current_user)
   end
 
   def create_blog_and_posts
@@ -47,9 +40,13 @@ class TumblrController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def disconnect
+    disconnect_blog("tumblr")
+  end
+
   private
 
-    def build_photo_body(photos, caption)
+  def build_photo_body(photos, caption)
     body = ""
     alt_sizes = photos.map { |photo| photo["alt_sizes"] }.flatten
     size_500 = alt_sizes.select { |photo| photo["width"] == 500 }
@@ -58,9 +55,5 @@ class TumblrController < ApplicationController
       body += "<img src='#{url}'>"
     end
     body += caption
-  end
-
-  def auth
-    request.env["omniauth.auth"]
   end
 end
