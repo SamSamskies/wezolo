@@ -111,13 +111,13 @@ class User < ActiveRecord::Base
     involvements.map(&:sector) if self.involvements.present?
   end
 
-  def followed_posts
-    self.heroes_posts
+  def followed_posts(params)
+    self.heroes_posts(params)
      # + self.countries_posts
   end
 
-  def heroes_posts
-    Post.joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
+  def heroes_posts(params)
+    Post.joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).paginate(:page => params[:page], :per_page => params[:per_page]).order("published_at DESC")
   end
 
   # method being deprecated
