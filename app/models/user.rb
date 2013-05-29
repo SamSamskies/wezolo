@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  
+  STATUSES_HASH = {"interested" => "Interested in Peace Corps","ipcv" => "Invited Peace Corps Volunteer","pcv" => "Current Peace Corps Volunteer","rpcv" => "Returned Peace Corps Volunteer"}
+
   include Tire::Model::Search
   include Tire::Model::Callbacks
   index_name "#{Tire::Model::Search.index_prefix}users"
@@ -35,6 +38,10 @@ class User < ActiveRecord::Base
   has_many :responses
 
   after_create :initialize_auth_status
+
+  def self.statuses_hash
+    STATUSES_HASH
+  end
 
   AUTH_STATUSES = %w[guest incomplete user admin]
 
