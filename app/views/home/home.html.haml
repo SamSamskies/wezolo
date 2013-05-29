@@ -1,6 +1,30 @@
 .content
-  .container    
-    %h1 What's Going On?
+  .container
+    .row
+      %h1 What's Going On?
+      .well.sidebar-nav-fixed
+        / %h3.nav-header Filter feed
+        %ul.nav.nav-list
+          %p Select by Users you Follow
+          %li
+            = link_to "Users You Follow(default option)", "/home"
+          %p Select by Country of Involvement
+          %li
+            = select "query", "country_id", Country.all.map {|c| [c.name, c.id]}, {:include_blank => true, :prompt => 'Select a Country'}, {:class => "country-filter"}          
+          %li
+          
+        %ul.nav.nav-list
+          %p Post by Peace Corp Status  
+          %li
+            = link_to "Current Peace Corp Member", home_path(query_string: "PCV", :query_type => "status")
+          %li
+            = link_to "Returned Peace Corp Member", home_path(query_string: "RPCV", :query_type => "status")
+          %li
+            = link_to "Interested Peace Corp Member", home_path(query_string: "Interested", :query_type => "status")
+        %ul.nav.nav-list
+          %p Post by Sector of Involvement
+          - ['Agriculture', 'Community Development', 'ICT', 'Health', 'Education'].each do |sector_name|
+            %li= link_to sector_name, home_path(query_string: sector_name, :query_type => "sector")  
     -@newsfeed.each do |post|
       .form-effects.form-margins.span10
         .post-container
@@ -12,4 +36,3 @@
               %h3= post.title
               %p.published-date= post_date(post.published_at) 
               %p= post.body.html_safe
-

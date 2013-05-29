@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    # if user is not auhorized to create a follow they are redirected to involvement page to complete profile
     if current_user.present? && exception.action == :create && exception.subject.class == Follow && current_user.auth_status == "incomplete"
       redirect_to new_involvement_path, :notice => "Please complete your profile before you can follow other users!"
     elsif current_user.present? && exception.action == :read && exception.subject.class == UserDecorator && current_user.auth_status == "incomplete"
@@ -40,8 +39,11 @@ class ApplicationController < ActionController::Base
     date.strftime("%Y") if date
   end
 
+  def set_provider(auth)
+    AuthProvider.find_by_name(auth["provider"])
+  end
+
   def post_date(time)
     time.strftime("Posted on %m/%d/%Y at %I:%M%p")
   end
-
 end
