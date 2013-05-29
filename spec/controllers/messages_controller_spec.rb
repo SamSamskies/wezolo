@@ -22,7 +22,7 @@ describe MessagesController do
       params["From"] = invalid_phone_number
       post 'receive_callback', params
       request = FakeWeb.last_request 
-      FakeWeb.last_request.body.should eq("to=%2B123&body=Your+phone+number+does+not+seem+to+be+on+our+system.+Please+register+your+number+at+www.wezolo.com")
+      FakeWeb.last_request.body.should eq("to=%2B123&body=Your+number+does+not+seem+to+be+on+our+system.+Please+register+an+your+number+at+www.wezolo.com")
     end
 
     it "receives message with recognised number and save the incoming message" do

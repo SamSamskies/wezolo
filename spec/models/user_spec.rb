@@ -150,10 +150,17 @@ describe User do
   end
 
   context "#self.search" do
+    let!(:justin) { create(:user, :name => "justin bieber") }
+    before do
+      User.index.delete
+    end
     it "can search for users that are indexed" do
+      User.index.create
       justin = create(:user, :name => "justin bieber")
+      User.index.refresh
       User.search("justin bieber")[0].should eq(justin)
     end
+
   end
 
 end
