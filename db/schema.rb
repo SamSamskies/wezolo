@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130526073457) do
+ActiveRecord::Schema.define(:version => 20130528061924) do
 
   create_table "auth_providers", :force => true do |t|
     t.string   "name"
@@ -20,11 +20,13 @@ ActiveRecord::Schema.define(:version => 20130526073457) do
   end
 
   create_table "authorizations", :force => true do |t|
-    t.string   "uid",              :null => false
+    t.string   "uid"
     t.integer  "user_id"
     t.integer  "auth_provider_id", :null => false
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "token"
+    t.string   "secret"
   end
 
   add_index "authorizations", ["auth_provider_id"], :name => "index_authorizations_on_auth_provider_id"
@@ -72,6 +74,19 @@ ActiveRecord::Schema.define(:version => 20130526073457) do
     t.date    "end_date"
   end
 
+  create_table "messages", :force => true do |t|
+    t.string   "message"
+    t.integer  "user_id"
+    t.string   "type"
+    t.string   "status"
+    t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "messages", ["parent_id"], :name => "index_messages_on_parent_id"
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "body",         :null => false
@@ -102,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20130526073457) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
     t.string   "auth_status",     :default => "incomplete"
+    t.string   "phone_number"
   end
 
 end

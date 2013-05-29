@@ -14,8 +14,5 @@
     %h1 Users Newsfeed
     -@newsfeed.each do |post|
       %h3=post.title
-      %p=post.body
-  .span3
-
-
+      %p=post.body.html_safe
 

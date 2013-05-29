@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base  
   include Tire::Model::Search
-  # include Tire::Model::Callbacks
+  include Tire::Model::Callbacks
+  index_name "#{Tire::Model::Search.index_prefix}users"
 
   has_secure_password
 
-  attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status
+  attr_accessible :name, :password_digest, :status, :email, :password, :password_confirmation, :follower, :profile, :auth_status, :phone_number
 
   # validates :status, :presence => true
 
@@ -34,6 +35,10 @@ class User < ActiveRecord::Base
 
   has_one :profile
 
+  has_many :messages
+  has_many :incomings
+  has_many :responses
+
   after_create :initialize_auth_status
   # before_create :initialize_user_profile
 
@@ -51,25 +56,26 @@ class User < ActiveRecord::Base
 
   end
 
+  #search
+  
+  tire do
+    mapping do
+      indexes :id,          :index => :not_analyzed
+      indexes :name,        :boost => 100
+      indexes :username
+      indexes :status
+      indexes :country_names
+      indexes :user_bio
+      indexes :user_location
+      indexes :user_involvement_descriptions
+      indexes :user_involvement_sectors
+    end
+  end
 
-  # tire do
-  #   mapping do
-  #     indexes :id,          :index => :not_analyzed
-  #     indexes :name,        :boost => 100
-  #     indexes :username
-  #     indexes :status
-  #     indexes :country_names
-  #     indexes :user_bio
-  #     indexes :user_location
-  #     indexes :user_involvement_descriptions
-  #     indexes :user_involvement_sectors
-  #   end
-  # end
-
-  def self.search(params)
+  def self.search(search_query)
     tire.search(:load => true) do
       size 100
-      query { string params[:search], default_operator: "AND" } if params[:search].present?
+      query { string search_query, default_operator: "AND" } if search_query.present?
       # filter :range, published_at: {lte: Time.zone.now}
     end
   end
@@ -98,6 +104,8 @@ class User < ActiveRecord::Base
     involvements.map(&:sector) if self.involvements.present?
   end
 
+
+  # associations
   def followed_posts
     (self.heroes_posts + self.countries_posts).uniq
   end
@@ -111,7 +119,7 @@ class User < ActiveRecord::Base
   end
 
 
-
+  
   def user_followings_by_type
     self.followings.inject({}) do |follow_hash, following|
       type = following.followable_type
@@ -144,5 +152,9 @@ class User < ActiveRecord::Base
   private
   def sort_by_published_date(array)
     array.flatten.sort_by {|post| post.published_at}.reverse
+  end
+
+  def self.phone_number(user_id)
+    User.find(user_id).phone_number
   end
 end

@@ -141,6 +141,28 @@ describe User do
     end
   end
 
+  context "#phone number" do
+    let!(:user) { create(:user) }
+    it "returns the correct phone number given user id" do
+      id = user.id
+      User.phone_number(id).should eq("+11234567890")
+    end
+  end
+
+  context "#self.search" do
+    let!(:justin) { create(:user, :name => "justin bieber") }
+    before do
+      User.index.delete
+    end
+    it "can search for users that are indexed" do
+      User.index.create
+      justin = create(:user, :name => "justin bieber")
+      User.index.refresh
+      User.search("justin bieber")[0].should eq(justin)
+    end
+
+  end
+
 end
 
 
