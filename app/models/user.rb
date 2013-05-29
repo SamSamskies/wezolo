@@ -63,6 +63,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def change_password(user)
+    p user["password"]
+    p user["password_confirmation"]
+    if self.authenticate(user[:current_password])
+      self.update_attributes(:password => user["password"], :password_confirmation => user["password_confirmation"])
+      p "password changed"
+    else
+      p "change failed"
+    end
+  end 
+
   def self.search(search_query)
     tire.search(:load => true) do
       size 100

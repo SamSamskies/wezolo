@@ -28,7 +28,13 @@ class UsersController < ApplicationController
     authorize! :read, @user
   end
 
-  def edit
+  def edit_password
+    @user = current_user
+  end
+
+  def update_password
+    current_user.change_password(params[:user])
+    redirect_to edit_password_users_path
   end
 
   def destroy
