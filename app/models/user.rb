@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :countries
 
   validates :email, :uniqueness => true
-
+  validate :valid_status?
+  
   has_many :blogs
   has_many :posts, :through => :blogs
 
@@ -41,6 +42,10 @@ class User < ActiveRecord::Base
 
   def self.statuses_hash
     STATUSES_HASH
+  end
+
+  def valid_status?
+    errors.add(:status, "is not valid!") unless STATUSES_HASH[status]
   end
 
   AUTH_STATUSES = %w[guest incomplete user admin]
