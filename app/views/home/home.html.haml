@@ -2,7 +2,7 @@
   .container
     .well.sidebar-nav
     %ul.nav.nav-list
-      %li.nav-header Filter feed
+      %h3.nav-header Filter feed
       %li
         = link_to "Users You Follow", "/home"
   
@@ -17,14 +17,26 @@
       %li
         %p Select by Country of Involvement
       %li
-        = select "query", "country_id", Country.all.map {|c| [c.name, c.name]}, {:include_blank => true}, {:class => "country-filter", :prompt => 'Select a Country'}
+        = select "query", "country_id", Country.all.map {|c| [c.name, c.id]}, {:include_blank => true, :prompt => 'Select a Country'}, {:class => "country-filter"}
       %li
         %p Post by Sector of Involvement
-      - ["Education", "Health", "Community Economic Development", "Environment", "Youth in Development", "Agriculuture"].each do |sector_name|
-        %li= link_to sector_name, home_path(query_string: sector_name, :query_type => "Sector")
+      - ['ICT', 'Health', 'Agriculture', 'Community Development', 'Education'].each do |sector_name|
+        %li= link_to sector_name, home_path(query_string: sector_name, :query_type => "sector")
     %h1 What's Going On?
     -@newsfeed.each do |post|
-      %h3=post.title
-      %p=post.body.html_safe
+      %p status:
+      %p= post.blog.user.status
+
+      %p country:
+      -post.blog.user.involvements.each do |inv|
+        = inv.country.name
+
+      %p sector:
+      -post.blog.user.involvements.each do |inv| 
+        = inv.sector
+
+
+      / %h3=post.title
+      / %p=post.body.html_safe
 
 / 5 ~ 10 ms

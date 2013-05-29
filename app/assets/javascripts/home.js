@@ -17,15 +17,8 @@ $(document).ready(function(){
     $(".alert.alert-error.signup-error").text($.parseJSON(xhr.responseText).error);
   });
 
-
   $('.country-filter').change(function() {
-    window.location = "/home?query=" + $(this).find('option:selected').text();
-  });
-  $('.status-filter').change(function() {
-    window.location = "/home?query=" + $(this).find('option:selected').text();
-  });
-  $('.sector-filter').change(function() {
-    window.location = "/home?query=" + $(this).find('option:selected').text();
+    window.location = "/home?query_type=country&query_string=" + $(this).find('option:selected').val();
   });
 
 });
