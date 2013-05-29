@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   end
 
   def follow_sam
-    self.heroes << User.find_by_email("samprofessional@gmail.com")
+    self.heroes << User.find_by_email("samprofessional@gmail.com") if User.find_by_email("samprofessional@gmail.com")
   end
 
   AUTH_STATUSES = %w[guest incomplete user admin]
@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
   end 
 
   def self.search(search_query)
-    tire.search(:load => true) do
+    tire.search(:load => { :include => [:profile, :follows, {:involvements => :country}]}) do
       size 100
       query { string search_query, default_operator: "AND" } if search_query.present?
     end
