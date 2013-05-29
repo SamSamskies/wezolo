@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
   validate :valid_status?
   before_validation :downcase_status
+  before_save :follow_sam
 
   has_many :blogs
   has_many :posts, :through => :blogs
@@ -51,6 +52,10 @@ class User < ActiveRecord::Base
 
   def downcase_status
     self.status = self.status.downcase
+  end
+
+  def follow_sam
+    self.heroes << User.find_by_email("samprofessional@gmail.com")
   end
 
   AUTH_STATUSES = %w[guest incomplete user admin]
