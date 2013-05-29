@@ -1,6 +1,6 @@
 .content
   .container
     %h1 Search Results
-    %ul 
-    - @results.each do |user|
-      = render_user_box(user)
+    .row
+      - @results.each do |user|
+        = render_user_box(user)

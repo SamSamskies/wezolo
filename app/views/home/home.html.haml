@@ -1,6 +1,6 @@
 .content
   .container
-    %h1 Users Newsfeed
+    %h1 What's Going On?
     -@newsfeed.each do |post|
       %h3=post.title
       %p=post.body.html_safe
