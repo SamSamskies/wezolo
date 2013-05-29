@@ -11,6 +11,9 @@ class MessagesController < ApplicationController
     redirect_to messages_path, :notice => response
   end
 
+  # Review: This is method is to receive messages from Twillio, right? Messages sent via txt to a particular
+  # user? It's not clear what's going on from the action name or code. Consider renaming things and/or adding
+  # comments.
   def receive_callback
     if user = User.find_by_phone_number(params["From"])
       Incoming.create(message: params["Body"], user: user)

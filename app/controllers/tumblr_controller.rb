@@ -21,7 +21,7 @@ class TumblrController < ApplicationController
     blog.save!
     current_user.blogs << blog
 
-
+    # Review: I'd extract a bunch of this work to helper methods. Possibly to a Blog builder class.
     tumblr_id = find_auth_provider_id("tumblr")
     Tumblr.configure do |config|
       config.oauth_token = current_user.authorizations.select{|a| a.auth_provider_id == tumblr_id}.first.token

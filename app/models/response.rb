@@ -3,6 +3,9 @@ class Response < Message
   attr_accessible :message, :parent_id, :user_id
   validates :message, :presence => true
   
+  # REVIEW: Knowing the content of success/failure message shouldn't be a responsiblity 
+  # of this class. This method should return the new message object or nil depending on
+  # whether the message was saved. 
   def self.send_and_save_message(params, message_options)
     if self.send_message(message_options)
       message = self.save_message(params)

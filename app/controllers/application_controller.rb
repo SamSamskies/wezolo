@@ -9,12 +9,17 @@ class ApplicationController < ActionController::Base
     request.env["omniauth.auth"]
   end
 
+  # Review: This shouldn't be an application wide helper method. Looks like it belongs in something like:
+  # app/controllers/blog_helper.rb. Create a module in that file and include it in both TumblrController
+  # and BloggerController
   def disconnect_blog(blog_host)
     delete_id = BlogHost.find_by_name(blog_host).id
     current_user.blogs.select { |blog| blog.blog_host_id == delete_id  }.first.destroy
     redirect_to user_path(current_user)
   end
 
+
+  # Review: Is this used anywhere?
   def user_followings_by_type
     @current_user_followings ||= current_user.present? ? current_user.user_followings_by_type : {}
   end

@@ -82,6 +82,12 @@ class User < ActiveRecord::Base
   end
 
   def country_names
+    # REVIEW: I'm pretty sure the associations (involvements, countries, etc) should default to an empty
+    # array if there aren't any associations. So these .present? checks are probably unncessary.
+    #
+    # Also, all these methods that check for .present? will retun nil if .present? returns false. That
+    # nil can pollute things downstream (you'd have to check for nil), so it's better to always return a
+    # 'safe' return value, like an empty array.
     countries.map(&:name) if self.countries.present?
   end
 
@@ -106,6 +112,7 @@ class User < ActiveRecord::Base
   end
 
   def heroes_posts
+    # REVIEW: 
     sort_by_published_date(self.heroes.includes(:posts).map(&:posts))
   end
 
@@ -115,6 +122,9 @@ class User < ActiveRecord::Base
   end
 
   def user_followings_by_type
+    # REVIEW: Checkout Enumberable#group_by: http://ruby-doc.org/core-2.0/Enumerable.html#method-i-group_by
+    # self.followings.group_by{|following| following.followable_type}
+    #
     self.followings.inject({}) do |follow_hash, following|
       type = following.followable_type
       id = following.followable_id
@@ -123,7 +133,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  # REVIEW: It's preferable to put class methods together, at the top of file (after associations & validations)
   def self.create_with_omniauth(auth)
+    # Nice use of a block here for a complicated create
     new_user = create! do |user|
       provider = set_provider(auth)
       user.authorizations << provider.authorizations.create(uid: auth["uid"])

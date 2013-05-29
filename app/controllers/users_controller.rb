@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     authorize! :read, @user
   end
 
+  # Review: Remove these empty actions
   def edit
   end
 

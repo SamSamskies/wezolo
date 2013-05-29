@@ -22,6 +22,8 @@ class BloggerController < ApplicationController
 
   end
 
+  # Review: Since this is a helper method and not a controller action, move to the end of this file
+  # and make it a private method.
   def user_credentials
     @client = Google::APIClient.new
     @blogger = @client.discovered_api('blogger', 'v3')
@@ -32,6 +34,7 @@ class BloggerController < ApplicationController
     @auth = @client.authorization.dup
   end
 
+  # Review: Why all these non-standard routes? Any reason this can't be the #create action?
   def create_blog_and_posts
     #refactor this into helper see repetition in tumblr controller
     blog = Blog.create(params[:blog])
@@ -41,6 +44,8 @@ class BloggerController < ApplicationController
     current_user.blogs << blog
     #dont refactor
 
+    # Review: This action redirects, so I don't think there's any need for all of these variables
+    # to be @instance variables. Make them local instead.
     @blogId = blog.external_id
     @client = Google::APIClient.new
     @blogger = @client.discovered_api('blogger', 'v3')

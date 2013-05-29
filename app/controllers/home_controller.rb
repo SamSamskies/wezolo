@@ -14,6 +14,7 @@ class HomeController < ApplicationController
     end
   end
 
+  # Review: Remove this if it's cruft. Avoid commiting empty methods like this.
   def valid_query?
 
   end
