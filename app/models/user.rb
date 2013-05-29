@@ -47,11 +47,15 @@ class User < ActiveRecord::Base
   end
 
   def valid_status?
-    errors.add(:status, "is not valid!") unless STATUSES_HASH[status]
+    if status
+      errors.add(:status, "is not valid!") unless STATUSES_HASH[status]
+    end
   end
 
   def downcase_status
-    self.status = self.status.downcase
+    if status
+      self.status = self.status.downcase
+    end
   end
 
   def follow_sam
@@ -127,10 +131,10 @@ class User < ActiveRecord::Base
   def followed_posts(pagination = {})
     self.heroes_posts.paginate(:page => pagination[:page], :per_page => pagination[:per_page])
      # + self.countries_posts
-  end
+   end
 
-  def heroes_posts
-      Post.includes({:blog => :user}).joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
+   def heroes_posts
+    Post.includes({:blog => :user}).joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
   end
 
   # method being deprecated
