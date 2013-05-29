@@ -46,7 +46,7 @@ describe User do
       blogdude.blogs << blog
       blogdude.blogs.first.posts << post1
       blogdude.blogs.first.posts << post2
-      blogdude.countries << spain
+      create(:involvement, :country => spain, user: blogdude)
       spain.followers << sammyboy
       sammyboy.countries_posts.count.should eq 2
     end
@@ -63,7 +63,7 @@ describe User do
       blogdude.blogs.first.posts << post1
       blogdude.blogs.first.posts << post2
       blogdude.followers << sammyboy
-      blogdude.countries << spain
+      create(:involvement, :country => spain, user: blogdude)
       spain.followers << sammyboy
       sammyboy.followed_posts.count.should eq 2
     end
@@ -74,7 +74,7 @@ describe User do
       blogdude.blogs.first.posts << post2
       blogdude.blogs.first.posts << post3
       blogdude.followers << sammyboy
-      blogdude.countries << spain
+      create(:involvement, :country => spain, user: blogdude)
       spain.followers << sammyboy
       dates = sammyboy.followed_posts.map(&:published_at)
       dates[0].should > dates[1]
@@ -90,8 +90,10 @@ describe User do
       sammyboy.blogs << blog2
       sammyboy.blogs.first.posts << post3
 
-      blogdude.countries << spain
-      sammyboy.countries << spain
+      create(:involvement, :country => spain, user: blogdude)
+
+      create(:involvement, :country => spain, user: sammyboy)
+
       spain.followers << sammyboy
       sammyboy.followed_posts.count.should eq 3
     end
@@ -102,8 +104,8 @@ describe User do
       blogdude.blogs.first.posts << post2
       sammyboy.blogs << blog2
       sammyboy.blogs.first.posts << post3
-      blogdude.countries << spain
-      sammyboy.countries << spain
+      create(:involvement, :country => spain, user: blogdude)
+      create(:involvement, :country => spain, user: sammyboy)      
       spain.followers << sammyboy
       sammyboy.followed_posts.count.should_not eq 2
     end
