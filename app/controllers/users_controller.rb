@@ -34,6 +34,11 @@ class UsersController < ApplicationController
 
   def update_password
     current_user.change_password(params[:user])
+    if current_user.errors.any?
+      flash[:error] = current_user.errors.full_messages.join(", ")
+    else
+      flash[:notice] = "Password Change!"
+    end
     redirect_to edit_password_users_path
   end
 

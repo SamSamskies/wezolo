@@ -64,13 +64,10 @@ class User < ActiveRecord::Base
   end
 
   def change_password(user)
-    p user["password"]
-    p user["password_confirmation"]
     if self.authenticate(user[:current_password])
       self.update_attributes(:password => user["password"], :password_confirmation => user["password_confirmation"])
-      p "password changed"
-    else
-      p "change failed"
+    else 
+      self.errors.add(:What?, "Authentication of Current Password Failed")
     end
   end 
 
