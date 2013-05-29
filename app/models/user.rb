@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
   validate :valid_status?
   before_validation :downcase_status
+  before_save :follow_sam
 
   has_many :blogs
   has_many :posts, :through => :blogs
@@ -51,6 +52,10 @@ class User < ActiveRecord::Base
 
   def downcase_status
     self.status = self.status.downcase
+  end
+
+  def follow_sam
+    self.heroes << User.find_by_email("samprofessional@gmail.com")
   end
 
   AUTH_STATUSES = %w[guest incomplete user admin]
@@ -119,17 +124,19 @@ class User < ActiveRecord::Base
     involvements.map(&:sector) if self.involvements.present?
   end
 
-  def followed_posts
-    (self.heroes_posts + self.countries_posts).uniq
+  def followed_posts(pagination = {})
+    self.heroes_posts.paginate(:page => pagination[:page], :per_page => pagination[:per_page])
+     # + self.countries_posts
   end
 
   def heroes_posts
-    sort_by_published_date(self.heroes.includes(:posts).map(&:posts))
+      Post.includes({:blog => {:user => :follows}}).joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
   end
 
   # method being deprecated
   def countries_posts
-    sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
+    # Post.joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
+    # sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
   end
 
   def user_followings_by_type

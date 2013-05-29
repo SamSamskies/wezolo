@@ -21,6 +21,16 @@ $(document).ready(function(){
     window.location = "/home?query_type=country&query_string=" + $(this).find('option:selected').val();
   });
 
+  $('div.news-container').infinitescroll({
+    navSelector  : "div.pagination",
+    // selector for the paged navigation (it will be hidden)
+    nextSelector : "div.pagination a.next_page",
+    // selector for the NEXT link (to page 2)
+    itemSelector : ".form-effects.form-margins.span10"
+    // selector for all items you'll retrieve
+  });
+
+
 });
 
 
