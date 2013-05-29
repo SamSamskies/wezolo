@@ -1,7 +1,6 @@
 class MessagesController < ApplicationController
   def index
-    @messages = Message.includes(:user).all
-    @incomings = Incoming.all
+    @incomings = Incoming.includes(:responses, :user).all
   end
 
   def create

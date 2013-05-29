@@ -130,7 +130,7 @@ class User < ActiveRecord::Base
   end
 
   def heroes_posts
-      Post.includes({:blog => {:user => :follows}}).joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
+      Post.includes({:blog => :user}).joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
   end
 
   # method being deprecated

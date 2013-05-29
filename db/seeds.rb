@@ -5,10 +5,19 @@ Profile.delete_all
 Involvement.delete_all
 BlogHost.delete_all
 Blog.delete_all
+Post.delete_all
+Message.delete_all
 
 CSV.foreach("./db/countries.csv") do |row|
   Country.create(name: row.first)
 end
+
+AuthProvider.create(name: "google_oauth2")
+AuthProvider.create(name: "tumblr")
+blogger = BlogHost.create(name: 'blogger')
+tumblr = BlogHost.create(name: 'tumblr')
+
+
 countries = Country.all
 test_user = FactoryGirl.create(:sam)
 FactoryGirl.create(:profile, user: test_user)
@@ -24,8 +33,7 @@ User.all.each do |u|
   FactoryGirl.create(:profile, user: u)
 end
 
-blogger = BlogHost.create(name: 'blogger')
-tumblr = BlogHost.create(name: 'tumblr')
+
 blogger = BlogHost.first
 user_ids = User.pluck(:id)
 300.times do
@@ -39,6 +47,3 @@ user_ids = User.pluck(:id)
                       published_at: (1..365).to_a.sample.days.ago)
   end
 end
-
-AuthProvider.create(name: "google_oauth2")
-AuthProvider.create(name: "tumblr")
