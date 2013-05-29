@@ -4,16 +4,19 @@
 
 .question-container {
   p {
-    margin-bottom: 0;
+    margin: 0;
+    line-height: 1.2em;
   }
-  textarea {
-    width: 350px;
-  }
+  // textarea {
+  //   width: 300px;
+  // }
 }
 
 .response-container {
   background-color: #E8FFFF;
   padding: 10px 10px 50px 10px;
   border-radius: 10px;
+  width: 100%;
+  margin: 20px 0 0 0;
 }
 
