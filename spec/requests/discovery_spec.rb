@@ -19,6 +19,5 @@ describe "Discovery" do
       page.should have_css('div.user-box.form-effects', :text => 'justin bieber')
     end
   end
-
 end
 

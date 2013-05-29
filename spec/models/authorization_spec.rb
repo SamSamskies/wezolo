@@ -15,5 +15,4 @@ describe Authorization do
   it "has one auth provider" do
     fb_login_auth.auth_provider.should eq facebook
   end
-
 end

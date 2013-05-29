@@ -106,7 +106,6 @@ class User < ActiveRecord::Base
   def countries_posts
     sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
   end
-   # 
 
   def user_followings_by_type
     self.followings.inject({}) do |follow_hash, following|

@@ -7,21 +7,21 @@ FactoryGirl.define do
     status ['PCV', 'RPCV', 'Interested'].sample
   end
 
- factory :sam, :parent => :user do
+  factory :sam, :parent => :user do
     email "sam@gmail.com"
     password "password"
     name "Sam Samskies"
-    status "RPCV" 
- end
+    status "RPCV"
+  end
 
   factory :fab, :parent => :user do
     email "fab@gmail.com"
     password "password"
     name "Fab Mackojc"
-    status "Interested" 
- end
+    status "Interested"
+  end
 
- factory :rpcv, :parent => :user do
+  factory :rpcv, :parent => :user do
     status "RPCV"
   end
 
@@ -35,5 +35,4 @@ FactoryGirl.define do
     photo_url "http://agarwal.seas.upenn.edu/wp-content/uploads/2011/01/person_default_208x208-1.png"
     user
   end
-
 end

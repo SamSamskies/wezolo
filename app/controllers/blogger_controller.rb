@@ -13,7 +13,7 @@ class BloggerController < ApplicationController
     session[:refresh_token] = @auth.refresh_token
     session[:expires_in] = @auth.expires_in
     session[:issued_at] = @auth.issued_at
-    provider = AuthProvider.find_or_create_by_name("blogger") # could write params["auth_provider"]
+    provider = AuthProvider.find_or_create_by_name("blogger")
     current_user.authorizations << provider.authorizations.create(:token => @auth.access_token, :secret => @auth.refresh_token)
     response = @client.execute(:api_method => @blogger.blogs.list_by_user,
       :parameters => {"userId" => 'self'},
@@ -59,7 +59,7 @@ class BloggerController < ApplicationController
       :authorization => @auth)
 
     @posts = response.data.items
-    @posts.each do |post| 
+    @posts.each do |post|
       blog.posts.create(:title => post["title"], :body => post["content"], :published_at => post["published"])
     end
     redirect_to user_path(current_user)
@@ -68,5 +68,5 @@ class BloggerController < ApplicationController
   def disconnect
     disconnect_blog("blogger")
   end
-  
+
 end
