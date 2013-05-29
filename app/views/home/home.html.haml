@@ -33,3 +33,5 @@
               %h3= post.title
               %p.published-date= post_date(post.published_at) 
               %p= post.body.html_safe
+    <%= will_paginate @newsfeed %>
+

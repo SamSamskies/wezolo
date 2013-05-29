@@ -112,16 +112,18 @@ class User < ActiveRecord::Base
   end
 
   def followed_posts
-    (self.heroes_posts + self.countries_posts).uniq
+    self.heroes_posts
+     # + self.countries_posts
   end
 
   def heroes_posts
-    sort_by_published_date(self.heroes.includes(:posts).map(&:posts))
+    Post.joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
   end
 
   # method being deprecated
   def countries_posts
-    sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
+    # Post.joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
+    # sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
   end
 
   def user_followings_by_type
