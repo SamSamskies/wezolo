@@ -39,4 +39,7 @@ class ApplicationController < ActionController::Base
     date.strftime("%Y") if date
   end
 
+  def set_provider(auth)
+    AuthProvider.find_by_name(auth["provider"])
+  end
 end
