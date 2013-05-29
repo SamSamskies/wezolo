@@ -1,3 +1,22 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.question-container {
+  p {
+    margin: 0;
+    line-height: 1.2em;
+  }
+  // textarea {
+  //   width: 300px;
+  // }
+}
+
+.response-container {
+  background-color: #E8FFFF;
+  padding: 10px 10px 50px 10px;
+  border-radius: 10px;
+  width: 100%;
+  margin: 20px 0 0 0;
+}
+

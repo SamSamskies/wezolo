@@ -15,16 +15,15 @@ class Post < ActiveRecord::Base
   end
 
   def self.by_sector(filter_choice)
-    self.joins(:blog => {:user => :involvements}).where("involvements.sector" => filter_choice)
+    self.includes({:blog => {:user => [:profile, :involvements]}}).where("involvements.sector" => filter_choice)
   end
 
   def self.by_country(filter_choice)
-    p "coontry"
-    self.joins(:blog => {:user => :involvements}).where("involvements.country_id" => filter_choice)
+    self.includes({:blog => {:user => [:profile, :involvements]}}).where("involvements.country_id" => filter_choice)
   end
 
   def self.by_status(filter_choice)
-    self.joins(:blog => :user).where("users.status" => filter_choice)
+    self.includes({:blog => {:user => :profile}}).where("users.status" => filter_choice)
   end
 
 end

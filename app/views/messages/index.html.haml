@@ -1,16 +1,36 @@
 .content
   .container
-    %h1 Messages#index
+    %h2 Text Questions to 720-259-WEZO
     - @incomings.each do |incoming|
-      %p Question:
-      %p= incoming.user.name
-      %p= incoming.message
-      %p Answers:
-      - incoming.responses.each do |response|
-        %p= response.message
-      =form_tag(messages_path, :method => :post) do
-        =hidden_field_tag("incoming_user_id", incoming.user.id)
-        =hidden_field_tag("response_user_id", current_user.id)
-        =hidden_field_tag("incoming_id", incoming.id)
-        =text_area_tag("message")
-        =submit_tag("send")
+      .form-effects.form-margins.span10.offset1
+        .container-fluid.question-container
+          .row-fluid
+            .span1.offset1
+              - user = incoming.user
+              .thumbnail
+                = link_to((image_tag avatar_url(user), :title => user.name), user)
+            .span8
+              %p= link_to (user.name), user
+              %p= incoming.message
+              .response-container.pull-left
+                - incoming.responses.each do |response_obj|
+                  - user = response_obj.user
+                  / = link_to((image_tag avatar_url(user, 25), :title => user.name, :class => "img-polaroid"), user) 
+                  .container-fluid
+                    .row-fluid
+                      .span2
+                        - user = incoming.user
+                        .thumbnail
+                          = link_to((image_tag avatar_url(user), :title => user.name), user)
+                      .span10
+                        %p= link_to (user.name), user
+                        %p= response_obj.message
+                  %hr
+                .span10
+                  =form_tag(messages_path, :method => :post) do
+                    =hidden_field_tag("incoming_user_id", incoming.user.id)
+                    =hidden_field_tag("response_user_id", current_user.id)
+                    =hidden_field_tag("incoming_id", incoming.id)
+                    =text_area_tag("message")
+                    .span1.pull-right
+                      =submit_tag(("send"), :class => "btn btn-primary")
