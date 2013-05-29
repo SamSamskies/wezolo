@@ -1,4 +1,28 @@
+.sidebar-nav-fixed {
+    padding: 9px 0;
+    // position:fixed;
+    left:20px;
+    top:60px;
+    width:100%;
+    p{
+      margin:0;
+      // text-decoration:underline;
+      font-size: 14px;
+    }
+    ul {
+      display: inline-block;
+      vertical-align:top;
+    }
+    li a{
+      font-size: 12px;
+      padding: 0;
+      margin: 0;
+    }
+}
 
+.row-fluid > .span-fixed-sidebar {
+    margin-left: 290px;
+}
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
@@ -22,11 +46,48 @@ body {
   margin-top: 50px;
 }
 
+.bottom-spacer {
+  margin-bottom: 20px;
+}
+
+.post-container {
+  margin-left: 70px;
+}
+
+.published-date {
+  font-size: 14px;
+  font-weight:bold;
+}
+
+.vertical-align {
+  line-height: 70px;
+}
+
+.landing-container {
+  height: 800px;
+      /* This image will be displayed fullscreen */
+    background:url('main1.JPG') no-repeat center center;
+
+    /* Ensure the html element always takes up the full height of the browser window */
+    min-height:100%;
+
+    /* The Magic */
+    background-size:cover;
+}
+
+.error-notice {
+  color: red;
+  position: fixed;
+  top: 70px;
+  left: 30px;
+  font-size: 35px;
+}
+
 /* hack to stop flat ui icons from appear multiple times */
 .fui-icons-h *{
   display: none;
 }
-/* end */ 
+/* end */
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
@@ -67,7 +128,7 @@ body {
 }
 
 .navbar .nav > li.search {
-  margin-top: 8px;
+  margin-top: 4px;
     form {
     margin-bottom: 0px;
   }

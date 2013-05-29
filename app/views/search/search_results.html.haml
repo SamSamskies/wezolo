@@ -1,8 +1,6 @@
 .content
-  %h1 Search Results
-  %ul 
-  - @results.each do |result|
-    %li= result.name
-    %ul
-      - result.users.each do |user|
-        %li=user.username
+  .container
+    %h1 Search Results
+    .row
+      - @results.each do |user|
+        = render_user_box(user)

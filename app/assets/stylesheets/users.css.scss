@@ -4,8 +4,51 @@
 
 
 .form-margins {
-  margin-top: 40px;
+  margin-top: 30px;
   padding-top: 20px;
+  padding-left: 20px;
   padding-bottom: 20px;
   border-radius: 10px;
+}
+
+.user-box {
+  margin-top: 20px;
+  width: 410px;
+  height: 300px;
+  padding: 20px;
+  img {
+    height: 100px;
+  }
+  .btn a{
+    color: white;
+  }
+}
+
+.img-container {
+  margin-left: 60px;
+}
+
+.info-section h4 {
+  margin-bottom: 0;
+  margin-top: 0;
+  line-height: 1em;
+}
+
+.involvement-list {
+  margin-left: 35px;
+  margin-right: 35px;
+  width: 90%;
+  p {
+    font-size: 1em;
+    margin: 0;
+    line-height: 1.5em;  
+  }
+}
+
+.involvement {
+  margin-top: 10px;
+}
+
+.btn-small a {
+  color: white;
 }

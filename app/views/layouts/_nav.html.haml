@@ -19,13 +19,19 @@
                 %li
                   =link_to "Profile", user_path(current_user)
                 %li
-                  =link_to "Discover", search_index_path
+                  =link_to "What's Going On?", home_path
+                %li
+                  =link_to "Volunteer Questions", messages_path
+                %li
+                  =link_to "Find Volunteers", search_index_path
                 %li.divider
+                %li
+                  =link_to "Settings", edit_password_users_path
                 %li
                   =link_to "Log out", logout_path, :method => "delete"
             %li.search.pull-right
               =form_tag search_results_path, :method => :get, :class => "form-search" do
                 .input-append
-                  =text_field_tag "search", nil,:class => "search-query-8 span2 small search-query search-query-rounded", :placeholder => "Search Countries"
+                  =text_field_tag "search", nil,:class => "search-query-8 span3 search-query", :placeholder => "Search Volunteers"
                   %button.btn.btn-small{:type => "submit"}
                     %span.fui-search.fui-icons-h

@@ -60,9 +60,16 @@ module Wezolo
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    #searchbox elastic search
-    Tire.configure do
-        url ENV['ELASTICSEARCH_URL']
+    # not to bootstrap application for heroku deployment ; refactor 
+    config.assets.initialize_on_precompile = false
+
+    # searchbox elastic search
+    # Tire.configure do
+    #     url ENV['ELASTICSEARCH_URL']
+    # end
+    Tumblr.configure do |config|
+      config.consumer_key = ENV["TUMBLR_KEY"]
+      config.consumer_secret = ENV["TUMBLR_SECRET"]
     end
-end
+  end
 end

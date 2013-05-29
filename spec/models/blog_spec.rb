@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Blog do
 
   let!(:fanguy) { create(:user, :name => "fanguy") }
-  
+
   let!(:blogger) { create(:blog_host) }
 
   let!(:blog) { create(:blog) }
@@ -27,11 +27,10 @@ describe Blog do
   end
 
   it "can have multiple blog posts" do
-    blog.posts << post1 
+    blog.posts << post1
     blog.posts << post2
     blog.posts << post3
     blog.posts.count.should eq 3
     blog.posts.should eq [post3, post2, post1]
   end
-
 end

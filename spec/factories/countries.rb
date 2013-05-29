@@ -1,5 +1,3 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :country do
     name Faker::Address.city
@@ -8,4 +6,5 @@ FactoryGirl.define do
   factory :USA do
     name "USA"
   end
+
 end

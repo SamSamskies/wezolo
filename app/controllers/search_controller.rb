@@ -1,10 +1,10 @@
 class SearchController < ApplicationController
   def index
-    @users = User.includes(:countries).all
+    @users = User.includes({:involvements => :country}, :profile).all
   end
 
 #figure out how to search by all indices
   def search_results
-    @results = Country.search(params[:search], :load => true)
+    @results = User.search(params[:search])
   end
 end

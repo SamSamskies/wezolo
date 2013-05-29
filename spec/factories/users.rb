@@ -3,22 +3,30 @@ FactoryGirl.define do
     sequence(:email) {|n| "email-#{n}-#{Time.now.to_i}@example.com"  }
     password "password"
     name Faker::Name.name
-    status ['PCV', 'RPCV', 'Interested'].sample
+    phone_number "+11234567890"
+    status ['pcv', 'rpcv', 'interested', "ipcv"].sample
   end
 
- factory :test, :parent => :user do
-    email "sam@boss.com"
+  factory :sam, :parent => :user do
+    email "sam@gmail.com"
     password "password"
     name "Sam Samskies"
-    status "RPCV" 
- end
-
- factory :rpcv, :parent => :user do
     status "RPCV"
   end
 
+  factory :fab, :parent => :user do
+    email "fab@gmail.com"
+    password "password"
+    name "Fab Mackojc"
+    status "interested"
+  end
+
+  factory :rpcv, :parent => :user do
+    status "rpcv"
+  end
+
   factory :pcv, :parent => :user do
-    status "PCV"
+    status "pcv"
   end
 
   factory :profile do
@@ -27,5 +35,4 @@ FactoryGirl.define do
     photo_url "http://agarwal.seas.upenn.edu/wp-content/uploads/2011/01/person_default_208x208-1.png"
     user
   end
-
 end

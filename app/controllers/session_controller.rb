@@ -13,19 +13,27 @@ class SessionController < ApplicationController
     redirect_to root_url
   end
 
-  def omniauth_failure # need to add this to routes.rb?
+  def omniauth_failure
     flash[:notice] = "Y u no authorize?"
     redirect_to root_path
   end
 
   private
 
-  def auth
-    request.env["omniauth.auth"]
+  def external_provider_login?
+    return true if params[:auth_provider]
   end
 
-  def external_provider_login?
-    defined?(params[:auth_provider])
+  def find_user_by_uid
+    Authorization.find_by_uid(auth["uid"]).user
+  end
+
+  def create_user_by_uid
+    User.create_with_omniauth(auth)
+  end
+
+  def find_or_create_user_by_uid
+    @user = find_user_by_uid || create_user_by_uid
   end
 
   def authenticate_user_by_external_provider
@@ -41,7 +49,8 @@ class SessionController < ApplicationController
   def authenticate_user_by_email
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      login(user)
+      set_session(user)
+      render :json => {:redirect => "/home"}
     else
       @error = "Oh Snap! User Login or Password Incorrect!"
       render :json => {:error => @error}, :status => :unprocessable_entity
