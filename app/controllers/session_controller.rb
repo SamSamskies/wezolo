@@ -13,7 +13,7 @@ class SessionController < ApplicationController
     redirect_to root_url
   end
 
-  def omniauth_failure # need to add this to routes.rb?
+  def omniauth_failure
     flash[:notice] = "Y u no authorize?"
     redirect_to root_path
   end

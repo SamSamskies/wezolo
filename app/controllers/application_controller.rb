@@ -39,10 +39,6 @@ class ApplicationController < ActionController::Base
     date.strftime("%Y") if date
   end
 
-  def set_provider(auth)
-    AuthProvider.find_by_name(auth["provider"])
-  end
-
   def post_date(time)
     time.strftime("Posted on %m/%d/%Y at %I:%M%p")
   end

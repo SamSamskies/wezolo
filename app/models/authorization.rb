@@ -1,4 +1,5 @@
 class Authorization < ActiveRecord::Base
+  extend ExternalAuth
   belongs_to :user
   belongs_to :auth_provider
   attr_accessible :uid, :token, :secret

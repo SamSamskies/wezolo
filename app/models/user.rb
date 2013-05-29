@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
-  
-  STATUSES_HASH = {"interested" => "Interested in Peace Corps","ipcv" => "Invited Peace Corps Volunteer","pcv" => "Current Peace Corps Volunteer","rpcv" => "Returned Peace Corps Volunteer"}
-
+  extend ExternalAuth
   include Tire::Model::Search
   include Tire::Model::Callbacks
   index_name "#{Tire::Model::Search.index_prefix}users"
+
+  STATUSES_HASH = {"interested" => "Interested in Peace Corps","ipcv" => "Invited Peace Corps Volunteer","pcv" => "Current Peace Corps Volunteer","rpcv" => "Returned Peace Corps Volunteer"}
 
   has_secure_password
 
@@ -142,6 +142,7 @@ class User < ActiveRecord::Base
       user.password = SecureRandom.hex(10)
     end
     new_user.create_profile(photo_url: auth["info"]["image"])
+    new_user
   end
 
   def initialize_auth_status

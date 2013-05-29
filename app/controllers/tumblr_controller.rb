@@ -1,6 +1,4 @@
 class TumblrController < ApplicationController
-  #helpful references
-  #http://behindtechlines.com/2011/08/using-the-tumblr-api-v2-on-rails-with-omniauth/
   def connect
     Tumblr.configure do |config|
       config.oauth_token = auth["credentials"]["token"]
@@ -8,7 +6,7 @@ class TumblrController < ApplicationController
     end
     client = Tumblr::Client.new
     @blogs = client.info["user"]["blogs"]
-    provider = AuthProvider.find_or_create_by_name("tumblr") 
+    provider = AuthProvider.find_or_create_by_name("tumblr")
     current_user.authorizations << provider.authorizations.create(:token => auth["credentials"]["token"], :secret => auth["credentials"]["secret"])
   end
 
@@ -30,7 +28,7 @@ class TumblrController < ApplicationController
 
     client = Tumblr::Client.new
     @posts = client.posts(blog.url.gsub("http://", ""))["posts"]
-    @posts.each do |post| 
+    @posts.each do |post|
       if post["type"] == "text"
         blog.posts.create(:title => post["title"], :body => post["body"], :published_at => post["date"])
       elsif post["type"] == "photo"
