@@ -106,17 +106,18 @@ class User < ActiveRecord::Base
 
   # associations
   def followed_posts
-    self.heroes_posts
+    (self.heroes_posts + self.countries_posts).uniq
   end
 
   def heroes_posts
     sort_by_published_date(self.heroes.includes(:posts).map(&:posts))
   end
 
-  # def countries_posts(query_string)
-  #   sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
-   # + self.countries_posts(query_string)
-  # end
+  # method being deprecated
+  def countries_posts
+    sort_by_published_date(self.following_countries.includes(:posts).map(&:posts))
+  end
+   # 
 
 
   
