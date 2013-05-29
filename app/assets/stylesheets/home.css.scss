@@ -1,4 +1,28 @@
+.sidebar-nav-fixed {
+    padding: 9px 0;
+    // position:fixed;
+    left:20px;
+    top:60px;
+    width:100%;
+    p{
+      margin:0;
+      // text-decoration:underline;
+      font-size: 14px;
+    }
+    ul {
+      display: inline-block;
+      vertical-align:top;
+    }
+    li a{
+      font-size: 12px;
+      padding: 0;
+      margin: 0;
+    }
+}
 
+.row-fluid > .span-fixed-sidebar {
+    margin-left: 290px;
+}
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
