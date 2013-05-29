@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 # Country.delete_all
 # User.delete_all
 # Profile.delete_all
