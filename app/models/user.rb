@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  extend ExternalAuth
   include Tire::Model::Search
   include Tire::Model::Callbacks
   index_name "#{Tire::Model::Search.index_prefix}users"
@@ -125,6 +126,7 @@ class User < ActiveRecord::Base
       user.password = SecureRandom.hex(10)
     end
     new_user.create_profile(photo_url: auth["info"]["image"])
+    new_user
   end
 
   def initialize_auth_status
