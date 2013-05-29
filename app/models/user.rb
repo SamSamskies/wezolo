@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
 
   validates :email, :uniqueness => true
   validate :valid_status?
-  
+  before_validation :downcase_status
+
   has_many :blogs
   has_many :posts, :through => :blogs
 
@@ -46,6 +47,10 @@ class User < ActiveRecord::Base
 
   def valid_status?
     errors.add(:status, "is not valid!") unless STATUSES_HASH[status]
+  end
+
+  def downcase_status
+    self.status = self.status.downcase
   end
 
   AUTH_STATUSES = %w[guest incomplete user admin]

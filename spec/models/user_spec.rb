@@ -160,7 +160,13 @@ describe User do
       User.index.refresh
       User.search("justin bieber")[0].should eq(justin)
     end
-
+    context "validations" do
+      it "should downcase statuses before validation" do
+        u = build(:user, status: "INTERESTED")
+        u.should be_valid
+        u.status.should eq("interested")
+      end
+    end
   end
 
 end
