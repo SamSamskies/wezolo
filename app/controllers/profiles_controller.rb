@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
 
   def update
     profile = Profile.find(params[:id])
-    format_phone_number
+    format_phone_number unless params[:profile][:user_attributes][:phone_number] == ""
     profile.update_attributes(params[:profile])
     redirect_to user_path(profile.user)
   end
