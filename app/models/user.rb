@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
   validate :valid_status?
   before_validation :downcase_status
-  after_create :follow_sam
 
   has_many :blogs
   has_many :posts, :through => :blogs
@@ -40,6 +39,7 @@ class User < ActiveRecord::Base
   has_many :incomings
   has_many :responses
 
+  after_create :follow_sam
   after_create :initialize_auth_status
 
   def self.statuses_hash
@@ -60,7 +60,13 @@ class User < ActiveRecord::Base
 
   def follow_sam
     if sam = User.find_by_email("samprofessional@gmail.com")
+      p sam
+      p self
+      p self.heroes
+      p self.followings
       self.heroes << sam
+      p self.heroes
+      p self.followings
     end
   end
 
@@ -162,7 +168,12 @@ class User < ActiveRecord::Base
       user.email = auth["info"]["email"]
       user.password = SecureRandom.hex(10)
     end
+    p "after create"
+    p new_user
+    p new_user.followings
     new_user.create_profile(photo_url: auth["info"]["image"])
+    p "after creating profile"
+    p new_user.followings
     new_user
   end
 
