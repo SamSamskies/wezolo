@@ -1,5 +1,8 @@
+
+
+
 .sidebar-nav-fixed {
-    padding: 9px 0;
+  padding: 9px 0;
     // position:fixed;
     left:20px;
     top:60px;
@@ -18,11 +21,11 @@
       padding: 0;
       margin: 0;
     }
-}
+  }
 
-.row-fluid > .span-fixed-sidebar {
+  .row-fluid > .span-fixed-sidebar {
     margin-left: 290px;
-}
+  }
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
@@ -66,22 +69,22 @@ body {
 .landing-container {
   height: 800px;
       /* This image will be displayed fullscreen */
-    background:url('main1.JPG') no-repeat center center;
+      background:url('main1.JPG') no-repeat center center;
 
     /* Ensure the html element always takes up the full height of the browser window */
     min-height:100%;
 
     /* The Magic */
     background-size:cover;
-}
+  }
 
-.error-notice {
-  color: red;
-  position: fixed;
-  top: 70px;
-  left: 30px;
-  font-size: 35px;
-}
+  .error-notice {
+    color: red;
+    position: fixed;
+    top: 70px;
+    left: 30px;
+    font-size: 35px;
+  }
 
 /* hack to stop flat ui icons from appear multiple times */
 .fui-icons-h *{
@@ -129,7 +132,7 @@ body {
 
 .navbar .nav > li.search {
   margin-top: 4px;
-    form {
+  form {
     margin-bottom: 0px;
   }
 }
@@ -351,3 +354,89 @@ body {
   box-shadow: 3px 10px 6px -6px #777;
 }
 /* form-effects */
+
+.team-box{
+  // background-color: rgba(242, 242, 242,0.5);
+  border-radius: 10px;
+  margin:0px auto;
+  p {
+    color:black;
+  }
+}
+
+
+.about-container {
+  position:relative;
+  height: 600px;
+  background:url('wezoloteam.png');
+  min-height:100%;
+  background-size:cover;
+  vertical-align: text-bottom;
+  h1{
+    line-height: .8em;
+    text-align: center;
+    color: rgb(239, 239, 239);
+    -webkit-text-fill-color: white;
+    color: white;
+    font-weight: 900px;
+    font-size: 100px;
+    margin:0;
+    position: absolute;
+    bottom: 0; 
+  }
+}
+.team-box {
+  position: absolute;
+  bottom: 0; 
+  width:100%;
+   .member-profile{
+    opacity:0.0;
+      .team-member{
+      float:left;
+      height:100%;
+      width:25%;
+      position: relative;
+      }
+      .team-member:hover{
+      float:left;
+      height:100%;
+      width:25%;
+      -webkit-filter: blur(2px);
+     }
+    }
+    .member-profile:hover{
+    opacity:1;
+      .team-member{
+      float:left;
+      height:100%;
+      width:25%;
+      position: relative;
+      }
+      .team-member:hover{
+      float:left;
+      height:100%;
+      width:25%;
+      -webkit-filter: blur(0px);
+     }
+    }
+  }
+
+.story{
+  margin-top:0px;
+  h1{
+    position: relative;
+    z-index: 9999;
+  }
+  h2{
+    line-height: 1em;
+  }
+}
+.profile-modal{
+  width:800px;
+  margin-left:-400px;
+  .team-member{
+      float:left;
+      width:25%;
+      position: relative;
+      }
+}
