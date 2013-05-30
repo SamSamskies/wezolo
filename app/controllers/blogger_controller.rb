@@ -27,7 +27,8 @@ class BloggerController < ApplicationController
     @blogger = @client.discovered_api('blogger', 'v3')
     @client.authorization.client_id = ENV["BLOGGER_CLIENT_ID"]
     @client.authorization.client_secret = ENV["BLOGGER_CLIENT_SECRET"]
-    @client.authorization.redirect_uri = 'http://localhost:3000/auth/blogger/callback'
+    puts "#{root_url}auth/blogger/callback"
+    @client.authorization.redirect_uri = "#{root_url}auth/blogger/callback"
     @client.authorization.scope = 'https://www.googleapis.com/auth/blogger.readonly'
     @auth = @client.authorization.dup
   end
@@ -48,7 +49,7 @@ class BloggerController < ApplicationController
     # Initialize OAuth 2.0 @client
     @client.authorization.client_id = ENV["BLOGGER_CLIENT_ID"]
     @client.authorization.client_secret = ENV["BLOGGER_CLIENT_SECRET"]
-    @client.authorization.redirect_uri = 'http://localhost:3000/auth/blogger/callback'
+    @client.authorization.redirect_uri = "#{root_url}auth/blogger/callback"
     @client.authorization.scope = 'https://www.googleapis.com/auth/blogger.readonly'
     @auth = @client.authorization.dup
 
