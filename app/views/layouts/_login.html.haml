@@ -3,12 +3,5 @@
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3#myModalLabel Wezolo Login
   .modal-body
-    %a{:href => '/auth/google_oauth2'}
-      %img#google-login-button{:src => 'https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png'}
-    %h4.top-spacer Or fill out the following:
-    =form_tag login_path, :method => :post, :remote => true do
-      = email_field_tag :email, nil, {:required => true, :placeholder => "Email"}
-      = password_field_tag :password, nil, {:required => true, :placeholder => "Password"}
-      = submit_tag "Sign in", :class => "btn btn-primary loginmein"
-    / %button.btn.btn-primary Log in
+    About: Sam Samskies
   .alert.alert-error.login-error

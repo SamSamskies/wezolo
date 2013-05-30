@@ -11,6 +11,8 @@
             - unless current_user
               =link_to "Log in", "#loginModal", {"data-toggle" => "modal"}
           - if current_user
+            %li
+            =link_to "About", about_path
             %li.dropdown.pull-right
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 =current_user.email
