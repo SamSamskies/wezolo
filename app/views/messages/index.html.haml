@@ -1,5 +1,5 @@
 .content
-  .container
+  .container.message
     %h2 Text Questions to 720-259-WEZO
     - if @incomings 
       - @incomings.each do |incoming|
@@ -30,6 +30,7 @@
                       =hidden_field_tag("incoming_user_id", incoming.user.id)
                       =hidden_field_tag("response_user_id", current_user.id)
                       =hidden_field_tag("incoming_id", incoming.id)
-                      =text_area_tag("message", nil, :maxlength => 140, :placeholder => "Responses are limited to 140 characters.")
+                      =text_area_tag("message"+incoming.id.to_s, nil, :maxlength => 140, :placeholder => "Responses are limited to 140 characters.", :class=> "message")
+                      =#label_tag("message"+incoming.id.to_s, "140 Characters", :class=> "message-word-count")
                       .span1.pull-right
                         =submit_tag(("Reply"), :class => "btn btn-primary")
