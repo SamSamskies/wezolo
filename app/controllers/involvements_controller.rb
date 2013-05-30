@@ -19,8 +19,9 @@ class InvolvementsController < ApplicationController
   end
   
   def update
-    @involvement = current_user.involvements.build(params[:involvement])
-    if @involvement.save
+    @involvement = Involvement.find params[:id]
+    
+    if @involvement.update_attributes params[:involvement]
       redirect_to(user_path(current_user), :notice => 'Involvement was successfully editted.')
     else
       render :action => "new", :error => @involvement.errors.full_messages.join(", ")

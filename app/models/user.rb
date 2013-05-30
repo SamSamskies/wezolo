@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
   validate :valid_status?
   before_validation :downcase_status
-  before_save :follow_sam
+  after_create :follow_sam
 
   has_many :blogs
   has_many :posts, :through => :blogs
