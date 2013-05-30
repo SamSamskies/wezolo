@@ -13,12 +13,12 @@ class User < ActiveRecord::Base
   has_many :involvements
   has_many :countries, :through => :involvements
 
-  accepts_nested_attributes_for :countries
+  accepts_nested_attributes_for :countries, :involvements
 
   validates :email, :uniqueness => true
   validate :valid_status?
   before_validation :downcase_status
-  before_save :follow_sam
+  after_create :follow_sam
 
   has_many :blogs
   has_many :posts, :through => :blogs
@@ -47,15 +47,19 @@ class User < ActiveRecord::Base
   end
 
   def valid_status?
-    errors.add(:status, "is not valid!") unless STATUSES_HASH[status]
+    if status
+      errors.add(:status, "is not valid!") unless STATUSES_HASH[status]
+    end
   end
 
   def downcase_status
-    self.status = self.status.downcase
+    if status
+      self.status = self.status.downcase
+    end
   end
 
   def follow_sam
-    self.heroes << User.find_by_email("samprofessional@gmail.com")
+    self.heroes << User.find_by_email("samprofessional@gmail.com") if User.find_by_email("samprofessional@gmail.com")
   end
 
   AUTH_STATUSES = %w[guest incomplete user admin]
@@ -94,7 +98,7 @@ class User < ActiveRecord::Base
   end 
 
   def self.search(search_query)
-    tire.search(:load => true) do
+    tire.search(:load => { :include => [:profile, :follows, {:involvements => :country}]}) do
       size 100
       query { string search_query, default_operator: "AND" } if search_query.present?
     end
@@ -127,10 +131,10 @@ class User < ActiveRecord::Base
   def followed_posts(pagination = {})
     self.heroes_posts.paginate(:page => pagination[:page], :per_page => pagination[:per_page])
      # + self.countries_posts
-  end
+   end
 
-  def heroes_posts
-      Post.includes({:blog => {:user => :follows}}).joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
+   def heroes_posts
+    Post.includes({:blog => :user}).joins({:blog => {:user => :follows}}).where("follows.follower_id" => self.id).order("published_at DESC")
   end
 
   # method being deprecated
@@ -161,7 +165,7 @@ class User < ActiveRecord::Base
   end
 
   def initialize_auth_status
-    self.update_attributes(:auth_status => "user") if self.status == ["interested"]
+    self.update_attributes(:auth_status => "user") if self.status == "interested"
   end
 
   private

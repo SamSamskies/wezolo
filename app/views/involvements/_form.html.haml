@@ -2,12 +2,14 @@
   = f.label :country_id
   = f.collection_select :country_id, Country.all, :id, :name, {:prompt => true}, {:required => true}
   = f.label :description
-  = f.text_area :description, :rows => 10, :required => true
+  = f.text_area :description, :rows => 5, :required => true
   = f.label :sector
   = f.select :sector, Involvement.sectors.map(&:titleize), {:prompt => true}, {:required => true}
   = f.label :start_date
-  / = f.text_field :start_date, {:class => "datepicker", :required => true}
   = f.select :start_date, peace_corps_years_options, {:prompt => true}, {:required => true}
   = f.label :end_date
   = f.select :end_date, peace_corps_years_options, {:prompt => true}, {:required => true}
+
+  = render :partial => "layouts/error"
+
   #submit_button= f.submit "Confirm", :class => "btn btn-primary"

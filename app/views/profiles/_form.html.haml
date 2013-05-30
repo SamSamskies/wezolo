@@ -1,9 +1,9 @@
 .basic-info-edit
   = form_for profile do |f|
     = f.fields_for :user do |u_f|
-      = f.label :status
-      = u_f.text_field :status
-      = f.label :phone_number
+      = u_f.label :status
+      = u_f.select :status, User.statuses_hash.map { |k,v| [v,k] }, {:prompt => true}, {:required => true}
+      = f.label :phone_number, "Phone Number (include country code)"
       = u_f.text_field :phone_number
     = f.label :location
     = f.text_field :location

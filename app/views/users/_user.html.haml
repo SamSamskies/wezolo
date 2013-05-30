@@ -11,4 +11,4 @@
       %h6 Service Details:
       - user.involvements.each do |inv|
         .involvement
-        %p= "#{inv.country.name}, #{inv.sector}, #{date_to_year(inv.start_date)} - #{date_to_year(inv.end_date)}"
+        %p= "#{inv.country.name}, #{inv.sector.titleize}, #{date_to_year(inv.start_date)} - #{date_to_year(inv.end_date)}"

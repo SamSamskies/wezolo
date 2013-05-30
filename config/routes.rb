@@ -7,8 +7,8 @@ Wezolo::Application.routes.draw do
   resource :follows, :only => [:create, :destroy]
   resources :users do
     collection do
-     put "update_password" 
-     get "edit_password"
+      put "update_password" 
+      get "edit_password"
     end
   end 
 

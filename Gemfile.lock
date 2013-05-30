@@ -58,6 +58,9 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     columnize (0.3.6)
+    countries (0.9.2)
+      currencies (>= 0.4.0)
+    currencies (0.4.1)
     daemons (1.1.9)
     database_cleaner (1.0.1)
     debugger (1.6.0)
@@ -142,6 +145,7 @@ GEM
     mime-types (1.23)
     multi_json (1.7.3)
     multipart-post (1.2.0)
+    newrelic_rpm (3.6.1.88)
     nokogiri (1.5.9)
     oauth (0.4.7)
     oauth2 (0.8.1)
@@ -165,6 +169,11 @@ GEM
     omniauth-tumblr (1.1)
       omniauth-oauth (~> 1.0)
     pg (0.15.1)
+    phony (1.9.0)
+    phony_rails (0.3.2)
+      activerecord (>= 3.0)
+      countries (>= 0.8.2)
+      phony (>= 1.7.7)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -303,9 +312,11 @@ DEPENDENCIES
   guard-rspec
   haml-rails
   jquery-rails
+  newrelic_rpm
   omniauth-google-oauth2
   omniauth-tumblr
   pg
+  phony_rails
   pry-rails
   quiet_assets
   rack_session_access

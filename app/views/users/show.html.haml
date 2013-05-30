@@ -18,13 +18,10 @@
                 - if can? :update, @user.profile
                   = link_to "Edit", "#basic-edit-info-modal", {"data-toggle" => "modal"}
             %tr
-              %td.small Last login: 
-              %td.large 
-            %tr
               %td Status: 
               %td 
                 .user-info
-                  = @user.status
+                  = User.statuses_hash[@user.status]
             %tr  
               %td Phone:
               %td  
@@ -48,48 +45,52 @@
           .thumbnails
             - @user.heroes.each do |hero|
               = link_to((image_tag avatar_url(hero), :title => hero.name, :class => "thumbnail"), hero)
-        .span7.profile
-          %table.table
-            %tr.info
-              %th Service Details
-              %th.align-right
-                - if can? :add_involvement, @user
-                  = link_to "Add", "#service-details-add-modal", {"data-toggle" => "modal"}
-          -unless @user.involvements.empty?
-            - @user.involvements.each_with_index do |i, index|
-              %table.table
-                %tr
-                  %td
-                  %td.pull-right
-                    - if can? :update, i
-                      =link_to "Edit", "#service-details-edit-modal-" + index.to_s, {"data-toggle" => "modal"}
-                      .widgets= render "/layouts/modal", :title => "Edit Service Details", :id => "service-details-edit-modal-"+index.to_s , :body => render("involvements/form", :involvement => i)
-                %tr
-                  %td.small Country:
-                  %td.large
-                    .user-info
-                      = i.country.name if i.country
-                %tr
-                  %td Description: 
-                  %td
-                    .user-info
-                      = i.description
-                %tr
-                  %td Sector: 
-                  %td
-                    .user-info
-                      = i.sector
-                %tr
-                  %td Start Date:
-                  %td
-                    .user-info
-                      = date_to_year(i.start_date)
-                %tr
-                  %td End Date:
-                  %td
-                    .user-info
-                      = date_to_year(i.end_date)
-              %hr
+        - if @user.status != "interested"
+          .span7.profile
+            %table.table
+              %tr.info
+                %th Service Details
+                %th.align-right
+                  - if can? :add_involvement, @user
+                    = link_to "Add", "#service-details-add-modal", {"data-toggle" => "modal"}
+            -unless @user.involvements.empty?
+              - @user.involvements.order("end_date DESC").each_with_index do |i, index|
+                = render :partial => "layouts/error"
+                %table.table
+                  %tr
+                    %td
+                    %td.pull-right
+                      - if can? :update, i
+                        =link_to "Edit", "#service-details-edit-modal-" + index.to_s, {"data-toggle" => "modal"}
+                        ="#{" | "}" 
+                        =link_to("Delete", involvement_path(i), :method => :delete, :confirm => "Are you sure you want to delete these service details?", :class => "alert-heading")
+                        .widgets= render "/layouts/modal", :title => "Edit Service Details", :id => "service-details-edit-modal-"+index.to_s , :body => render("involvements/form", :involvement => i)
+                  %tr
+                    %td.small Country:
+                    %td.large
+                      .user-info
+                        = i.country.name if i.country
+                  %tr
+                    %td Description: 
+                    %td
+                      .user-info
+                        = i.description
+                  %tr
+                    %td Sector: 
+                    %td
+                      .user-info
+                        = i.sector
+                  %tr
+                    %td Start Date:
+                    %td
+                      .user-info
+                        = date_to_year(i.start_date)
+                  %tr
+                    %td End Date:
+                    %td
+                      .user-info
+                        = date_to_year(i.end_date)
+                %hr
       .row
         .offset4.span7.profile
           %table.table
