@@ -12,8 +12,8 @@ class Post < ActiveRecord::Base
     elsif query_type == "country"
       query = self.by_country(filter_choice)
     end
-    return query.paginate(:page => pagination[:page], :per_page => pagination[:per_page]) if pagination.present?
-    query
+    return query.order("published_at DESC").paginate(:page => pagination[:page], :per_page => pagination[:per_page]) if pagination.present?
+    query.order("published_at DESC")
   end
 
   def self.by_sector(filter_choice)
