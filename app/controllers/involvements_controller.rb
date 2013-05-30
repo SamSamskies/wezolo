@@ -29,7 +29,11 @@ class InvolvementsController < ApplicationController
   end
 
   def destroy
-    Involvement.find(params[:id]).destroy
+    if current_user.involvements.count > 1
+      Involvement.find(params[:id]).destroy
+    else
+      flash[:error] = "You must have service details for at least one country."
+    end
     redirect_to user_path(current_user)
   end
 end
