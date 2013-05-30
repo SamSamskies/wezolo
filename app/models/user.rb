@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
   validate :valid_status?
   before_validation :downcase_status
-  after_create :follow_sam
 
   has_many :blogs
   has_many :posts, :through => :blogs
@@ -40,7 +39,8 @@ class User < ActiveRecord::Base
   has_many :incomings
   has_many :responses
 
-  after_create :initialize_auth_status
+  after_create :follow_sam
+  after_save :update_auth_status
 
   def self.statuses_hash
     STATUSES_HASH
@@ -59,7 +59,9 @@ class User < ActiveRecord::Base
   end
 
   def follow_sam
-    self.heroes << User.find_by_email("samprofessional@gmail.com") if User.find_by_email("samprofessional@gmail.com")
+    if sam = User.find_by_email("samprofessional@gmail.com")
+      self.heroes << sam
+    end
   end
 
   AUTH_STATUSES = %w[guest incomplete user admin]
@@ -164,8 +166,8 @@ class User < ActiveRecord::Base
     new_user
   end
 
-  def initialize_auth_status
-    self.update_attributes(:auth_status => "user") if self.status == "interested"
+  def update_auth_status
+    self.update_attributes(:auth_status => "user") if self.status == "interested" && self.auth_status == "incomplete"
   end
 
   private

@@ -40,18 +40,28 @@ class SessionController < ApplicationController
     user = User.find_by_email(auth["info"]["email"])
     if user
       Authorization.find_or_create_by_uid(auth, user)
+      if user.status.nil?
+        set_session(user)
+        redirect_to edit_profile_path(user.profile)
+      else
+        login(user) 
+      end
     else
       user = User.create_with_omniauth(auth)
+      set_session(user)
+      redirect_to edit_profile_path(user.profile)
     end
-    set_session(user)
-    redirect_to edit_profile_path(user)
   end
 
   def authenticate_user_by_email
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       set_session(user)
-      render :json => {:redirect => "/home"}
+      if user.status.nil?
+        redirect_to edit_profile_path(user.profile)
+      else
+        render :json => {:redirect => "/home"}
+      end
     else
       @error = "Oh Snap! User Login or Password Incorrect!"
       render :json => {:error => @error}, :status => :unprocessable_entity

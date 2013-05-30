@@ -20,7 +20,6 @@
                     .container-fluid
                       .row-fluid
                         .span2
-                          - user = incoming.user
                           .thumbnail
                             = link_to((image_tag avatar_url(user), :title => user.name), user)
                         .span10
@@ -32,6 +31,6 @@
                       =hidden_field_tag("incoming_user_id", incoming.user.id)
                       =hidden_field_tag("response_user_id", current_user.id)
                       =hidden_field_tag("incoming_id", incoming.id)
-                      =text_area_tag("message")
+                      =text_area_tag("message", nil, :maxlength => 140, :placeholder => "Responses are limited to 140 characters.")
                       .span1.pull-right
                         =submit_tag(("Reply"), :class => "btn btn-primary")
