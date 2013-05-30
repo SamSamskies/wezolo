@@ -4,7 +4,7 @@
       = image_tag avatar_url(user), :class => "img-polaroid"
     .offset1.info-section.pagination-centered
       %h4= link_to (user.name), user
-      %p= user.status.upcase
+      %p= user.status.upcase if user.status
       .btn.btn-info.btn-small= current_user.follow_link(user)
   .row
     .involvement-list
