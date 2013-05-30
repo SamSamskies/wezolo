@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   has_many :responses
 
   after_create :follow_sam
-  after_create :initialize_auth_status
+  after_save :update_auth_status
 
   def self.statuses_hash
     STATUSES_HASH
@@ -60,13 +60,7 @@ class User < ActiveRecord::Base
 
   def follow_sam
     if sam = User.find_by_email("samprofessional@gmail.com")
-      p sam
-      p self
-      p self.heroes
-      p self.followings
       self.heroes << sam
-      p self.heroes
-      p self.followings
     end
   end
 
@@ -168,17 +162,12 @@ class User < ActiveRecord::Base
       user.email = auth["info"]["email"]
       user.password = SecureRandom.hex(10)
     end
-    p "after create"
-    p new_user
-    p new_user.followings
     new_user.create_profile(photo_url: auth["info"]["image"])
-    p "after creating profile"
-    p new_user.followings
     new_user
   end
 
-  def initialize_auth_status
-    self.update_attributes(:auth_status => "user") if self.status == "interested"
+  def update_auth_status
+    self.update_attributes(:auth_status => "user") if self.status == "interested" && self.auth_status == "incomplete"
   end
 
   private
