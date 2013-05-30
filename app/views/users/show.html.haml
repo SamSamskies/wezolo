@@ -56,14 +56,17 @@
                 %th.align-right
                   - if can? :add_involvement, @user
                     = link_to "Add", "#service-details-add-modal", {"data-toggle" => "modal"}
-            -if @user.involvements.present?
-              - @user.involvements.each_with_index do |i, index|
+            -unless @user.involvements.empty?
+              - @user.involvements.order("end_date DESC").each_with_index do |i, index|
                 %table.table
                   %tr
                     %td
                     %td.pull-right
                       - if can? :update, i
                         =link_to "Edit", "#service-details-edit-modal-" + index.to_s, {"data-toggle" => "modal"}
+                        - if index > 0
+                          ="#{" | "}" 
+                          =link_to("Delete", involvement_path(i), :method => :delete, :confirm => "Are you sure you want to delete these service details?", :class => "alert-heading")
                         .widgets= render "/layouts/modal", :title => "Edit Service Details", :id => "service-details-edit-modal-"+index.to_s , :body => render("involvements/form", :involvement => i)
                   %tr
                     %td.small Country:
