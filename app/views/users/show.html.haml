@@ -49,7 +49,7 @@
             - @user.heroes.each do |hero|
               = link_to((image_tag avatar_url(hero), :title => hero.name, :class => "thumbnail"), hero)
         - if @user.status != "interested"
-          .span7.profile
+          .span7.profile#service-details
             %table.table
               %tr.info
                 %th Service Details

@@ -44,7 +44,7 @@ class SessionController < ApplicationController
       user = User.create_with_omniauth(auth)
     end
     set_session(user)
-    redirect_to edit_profile_path(user)
+    redirect_to edit_profile_path(user.profile)
   end
 
   def authenticate_user_by_email
