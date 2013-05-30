@@ -26,7 +26,6 @@ class ApplicationController < ActionController::Base
 
   # refactoring required
   rescue_from CanCan::AccessDenied do |exception|
-    current_user.update_auth_status if current_user.auth_status == "incomplete" && current_user.status == "interested"
     if current_user.present? && exception.action == :create && exception.subject.class == Follow && current_user.auth_status == "incomplete"
       redirect_to new_involvement_path, :notice => "Please complete your profile before you can follow other users!"
     elsif current_user.present? && exception.action == :read && exception.subject.class == UserDecorator && current_user.auth_status == "incomplete"
