@@ -5,20 +5,20 @@
       .well.sidebar-nav-fixed
         / %h3.nav-header Filter feed
         %ul.nav.nav-list
-          %p Select by Users you Follow
+          %p Posts by Users you Follow
           %li
             = link_to "Users You Follow(default option)", "/home"
-          %p Select by Country of Involvement
+          %p Posts by Country of Service
           %li
             = select "query", "country_id", Country.all.map {|c| [c.name, c.id]}, {:include_blank => true, :prompt => 'Select a Country'}, {:class => "country-filter"}          
           %li
           
         %ul.nav.nav-list
-          %p Post by Peace Corp Status  
+          %p Posts by Peace Corp Status  
           - User.statuses_hash.each do |acr, text|
             %li= link_to text, home_path(query_string: acr, :query_type => "status")
         %ul.nav.nav-list
-          %p Post by Sector of Involvement
+          %p Posts by Sector
           - Involvement.sectors.each do |sector_name|
             %li= link_to sector_name.titleize, home_path(query_string: sector_name, :query_type => "sector")  
     -@newsfeed.each do |post|
