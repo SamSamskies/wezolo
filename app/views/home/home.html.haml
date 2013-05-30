@@ -14,7 +14,7 @@
           %li
           
         %ul.nav.nav-list
-          %p Posts by Peace Corp Status  
+          %p Posts by Peace Corps Status  
           - User.statuses_hash.each do |acr, text|
             %li= link_to text, home_path(query_string: acr, :query_type => "status")
         %ul.nav.nav-list
