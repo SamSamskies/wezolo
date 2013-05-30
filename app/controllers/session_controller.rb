@@ -40,11 +40,12 @@ class SessionController < ApplicationController
     user = User.find_by_email(auth["info"]["email"])
     if user
       Authorization.find_or_create_by_uid(auth, user)
+      login(user)  
     else
       user = User.create_with_omniauth(auth)
+      set_session(user)
+      redirect_to edit_profile_path(user.profile)
     end
-    set_session(user)
-    redirect_to edit_profile_path(user.profile)
   end
 
   def authenticate_user_by_email
