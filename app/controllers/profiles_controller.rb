@@ -14,6 +14,6 @@ class ProfilesController < ApplicationController
   private
 
   def format_phone_number
-    params[:profile][:user_attributes][:phone_number] = "+" + PhonyRails.normalize_number(params[:profile][:user_attributes][:phone_number], :default_country_code => 'US')
+    params[:profile][:user_attributes][:phone_number] = "+" + PhonyRails.normalize_number(params[:profile][:user_attributes][:phone_number])
   end
 end
