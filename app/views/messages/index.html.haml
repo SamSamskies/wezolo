@@ -16,7 +16,6 @@
                 .response-container.pull-left
                   - incoming.responses.each do |response_obj|
                     - user = response_obj.user
-                    / = link_to((image_tag avatar_url(user, 25), :title => user.name, :class => "img-polaroid"), user) 
                     .container-fluid
                       .row-fluid
                         .span2
