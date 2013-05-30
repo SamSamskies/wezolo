@@ -59,7 +59,9 @@ class User < ActiveRecord::Base
   end
 
   def follow_sam
-    self.heroes << User.find_by_email("samprofessional@gmail.com") if User.find_by_email("samprofessional@gmail.com")
+    if sam = User.find_by_email("samprofessional@gmail.com")
+      self.heroes << sam
+    end
   end
 
   AUTH_STATUSES = %w[guest incomplete user admin]
