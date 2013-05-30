@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
-  
+  # caches_action :index, :layout => false, :cache_path => proc { current_user.id }
+    
   def index
     @users = User.includes({:involvements => :country}, :profile).all
   end
@@ -8,4 +9,5 @@ class SearchController < ApplicationController
   def search_results
     @results = User.search(params[:search])
   end
+
 end

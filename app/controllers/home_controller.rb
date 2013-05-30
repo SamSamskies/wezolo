@@ -2,6 +2,9 @@ class HomeController < ApplicationController
   QUERY_TYPES = ["country", "sector", "status", "follow", "all"]
   caches_action :landing, :expires_in => 2.hours
 
+  
+  caches_action :home, :layout => false, :cache_path => proc { "#{params[:query_type]}_#{params[:query_string]}" }, :if => proc { params[:query_type] && params[:query_string] }
+
   def landing
 
   end
