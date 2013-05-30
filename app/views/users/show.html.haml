@@ -56,7 +56,7 @@
                 - if can? :add_involvement, @user
                   = link_to "Add", "#service-details-add-modal", {"data-toggle" => "modal"}
           -unless @user.involvements.empty?
-            - @user.involvements.each_with_index do |i, index|
+            - @user.involvements.order("end_date DESC").each_with_index do |i, index|
               %table.table
                 %tr
                   %td
