@@ -7,11 +7,11 @@
         - else
           = link_to "Wezolo", root_path, :class => "brand"
         %ul.nav
+          %li.signin
+            =link_to "About", about_path
           %li.signin.pull-right
             - unless current_user
               =link_to "Log in", "#loginModal", {"data-toggle" => "modal"}
-          %li.signin.pull-right
-            =link_to "About", about_path
           - if current_user
             %li.dropdown.pull-right
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
