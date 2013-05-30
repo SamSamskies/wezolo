@@ -7,6 +7,6 @@
       = u_f.text_field :phone_number
     = f.label :location
     = f.text_field :location
-    = f.label :bio
-    = f.text_area :bio, :rows => 10
+    = f.label :bio, "Bio (max length 140 characters)"
+    = f.text_area :bio, :rows => 10, :maxlength => 140, :placeholder => "A quick snapshot about who you are. Don't worry about service details here, you can add those later."
     #submit_button= f.submit "Confirm", :class => "btn btn-primary"
