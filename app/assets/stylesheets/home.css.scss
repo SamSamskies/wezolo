@@ -440,3 +440,30 @@ body {
       position: relative;
       }
 }
+
+.profile-body{
+  height:550px;
+  .headshot-box{
+    float:left;
+    .member-headshot{
+    }
+  }
+  .details-box{
+    padding-left: 20px;
+    float:right;
+    height:300px;
+  }
+  .bios-box{
+    padding-top: 20px;
+    padding-left:0;
+}
+
+}
+.logo{
+  width:100px;
+}
+
+.logo:hover{
+  width:100px;
+  -webkit-filter:hue-rotate(180deg);
+}

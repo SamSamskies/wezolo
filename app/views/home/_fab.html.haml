@@ -1,0 +1,25 @@
+#fab-modal.modal.hide.fade.profile-modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Fab Mackojc
+  .modal-body.profile-body.container-fluid
+    .upper-half.row-fluid
+      .headshot-box.span5
+        =image_tag "fab-mackojc-headshot.png", {:class => "member-headshot"}
+      .details-box.span7
+        %h5 Info:
+        %ul
+          %li 
+            %span.subject Hometown:
+            %span.detail Melbourne, Australia
+          %li
+            %span.subject Education:
+            %span.detail Monash University/Dev Bootcamp
+          %li
+            %span.subject Known for:
+            %span.detail reminding us to push to development branch
+        =link_to image_tag("github.png", {:class => "logo"}), "http://github.com/fmackojc"
+        =link_to image_tag("linkedin.png", {:class => "logo"}), "http://linkedin.com/fmackojc"
+    .row-fluid
+      .bios-box
+        %p I break the stereotype for the kind of person you’d expect to have done a math major at University. I’m very outgoing and quite energetic. When I’m completely myself I tend to make people laugh. I’m always trying to improve how I spend my time here on Earth and make the most of every experience. I’m also passionate about exploring and am a big fan of exposing myself to new things. I believe that you should follow your dreams and be living a life you love. Do what you find interesting, even if that’s more risky. Life is more exciting that way.
