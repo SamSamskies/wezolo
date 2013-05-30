@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def index
-    @incomings = Incoming.includes(:responses, :user).all
+    @incomings = Incoming.includes(:responses, :user).order("created_at DESC")
   end
 
   def create
