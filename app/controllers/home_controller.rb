@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   QUERY_TYPES = ["country", "sector", "status", "follow", "all"]
+  caches_action :landing, :expires_in => 2.hours
 
   def landing
 

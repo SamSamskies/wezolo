@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  
   def index
     @users = User.includes({:involvements => :country}, :profile).all
   end
