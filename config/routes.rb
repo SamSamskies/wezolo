@@ -8,8 +8,8 @@ Wezolo::Application.routes.draw do
 
   resources :users do
     collection do
-     put "update_password" 
-     get "edit_password"
+      put "update_password" 
+      get "edit_password"
     end
   end 
 

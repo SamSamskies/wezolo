@@ -9,4 +9,5 @@ class ProfilesController < ApplicationController
     profile.update_attributes(params[:profile])
     redirect_to user_path(profile.user)
   end
+  
 end

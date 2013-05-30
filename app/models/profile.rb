@@ -10,4 +10,5 @@ class Profile < ActiveRecord::Base
   def update_user_search_index
     user.update_index
   end
+  
 end

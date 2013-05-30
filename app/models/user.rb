@@ -13,12 +13,12 @@ class User < ActiveRecord::Base
   has_many :involvements
   has_many :countries, :through => :involvements
 
-  accepts_nested_attributes_for :countries
+  accepts_nested_attributes_for :countries, :involvements
 
   validates :email, :uniqueness => true
   validate :valid_status?
   before_validation :downcase_status
-  before_save :follow_sam
+  after_create :follow_sam
 
   has_many :blogs
   has_many :posts, :through => :blogs
@@ -165,7 +165,7 @@ class User < ActiveRecord::Base
   end
 
   def initialize_auth_status
-    self.update_attributes(:auth_status => "user") if self.status == ["interested"]
+    self.update_attributes(:auth_status => "user") if self.status == "interested"
   end
 
   private
