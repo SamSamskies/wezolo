@@ -7,6 +7,8 @@
         - else
           = link_to "Wezolo", root_path, :class => "brand"
         %ul.nav
+          %li.signin
+            =link_to "About", about_path
           %li.signin.pull-right
             - unless current_user
               =link_to "Log in", "#loginModal", {"data-toggle" => "modal"}
@@ -25,6 +27,8 @@
                 %li
                   =link_to "Find Volunteers", search_index_path
                 %li.divider
+                %li
+                  =link_to "About", about_path
                 %li
                   =link_to "Settings", edit_password_users_path
                 %li

@@ -17,5 +17,8 @@ class HomeController < ApplicationController
   def valid_query?
 
   end
+  def about
+    
+  end
 end
 

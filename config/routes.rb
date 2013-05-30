@@ -5,7 +5,6 @@ Wezolo::Application.routes.draw do
   get "search/results", :to => "search#search_results"
   get "test" => "tumblr#show"
   resource :follows, :only => [:create, :destroy]
-
   resources :users do
     collection do
       put "update_password" 
@@ -18,6 +17,7 @@ Wezolo::Application.routes.draw do
   resources :involvements, :only => [:new, :create, :edit, :update, :destroy]
   root :to => "home#landing"
   get '/home' => "home#home"
+  get '/about' => "home#about"
   post '/login' => 'session#create', :as => "login"
   delete '/logout' => 'session#destroy', :as => "logout"
   get '/signup' => 'users#new', :as => "signup"
