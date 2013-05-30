@@ -1,12 +1,16 @@
-.basic-info-edit
-  = form_for profile do |f|
-    = f.fields_for :user do |u_f|
-      = u_f.label :status
-      = u_f.select :status, User.statuses_hash.map { |k,v| [v,k] }, {:prompt => true}, {:required => true}
-      = f.label :phone_number, "Phone Number (include country code)"
-      = u_f.text_field :phone_number
-    = f.label :location
-    = f.text_field :location
-    = f.label :bio, "Bio (max length 140 characters)"
-    = f.text_area :bio, :rows => 10, :maxlength => 140, :placeholder => "A quick snapshot about who you are. Don't worry about service details here, you can add those later."
-    #submit_button= f.submit "Confirm", :class => "btn btn-primary"
+.basic-info-edit.container-fluid
+  .row-fluid
+    .span11
+      = form_for profile do |f|
+        = f.fields_for :user do |u_f|
+          = u_f.label :status
+          = u_f.select :status, User.statuses_hash.map { |k,v| [v,k] }, {:prompt => true}, {:required => true}
+          = f.label :phone_number, "Phone Number (include country code)"
+          = u_f.text_field :phone_number, :placeholder => "Add your number here so that you can use our text message feature to ask questions when you don't have an internet connection."
+          .phone-text
+            %em Add your number here so that you can use our text message feature. It will let you ask questions to other volunteers when you don't have an internet connection!
+        = f.label :location
+        = f.text_field :location
+        = f.label :bio, "Bio (max length 140 characters)"
+        = f.text_area :bio, :rows => 10, :maxlength => 140, :placeholder => "A quick snapshot about who you are. Don't worry about service details here, there's a section on your profile to add those."
+        #submit_button= f.submit "Confirm", :class => "btn btn-primary"
