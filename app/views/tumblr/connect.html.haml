@@ -5,7 +5,7 @@
         .offset1.span11
           %h1 Please connect one blog to Wezolo
           - @blogs.each do |blog|
-            .blog-choice
+            .blog-choice.span10
               =form_for Blog.new, :url => url_for(:controller => 'tumblr', :action => 'create_blog_and_posts') do |f|
                 %h5= blog["title"]
                 %p= blog["description"]

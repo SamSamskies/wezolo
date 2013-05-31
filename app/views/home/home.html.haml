@@ -1,26 +1,29 @@
 .content
   .container.news-container
-    .row
+    .row.span10
       %h1 What's Going On?
       .well.sidebar-nav-fixed
-        / %h3.nav-header Filter feed
-        %ul.nav.nav-list
-          %p Posts by Users you Follow
-          %li
-            = link_to "Users You Follow(default option)", "/home"
-          %p Posts by Country of Service
-          %li
-            = select "query", "country_id", Country.all.map {|c| [c.name, c.id]}, {:include_blank => true, :prompt => 'Select a Country'}, {:class => "country-filter"}          
-          %li
-          
-        %ul.nav.nav-list
-          %p Posts by Peace Corps Status  
-          - User.statuses_hash.each do |acr, text|
-            %li= link_to text, home_path(query_string: acr, :query_type => "status")
-        %ul.nav.nav-list
-          %p Posts by Sector
-          - Involvement.sectors.each do |sector_name|
-            %li= link_to sector_name.titleize, home_path(query_string: sector_name, :query_type => "sector")  
+        .inner-sidebar
+          %ul.nav.nav-list
+            %p Posts by Users you Follow
+            %li
+              = link_to "Users You Follow(default option)", "/home"
+            %p Posts by Country of Service
+            %li
+              = select "query", "country_id", Country.all.map {|c| [c.name, c.id]}, {:include_blank => true, :prompt => 'Select a Country'}, {:class => "country-filter"}          
+          %ul.nav.nav-list
+            %p Posts by Peace Corp Status  
+            - User.statuses_hash.each do |acr, text|
+              %li= link_to text, home_path(query_string: acr, :query_type => "status")
+          %ul.nav.nav-list
+            %p Posts by Sector
+            - Involvement.sectors.each_with_index do |sector_name, index|
+              - if index < 4
+                %li= link_to sector_name.titleize, home_path(query_string: sector_name, :query_type => "sector")
+          %ul.nav.nav-list
+            - Involvement.sectors.each_with_index do |sector_name, index|
+              - if index >= 4
+                %li= link_to sector_name.titleize, home_path(query_string: sector_name, :query_type => "sector")
     -@newsfeed.each do |post|
       .form-effects.form-margins.span10
         .post-container

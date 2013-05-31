@@ -45,8 +45,21 @@
           .thumbnails
             - @user.heroes.each do |hero|
               = link_to((image_tag avatar_url(hero), :title => hero.name, :class => "thumbnail"), hero)
+        .span7.profile
+          %table.table
+            %tr.info
+              %th{:colspan => 3} Connect Your Blog
+            %tr
+              %td 
+                Blogger:
+                = @user.blog_connect "blogger"
+            %tr  
+              %td 
+                Tumblr:
+                = @user.blog_connect "tumblr"
+      .row
         - if @user.status != "interested"
-          .span7.profile#service-details
+          .offset4.span7.profile#service-details
             %table.table
               %tr.info
                 %th Service Details
@@ -91,19 +104,8 @@
                       .user-info
                         = date_to_year(i.end_date)
                 %hr
-      .row
-        .offset4.span7.profile
-          %table.table
-            %tr.info
-              %th{:colspan => 3} Connect Your Blog
-            %tr
-              %td 
-                Blogger:
-                = @user.blog_connect "blogger"
-            %tr  
-              %td 
-                Tumblr:
-                = @user.blog_connect "tumblr"
+
+
 .widgets
   - if can? :update, @user.profile
     = render "/layouts/modal", :title => "Basic Info", :id => "basic-edit-info-modal", :body => render("profiles/form", :profile => @user.profile)
