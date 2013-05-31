@@ -4,11 +4,12 @@
       = image_tag avatar_url(user), :class => "img-polaroid"
     .offset1.info-section.pagination-centered
       %h4= link_to (user.name), user
-      %p= user.status.upcase if user.status
+      %p= status = user.status.upcase if user.status
       .btn.btn-info.btn-small= current_user.follow_link(user)
   .row
-    .involvement-list
-      %h6 Service Details:
-      - user.involvements.each do |inv|
-        .involvement
-        %p= "#{inv.country.name}, #{inv.sector.titleize}, #{date_to_year(inv.start_date)} - #{date_to_year(inv.end_date)}"
+    - unless status == "INTERESTED"
+      .involvement-list
+        %h6 Service Details:
+        - user.involvements.each do |inv|
+          .involvement
+          %p= "#{inv.country.name}, #{inv.sector.titleize}, #{date_to_year(inv.start_date)} - #{date_to_year(inv.end_date)}"
