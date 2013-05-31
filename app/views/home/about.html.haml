@@ -19,15 +19,20 @@
   .container.marketing.top-spacer.story
     %h2 The App
     %p Our web app is run inguenity, teamwork, and cats. There are lots of cats involved. High tech kittens from outer space who have come back through time to nip at code.
-  %footer.top-spacer
-    %p.pull-right
-    %a{:href => "#"} Back to top
-    %p© 2013 Peace Mafia ·
-    %a{:href => "#"} Privacy
-    %a{:href => "#"} Terms
-    =link_to "About", about_path
-    =link_to "Photo by Avalon Emerson", "http://avalonemerson.com/"
-    %a{:href => "mailto:contact@wezolo.com"} email us
+    %footer.top-spacer
+      %p.pull-right
+        %a{:href => "#"} Back to top
+      %p
+        © 2013 Peace Mafia ·
+        %a{:href => "#"} Privacy
+        ·
+        %a{:href => "#"} Terms
+        ·
+        =link_to "About", about_path
+        | Team photo by
+        %a{:href => "http://avalonemerson.com"} Avalon Emerson
+        |
+        %a{:href => "mailto:contact@wezolo.com"} Email us
 
 = render :partial => "home/fab"
 = render :partial => "home/sam"
