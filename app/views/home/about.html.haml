@@ -15,43 +15,24 @@
     %p Dev Bootcamp is hard but Africa is harder. Sam Samskies along with a team of bright engineers embarked on a ridiculous journey to build Wezolo, a platform where you can live the Peace Corps life. Twilio yo self.
   .container.marketing.top-spacer.story
     %h2 The Team
-    %p Deep in the darkest corners of DBC... When the hour is latest. There lies a Team of badassery that few have witnessed. The Peace Mafia was created in response to the evil and the darkness that seeks to prevail over the world. With our powers we will change the world. seriously.
-    %footer.top-spacer
-      %p.pull-right
-      %a{:href => "#"} Back to top
-      %p© 2013 Peace Mafia ·
-      %a{:href => "#"} Privacy
-      %a{:href => "#"} Terms
-      %a{:href => "mailto:nguyenhstephen"} email us
+    %p Deep in the darkest corners of DBC...The team aka the Peace Mafia, consisting of <a href="http://www.wezolo.com/about#sam-modal">Steven "Sam Samskies" Miyakawa</a>,  <a href="http://www.wezolo.com/about#stephen-modal">Stephen Nguyen</a>,  <a href="http://www.wezolo.com/about#sidney-modal">Sidney Zhang</a>,  and <a href="http://www.wezolo.com/about#fab-modal">Fab Mackojc</a> was created in response to the evil and the darkness that seeks to prevail over the world. With our power to develop great web apps and big hearts we will change the world or lose sleep trying.
+  .container.marketing.top-spacer.story
+    %h2 The App
+    %p Our web app is run inguenity, teamwork, and cats. There are lots of cats involved. High tech kittens from outer space who have come back through time to nip at code.
+  %footer.top-spacer
+    %p.pull-right
+    %a{:href => "#"} Back to top
+    %p© 2013 Peace Mafia ·
+    %a{:href => "#"} Privacy
+    %a{:href => "#"} Terms
+    =link_to "About", about_path
+    =link_to "Photo by Avalon Emerson", "http://avalonemerson.com/"
+    %a{:href => "mailto:contact@wezolo.com"} email us
+
+= render :partial => "home/fab"
+= render :partial => "home/sam"
+= render :partial => "home/sidney"
+= render :partial => "home/stephen"
 
 
-#fab-modal.modal.hide.fade.profile-modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Fab Mackojc
-  .modal-body
-    =image_tag "fab.png"
-    Deep in the darkest corners of DBC... When the hour is latest. There lies a Team of badassery that few have witnessed. The Peace Mafia was created in response to the evil and the darkness that seeks to prevail over the world. With our powers we will change the world. seriously.
-#sam-modal.modal.hide.fade.profile-modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Steven "Sam Samkies" Miyakawa
-  .modal-body
-    This is information about Steven
-    =image_tag "sam.png"
-    Deep in the darkest corners of DBC... When the hour is latest. There lies a Team of badassery that few have witnessed. The Peace Mafia was created in response to the evil and the darkness that seeks to prevail over the world. With our powers we will change the world. seriously.
-#sidney-modal.modal.hide.fade.profile-modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Sidney Zahng is cool
-  .modal-body
-    This is information about Sidney
-    =image_tag "sidney.png"
-#stephen-modal.modal.hide.fade.profile-modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Stephen Nguyen
-  .modal-body
-    This is information about Stephen
-    =image_tag "stephen.png"
-    Deep in the darkest corners of DBC... When the hour is latest. There lies a Team of badassery that few have witnessed. The Peace Mafia was created in response to the evil and the darkness that seeks to prevail over the world. With our powers we will change the world. seriously.
+
