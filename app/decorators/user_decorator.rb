@@ -47,7 +47,7 @@ class UserDecorator < Draper::Decorator
         end
         h.link_to "Disconnect your blog", href
       else
-        h.link_to "Blog URL", "#"
+        "Connected"
       end
     else
       if h.current_user == self
