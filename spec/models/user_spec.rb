@@ -13,16 +13,21 @@ describe User do
   let!(:tumblr_login_auth) { create(:authorization, :auth_provider => tumblr) }
 
   context "followed posts" do
-
+  before(:each) do
+    # PostSweeper.any_instance.stubs(:after_create).returns(true)
+    post1.stubs(:blog).and_return(1)
+  end
   let!(:blogdude) { create(:user) }
   let!(:blogger) { create(:blog_host) }
 
   let!(:blog) { create(:blog, :url => "http://#{Faker::Lorem.characters(10)}.blogspot.com")}
-  let!(:blog2) { create(:blog, :url => "http://#{Faker::Lorem.characters(10)}.blogspot.com") }
+  let!(:blog2) { create(:blog, :url => "http://#{Faker::Lorem.characters(10)}.blogspot.com") }  
   let!(:post1) { create(:post, :published_at => (1..365).to_a.sample.days.ago) }
   let!(:post2) { create(:post, :published_at => (1..365).to_a.sample.days.ago) }
   let!(:post3) { create(:post,:published_at => (1..365).to_a.sample.days.ago) }
   let!(:spain) { create(:country, name: "spain") }
+
+
 
     it "user should not have any followed post without following other users" do
       sammyboy.followed_posts.empty?.should eq true

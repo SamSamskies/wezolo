@@ -9,7 +9,6 @@ class PostSweeper < ActionController::Caching::Sweeper
     expire_sectors(sector_names)
     expire_countries(country_ids)
     expire_status(status)
-
   end
 
   def expire_sectors(sector_names)
