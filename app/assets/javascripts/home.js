@@ -18,7 +18,7 @@ $(document).ready(function(){
   });
 
   $('.country-filter').change(function() {
-    window.location = "/home?query_type=country&query_string=" + $(this).find('option:selected').val();
+    window.location = "/home?query_string=" + $(this).find('option:selected').val() + "&query_type=country";
   });
 
   $('div.news-container').infinitescroll({

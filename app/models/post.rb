@@ -1,6 +1,14 @@
 class Post < ActiveRecord::Base
   belongs_to :blog
   attr_accessible :body, :published_at, :title
+  # 
+
+  # def expire_cache
+  #   p "cache deleted!!!!~"
+  #   Rails.cache.delete_matched(/home.*/)
+  # end
+
+
 
   def self.find_posts(query_type, filter_choice, pagination = {})
     if query_type == "all"
@@ -17,16 +25,17 @@ class Post < ActiveRecord::Base
   end
 
   def self.by_sector(filter_choice)
-      self.includes({:blog => {:user => [:profile, :involvements]}}).where("involvements.sector" => filter_choice)
+    self.includes({:blog => {:user => [:profile, :involvements]}}).where("involvements.sector" => filter_choice)
   end
 
   def self.by_country(filter_choice)
-      self.includes({:blog => {:user => [:profile, :involvements]}}).where("involvements.country_id" => filter_choice)
+    self.includes({:blog => {:user => [:profile, :involvements]}}).where("involvements.country_id" => filter_choice)
   end
 
   def self.by_status(filter_choice)
-      self.includes({:blog => {:user => :profile}}).where("users.status" => filter_choice)  
+    self.includes({:blog => {:user => :profile}}).where("users.status" => filter_choice)  
   end
 
 end
 
+# sectors status countries
