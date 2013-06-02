@@ -21,7 +21,7 @@ class SessionController < ApplicationController
   private
 
   def external_provider_login?
-    return true if params[:auth_provider]
+    params[:auth_provider].present?
   end
 
   def find_user_by_uid
@@ -44,7 +44,7 @@ class SessionController < ApplicationController
         set_session(user)
         redirect_to edit_profile_path(user.profile)
       else
-        login(user) 
+        login(user)
       end
     else
       user = User.create_with_omniauth(auth)
