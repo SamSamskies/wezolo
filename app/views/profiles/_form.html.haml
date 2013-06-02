@@ -6,7 +6,7 @@
           = u_f.label :status
           = u_f.select :status, User.statuses_hash.map { |k,v| [v,k] }, {:prompt => true}, {:required => true}
           = f.label :phone_number, "Phone Number (include country code)"
-          = u_f.text_field :phone_number, :placeholder => "Add your number here so that you can use our text message feature to ask questions when you don't have an internet connection."
+          = u_f.text_field :phone_number
           .phone-text
             %em Add your number here so that you can use our text message feature. It will let you ask questions to other volunteers when you don't have an internet connection!
         = f.label :location
