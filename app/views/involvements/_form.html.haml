@@ -7,7 +7,7 @@
         = f.label :description
         = f.text_area :description, :rows => 5, :required => true
         = f.label :sector
-        = f.select :sector, Involvement.sectors.map(&:titleize), {:prompt => true}, {:required => true}
+        = f.select :sector, options_for_select(Involvement.sectors.map(&:titleize), (involvement.sector.titleize if involvement.sector)), {:prompt => true}, {:required => true}
         = f.label :start_date
         = f.select :start_date, peace_corps_years_options, {:prompt => true}, {:required => true}
         = f.label :end_date
