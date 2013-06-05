@@ -1,0 +1,40 @@
+.content
+  .container.news-container
+    .row.span10
+      %h1 What's Going On?
+      .well.sidebar-nav-fixed
+        .inner-sidebar
+          %ul.nav.nav-list
+            %p Posts by Users you Follow
+            %li
+              = link_to "Users You Follow(default option)", "/home"
+            %p Posts by Country of Service
+            %li
+              = select "query", "country_id", Country.all.map {|c| [c.name, c.id]}, {:include_blank => true, :prompt => 'Select a Country'}, {:class => "country-filter"}          
+          %ul.nav.nav-list
+            %p Posts by Peace Corp Status  
+            - User.statuses_hash.each do |acr, text|
+              %li= link_to text, home_path(query_string: acr, :query_type => "status")
+          %ul.nav.nav-list
+            %p Posts by Sector
+            - Involvement.sectors.each_with_index do |sector_name, index|
+              - if index < 4
+                %li= link_to sector_name.titleize, home_path(query_string: sector_name, :query_type => "sector")
+          %ul.nav.nav-list
+            - Involvement.sectors.each_with_index do |sector_name, index|
+              - if index >= 4
+                %li= link_to sector_name.titleize, home_path(query_string: sector_name, :query_type => "sector")
+    -@newsfeed.each do |post|
+      .form-effects.form-margins.span10
+        .post-container
+          .row
+            .pull-left.vertical-align
+              - user = post.blog.user
+              .thumbnail
+                = link_to((image_tag avatar_url(user), :title => user.name), user)
+            .span7
+              %h3= post.title
+              %p.published-date= post_date(post.published_at) 
+              %p= post.body.html_safe
+    .hidden=will_paginate @newsfeed
+

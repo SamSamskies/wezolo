@@ -1,0 +1,70 @@
+class SessionController < ApplicationController
+
+  def create
+    if external_provider_login?
+      authenticate_user_by_external_provider
+    else
+      authenticate_user_by_email
+    end
+  end
+
+  def destroy
+    session.clear
+    redirect_to root_url
+  end
+
+  def omniauth_failure
+    flash[:notice] = "Y u no authorize?"
+    redirect_to root_path
+  end
+
+  private
+
+  def external_provider_login?
+    params[:auth_provider].present?
+  end
+
+  def find_user_by_uid
+    Authorization.find_by_uid(auth["uid"]).user
+  end
+
+  def create_user_by_uid
+    User.create_with_omniauth(auth)
+  end
+
+  def find_or_create_user_by_uid
+    @user = find_user_by_uid || create_user_by_uid
+  end
+
+  def authenticate_user_by_external_provider
+    user = User.find_by_email(auth["info"]["email"])
+    if user
+      Authorization.find_or_create_by_uid(auth, user)
+      if user.status.nil?
+        set_session(user)
+        redirect_to edit_profile_path(user.profile)
+      else
+        login(user)
+      end
+    else
+      user = User.create_with_omniauth(auth)
+      set_session(user)
+      redirect_to edit_profile_path(user.profile)
+    end
+  end
+
+  def authenticate_user_by_email
+    user = User.find_by_email(params[:email])
+    if user && user.authenticate(params[:password])
+      set_session(user)
+      if user.status.nil?
+        redirect_to edit_profile_path(user.profile)
+      else
+        render :json => {:redirect => "/home"}
+      end
+    else
+      @error = "Oh Snap! User Login or Password Incorrect!"
+      render :json => {:error => @error}, :status => :unprocessable_entity
+    end
+  end
+end

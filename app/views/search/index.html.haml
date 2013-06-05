@@ -1,0 +1,5 @@
+.content
+  .container.search-index
+    .row
+      - @users.each do |user|
+        = render_user_box(user)

@@ -1,3 +1,7 @@
-# Wezolo Application
+Wezolo
+======
+1. elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml
+2. rake environment tire:import CLASS='User' FORCE=true
+Our Dev Bootcamp final project!
 
-This is a application that will be a social network for Peace Corps members. It will also allow members to text questions and answers.
+It'll be live soon on [wezolo.herokuapp.com](http://wezolo.herokuapp.com)

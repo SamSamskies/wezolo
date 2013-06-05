@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'tire'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -14,10 +15,10 @@ module Wezolo
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-
+    config.autoload_paths += %W(#{config.root}/lib)
+    
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -58,5 +59,17 @@ module Wezolo
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # not to bootstrap application for heroku deployment ; refactor 
+    config.assets.initialize_on_precompile = false
+
+    # searchbox elastic search
+    # Tire.configure do
+    #     url ENV['ELASTICSEARCH_URL']
+    # end
+    Tumblr.configure do |config|
+      config.consumer_key = ENV["TUMBLR_KEY"]
+      config.consumer_secret = ENV["TUMBLR_SECRET"]
+    end
   end
 end
