@@ -1,0 +1,58 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.form-margins {
+  margin-top: 30px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+
+.user-box {
+  margin-top: 20px;
+  width: 410px;
+  height: 250px;
+  padding: 20px;
+  img {
+    height: 100px;
+  }
+  .btn a{
+    color: white;
+  }
+}
+
+.img-container {
+  margin-left: 60px;
+}
+
+.info-section h4 {
+  margin-bottom: 0;
+  margin-top: 0;
+  line-height: 1em;
+}
+
+.involvement-list {
+  margin-left: 35px;
+  margin-right: 35px;
+  width: 90%;
+  p {
+    font-size: 1em;
+    margin: 0;
+    line-height: 1.5em;
+  }
+}
+
+.involvement {
+  margin-top: 10px;
+}
+
+.btn-small a {
+  color: white;
+}
+
+.blog-choice {
+  margin-right: 120px;
+}
