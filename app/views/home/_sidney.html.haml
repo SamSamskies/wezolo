@@ -1,0 +1,28 @@
+#sidney-modal.modal.hide.fade.profile-modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Sidney Zhang
+  .modal-body.profile-body.container-fluid
+    .upper-half.row-fluid
+      .headshot-box.span5
+        =image_tag "sidney-zhang-headshot.png", {:class => "member-headshot"}
+      .details-box.span7
+        %h5 Info:
+        %ul
+          %li
+            %span.subject Hometown:
+            %span.detail Melbourne, Australia
+          %li
+            %span.subject Education:
+            %span.detail University of Melbourne / Dev Bootcamp
+          %li
+            %span.subject Known for:
+            %span.detail Eager Loading
+        =link_to image_tag("github.png", {:class => "logo"}), "http://github.com/sidazhang"
+        =link_to image_tag("linkedin.png", {:class => "logo"}), "http://linkedin.com/in/sidneyzhang"
+    .row-fluid
+      .bios-box
+        %p If we we weren't programming so hard we would tell you more about ourselves. Maybe a life story or some detailed information about how we came to be in this world. Sadly ain't no body got time for that. so I'll just copy and paste this twice. If we we weren't programming so hard we would tell you more about ourselves. Maybe a life story or some detailed information about how we came to be in this world. Sadly ain't no body got time for that. so I'll just copy and paste this twice.
+
+
+
