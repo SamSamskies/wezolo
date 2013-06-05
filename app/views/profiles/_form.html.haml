@@ -3,8 +3,10 @@
     .span11
       = form_for profile do |f|
         = f.fields_for :user do |u_f|
+          = u_f.label :name
+          = u_f.text_field :name
           = u_f.label :status
-          = u_f.select :status, User.statuses_hash.map { |k,v| [v,k] }, {:prompt => true}, {:required => true}
+          = u_f.select :status, User.statuses_hash.map { |k,v| [v,k] }, {:prompt => true}, {:required => true, :style => "width:300px"}
           = f.label :phone_number, "Phone Number (include country code)"
           = u_f.text_field :phone_number
           .phone-text
