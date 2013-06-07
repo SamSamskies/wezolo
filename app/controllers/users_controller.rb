@@ -19,11 +19,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.includes(:profile, :involvements => :country).find(params[:id]).decorate
-    if params[:set_tumbler_blog]
-      client = Tumblr::Client.new(:key => "foo")
-      @blogs = client.info[:blogs]
-      
-    end
 
     authorize! :read, @user
   end
