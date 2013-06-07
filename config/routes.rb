@@ -7,10 +7,10 @@ Wezolo::Application.routes.draw do
   resource :follows, :only => [:create, :destroy]
   resources :users do
     collection do
-      put "update_password" 
+      put "update_password"
       get "edit_password"
     end
-  end 
+  end
 
   # :update_password => :put, :edit_password => :get
   resources :profiles, :only => [:edit, :update]
@@ -34,5 +34,7 @@ Wezolo::Application.routes.draw do
   match '/auth/blogger/callback' => "blogger#authorize_blogger", :auth_provider => 'blogger'
   post "/blogger/create_blog_and_posts" => "blogger#create_blog_and_posts"
   match '/blogger/disconnect/' => "blogger#disconnect"
+
+  post '/avatar_upload' => 'profiles#avatar_upload'
 
 end

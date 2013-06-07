@@ -51,6 +51,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry-rails'
   gem 'rack_session_access'
+  gem 'railroady'
 end
 
 # To use ActiveModel has_secure_password

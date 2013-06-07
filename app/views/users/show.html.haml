@@ -7,9 +7,11 @@
         .offset2.span2
           - unless current_user == @user
             .pull-right.btn.btn-info.btn-small= current_user.follow_link(@user.object)
-      .row
+      .row.bottom-spacer
         .offset1.span3
           = image_tag avatar_url(@user), :class => "img-polaroid bottom-spacer"
+          - if current_user == @user
+            %a#upload{:href => "#"} Upload/Change profile pic
         .span7.profile
           %table.table
             %tr.info
