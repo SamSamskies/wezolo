@@ -67,4 +67,6 @@ class UserDecorator < Draper::Decorator
     self.blogs.map(&:blog_host).map(&:name).include?(blog_host)
   end
 
+
+
 end
