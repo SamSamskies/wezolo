@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def post_date(time)
-    time.strftime("Posted on %m/%d/%Y at %I:%M%p")
+    time.strftime("%m/%d/%Y at %I:%M%p")
   end
 
   def peace_corps_years_options
