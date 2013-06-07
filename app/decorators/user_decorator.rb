@@ -38,12 +38,12 @@ class UserDecorator < Draper::Decorator
 
   def display_blog_section(blog_host)
     if blog_connected?(blog_host)
-      blog_url = blog_url(blog_host)
+      blog = blog(blog_host)
 
       if h.current_user == self
-        h.link_to "Disconnect #{blog_url}", "/#{blog_host}/disconnect"
+        h.link_to "Disconnect #{blog.title}", "/#{blog_host}/disconnect"
       else
-        h.link_to blog_url, blog_url
+        h.link_to blog.url, blog.url
       end
     else
       if h.current_user == self
@@ -58,8 +58,8 @@ class UserDecorator < Draper::Decorator
     self.blogs.map(&:blog_host).map(&:name).include?(blog_host)
   end
 
-  def blog_url(blog_host)
+  def blog(blog_host)
     blog_host_id = BlogHost.find_by_name(blog_host).id
-    self.blogs.where(:blog_host_id => blog_host_id).first.url
+    self.blogs.where(:blog_host_id => blog_host_id).first
   end
 end
