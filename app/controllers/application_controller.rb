@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
   helper_method :date_to_year
-  helper_method :post_date
+  helper_method :post_date_and_time
   helper_method :peace_corps_years_options
 
   def auth
@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     date.strftime("%Y") if date
   end
 
-  def post_date(time)
+  def post_date_and_time(time)
     time.strftime("%m/%d/%Y at %I:%M%p")
   end
 

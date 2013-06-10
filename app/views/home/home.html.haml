@@ -34,7 +34,7 @@
                 = link_to((image_tag avatar_url(user), :title => user.name), user)
             .span7
               %h3= post.title
-              %p.published-date= "Posted by #{user.name} on #{post_date(post.published_at)}"
+              %p.published-date= "Posted by #{user.name} on #{post_date_and_time(post.published_at)}"
               %p= post.body.html_safe
     .hidden=will_paginate @newsfeed
 
