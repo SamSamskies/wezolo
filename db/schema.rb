@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528061924) do
+ActiveRecord::Schema.define(:version => 20130623174604) do
 
   create_table "auth_providers", :force => true do |t|
     t.string   "name"
@@ -114,10 +114,12 @@ ActiveRecord::Schema.define(:version => 20130528061924) do
     t.string   "email"
     t.string   "name"
     t.string   "password_digest"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
-    t.string   "auth_status",     :default => "incomplete"
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.string   "auth_status",            :default => "incomplete"
     t.string   "phone_number"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
 end
